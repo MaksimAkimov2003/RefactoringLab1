@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">Макс соси</string>
+    <string name="app_name">Mobile compilator</string>
+    <string name="startButton">Start</string>
 </resources>

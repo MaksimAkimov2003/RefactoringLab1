@@ -2,4 +2,7 @@
     <string name="app_name">Mobile compilator</string>
     <string name="startButton">Start</string>
     <string name="text">Андрей черт</string>
+    <string name="add_var">add var</string>
+    <string name="add_array">ADD ARRAY</string>
+    <string name="drop_here">Drop here</string>
 </resources>

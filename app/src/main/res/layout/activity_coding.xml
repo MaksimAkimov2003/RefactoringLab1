@@ -6,11 +6,33 @@
     android:layout_height="match_parent"
     tools:context=".CodingActivity">
 
+    <Button
+        android:id="@+id/buttonVar"
+        android:layout_width="82dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="28dp"
+        android:text="@string/add_var"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/buttonArray"
+        android:layout_width="82dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="28dp"
+        android:text="@string/add_array"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonVar" />
+
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="148dp"
-        android:layout_height="33dp"
-        android:text="@string/text"
+        android:id="@+id/dropTarget"
+        android:layout_width="199dp"
+        android:layout_height="117dp"
+        android:background="@color/purple_500"
+        android:text="@string/drop_here"
+        android:textColor="#E1BEE7"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

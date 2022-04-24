@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/buttonVar"
+        android:icon="@mipmap/ic_launcher"
+        android:title="@string/menu_first" />
+    <item
+        android:id="@+id/buttonArray"
+        android:icon="@mipmap/ic_launcher"
+        android:title="@string/menu_second" />
+    <item
+        android:id="@+id/buttonOperator"
+        android:icon="@mipmap/ic_launcher"
+        android:title="@string/menu_third" />
 
 </menu>

@@ -8,12 +8,19 @@
     android:id="@+id/mainLayout"
     tools:context=".CodingActivity">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/dropArea">
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <LinearLayout
+        android:id="@+id/sideLayout"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:orientation="vertical"
-        android:id ="@+id/sideLayout">
+        android:orientation="vertical">
 
         <Button
             android:id="@+id/buttonVar"
@@ -47,12 +54,5 @@
             app:layout_constraintTop_toBottomOf="@+id/buttonArray" />
 
     </LinearLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/dropArea">
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.drawerlayout.widget.DrawerLayout>

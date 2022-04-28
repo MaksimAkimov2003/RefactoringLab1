@@ -76,15 +76,14 @@
 
             <Button
                 android:id="@+id/deleteBlock"
-                android:layout_width="30dp"
+                android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:layout_marginStart="15dp"
+                android:layout_marginStart="25dp"
                 android:layout_marginTop="-5dp"
-                android:background="@color/black"
-                app:icon="@android:drawable/btn_dialog"
-                app:iconTint="#DA0A0A"
+                android:foreground="@android:drawable/btn_dialog"
                 app:layout_constraintStart_toStartOf="@+id/addVarBlockText"
-                app:layout_constraintTop_toTopOf="@+id/addVarBlockText" />
+                app:layout_constraintTop_toTopOf="@+id/addVarBlockText"
+                tools:ignore="UnusedAttribute" />
 
         </LinearLayout>
 

@@ -59,26 +59,28 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="28dp"
             android:background="@color/purple_500"
-            android:orientation="vertical"
+            android:orientation="horizontal"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/buttonOperator">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="50dp"
-                android:layout_marginTop="10dp"
+            <EditText
+                android:layout_width="60dp"
+                android:layout_height="40dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginStart="45dp"
+                android:layout_marginTop="5dp"/>
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:layout_marginStart="0dp"
-                    android:layout_marginTop="0dp"/>
-            </com.google.android.material.textfield.TextInputLayout>
+            <Button
+                android:id="@+id/deleteBlock"
+                android:layout_width="30dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="0dp"
+                android:background="@color/black"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
         </LinearLayout>
 
     </LinearLayout>

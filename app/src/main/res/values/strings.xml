@@ -7,5 +7,5 @@
     <string name="menu_first">first</string>
     <string name="menu_second">second</string>
     <string name="menu_third">third</string>
-    <string name="hint">int</string>
+    <string name="hint">var</string>
 </resources>

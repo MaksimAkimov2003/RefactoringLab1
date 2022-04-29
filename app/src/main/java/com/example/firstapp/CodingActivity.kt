@@ -26,10 +26,10 @@ class CodingActivity : AppCompatActivity(){
 
         attachViewDragListener()
 
-        binding.dropArea.setOnDragListener(AddDragListener)
+        binding.dropArea.setOnDragListener(addDragListener)
     }
 
-    private val AddDragListener = View.OnDragListener { view, dragEvent ->
+    private val addDragListener = View.OnDragListener { view, dragEvent ->
         val draggableItem = dragEvent.localState as View
 
         when (dragEvent.action) {
@@ -62,7 +62,7 @@ class CodingActivity : AppCompatActivity(){
                 draggableItem.x = dragEvent.x - (draggableItem.width / 2)
                 draggableItem.y = dragEvent.y - (draggableItem.height / 2)
 
-                val parent = draggableItem.parent as LinearLayout
+                val parent = draggableItem.parent as ConstraintLayout
                 parent.removeView(draggableItem)
 
                 val dropPlace = view as ConstraintLayout
@@ -85,7 +85,7 @@ class CodingActivity : AppCompatActivity(){
     }
 
     private fun attachViewDragListener() {
-        binding.buttonVar.setOnLongClickListener { view: View ->
+        binding.addVarBlock1.setOnLongClickListener { view: View ->
 
             val item = ClipData.Item(buttonVarDragMessage)
             val dataToDrag = ClipData(
@@ -109,6 +109,57 @@ class CodingActivity : AppCompatActivity(){
 
             true
         }
+
+        binding.addVarBlock2.setOnLongClickListener { view: View ->
+
+            val item = ClipData.Item(buttonVarDragMessage)
+            val dataToDrag = ClipData(
+                buttonVarDragMessage,
+                arrayOf(ClipDescription.MIMETYPE_TEXT_PLAIN),
+                item
+            )
+
+            val maskShadow = MaskDragShadowBuilder(view)
+
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
+                @Suppress("DEPRECATION")
+                view.startDrag(dataToDrag, maskShadow, view, 0)
+            }
+
+            else {
+                view.startDragAndDrop(dataToDrag, maskShadow, view, 0)
+            }
+
+            view.visibility = View.INVISIBLE
+
+            true
+        }
+
+        binding.addVarBlock3.setOnLongClickListener { view: View ->
+
+            val item = ClipData.Item(buttonVarDragMessage)
+            val dataToDrag = ClipData(
+                buttonVarDragMessage,
+                arrayOf(ClipDescription.MIMETYPE_TEXT_PLAIN),
+                item
+            )
+
+            val maskShadow = MaskDragShadowBuilder(view)
+
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
+                @Suppress("DEPRECATION")
+                view.startDrag(dataToDrag, maskShadow, view, 0)
+            }
+
+            else {
+                view.startDragAndDrop(dataToDrag, maskShadow, view, 0)
+            }
+
+            view.visibility = View.INVISIBLE
+
+            true
+        }
+
     }
 }
 

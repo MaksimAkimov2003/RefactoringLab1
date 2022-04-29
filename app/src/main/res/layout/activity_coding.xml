@@ -22,70 +22,130 @@
         android:layout_gravity="start"
         android:orientation="vertical">
 
-        <Button
-            android:id="@+id/buttonVar"
-            android:layout_width="82dp"
-            android:layout_height="55dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="28dp"
-            android:text="@string/add_var"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="DuplicateClickableBoundsCheck" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/helper">
 
-        <Button
-            android:id="@+id/buttonArray"
-            android:layout_width="82dp"
-            android:layout_height="55dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="28dp"
-            android:text="@string/add_array"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/buttonVar" />
-
-        <Button
-            android:id="@+id/buttonOperator"
-            android:layout_width="82dp"
-            android:layout_height="55dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="28dp"
-            android:text="@string/add_operator"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/buttonArray" />
-
-        <LinearLayout
-            android:id="@+id/addVarBlock"
-            android:layout_width="150dp"
-            android:layout_height="75dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="28dp"
-            android:background="@color/purple_500"
-            android:orientation="horizontal"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/buttonOperator">
-
-            <EditText
-                android:id="@+id/addVarBlockText"
-                android:layout_width="60dp"
-                android:layout_height="40dp"
-                android:inputType="text"
-                app:layout_constraintStart_toStartOf="parent"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/addVarBlock1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/purple_500"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginStart="45dp"
-                android:layout_marginTop="5dp"/>
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintVertical_bias="0.1">
 
-            <Button
-                android:id="@+id/deleteBlock"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginStart="25dp"
-                android:layout_marginTop="-5dp"
-                android:foreground="@android:drawable/btn_dialog"
-                app:layout_constraintStart_toStartOf="@+id/addVarBlockText"
-                app:layout_constraintTop_toTopOf="@+id/addVarBlockText"
-                tools:ignore="UnusedAttribute" />
+                <EditText
+                    android:id="@+id/addVarBlockText1"
+                    android:layout_width="60dp"
+                    android:layout_height="40dp"
+                    android:inputType="text"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintVertical_bias="0.1"/>
 
-        </LinearLayout>
+                <Button
+                    android:id="@+id/deleteBlock1"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:foreground="@android:drawable/btn_dialog"
+                    app:layout_constraintStart_toEndOf="@+id/addVarBlockText1"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHorizontal_bias="1"
+                    app:layout_constraintVertical_bias="0"
+                    tools:ignore="UnusedAttribute" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/addVarBlock2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/purple_500"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintVertical_bias="0.2">
+
+                <EditText
+                    android:id="@+id/addVarBlockText2"
+                    android:layout_width="60dp"
+                    android:layout_height="40dp"
+                    android:inputType="text"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintVertical_bias="0.1"/>
+
+                <Button
+                    android:id="@+id/deleteBlock2"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:foreground="@android:drawable/btn_dialog"
+                    app:layout_constraintStart_toEndOf="@+id/addVarBlockText2"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHorizontal_bias="1"
+                    app:layout_constraintVertical_bias="0"
+                    tools:ignore="UnusedAttribute" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/addVarBlock3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/purple_500"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintVertical_bias="0.3">
+
+                <EditText
+                    android:id="@+id/addVarBlockText3"
+                    android:layout_width="60dp"
+                    android:layout_height="40dp"
+                    android:inputType="text"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintVertical_bias="0.1"/>
+
+                <Button
+                    android:id="@+id/deleteBlock3"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:foreground="@android:drawable/btn_dialog"
+                    app:layout_constraintStart_toEndOf="@+id/addVarBlockText3"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHorizontal_bias="1"
+                    app:layout_constraintVertical_bias="0"
+                    tools:ignore="UnusedAttribute" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
 

@@ -27,6 +27,8 @@ class CodingActivity : AppCompatActivity(){
         attachViewDragListener()
 
         binding.dropArea.setOnDragListener(addDragListener)
+
+        //ВОТ ЗДЕСЬ АНДРЕЙ ПИШИ КОД ГЛАВНОЕ ДРОП НЕ ТРОГАЙ, ВООБЩЕ НЕ УДАЛЯЙ НИ СТРОЧКИ МОЕЙ
     }
 
     private val addDragListener = View.OnDragListener { view, dragEvent ->

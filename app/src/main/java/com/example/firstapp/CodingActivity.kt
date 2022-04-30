@@ -112,7 +112,7 @@ class CodingActivity : AppCompatActivity(){
             true
         }
 
-        binding.addVarBlock2.setOnLongClickListener { view: View ->
+        binding.addAssignmentBlock.setOnLongClickListener { view: View ->
 
             val item = ClipData.Item(buttonVarDragMessage)
             val dataToDrag = ClipData(

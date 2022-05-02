@@ -61,7 +61,7 @@ class CodingActivity : AppCompatActivity(){
                     println("draggedData $draggedData")
                 }
 
-                draggableItem.x = dragEvent.x - (draggableItem.width / 2) - draggableItem.width
+                draggableItem.x = dragEvent.x - (draggableItem.width / 2)
                 draggableItem.y = dragEvent.y - (draggableItem.height / 2)
 
                 val parent = draggableItem.parent as ConstraintLayout

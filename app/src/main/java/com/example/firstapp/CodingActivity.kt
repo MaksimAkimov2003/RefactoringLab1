@@ -1,18 +1,19 @@
 package com.example.firstapp
 
+import android.R
 import android.content.ClipData
 import android.content.ClipDescription
 import android.graphics.Canvas
 import android.graphics.Point
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.DragEvent
 import android.view.View
-import android.widget.LinearLayout
+import android.view.inputmethod.InputMethodManager
+import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.drawerlayout.widget.DrawerLayout
 import com.example.firstapp.databinding.ActivityCodingBinding
+import android.widget.Button
 
 class CodingActivity : AppCompatActivity(){
     private val buttonVarDragMessage = "buttonVar Added"
@@ -28,7 +29,16 @@ class CodingActivity : AppCompatActivity(){
 
         binding.dropArea.setOnDragListener(addDragListener)
 
+        binding.inputButton.setOnClickListener {
+            hideKeyboard(it)
+        }
+
         //ВОТ ЗДЕСЬ АНДРЕЙ ПИШИ КОД ГЛАВНОЕ ДРОП НЕ ТРОГАЙ, ВООБЩЕ НЕ УДАЛЯЙ НИ СТРОЧКИ МОЕЙ
+    }
+
+    private fun hideKeyboard(view: View) {
+        val inputMethodManager = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(view.applicationWindowToken, 0)
     }
 
     private val addDragListener = View.OnDragListener { view, dragEvent ->

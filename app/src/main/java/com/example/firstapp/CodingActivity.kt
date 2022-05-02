@@ -14,6 +14,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.firstapp.databinding.ActivityCodingBinding
 import android.widget.Button
+import androidx.core.content.ContextCompat
+import androidx.core.view.GravityCompat
+import kotlinx.android.synthetic.main.activity_coding.*
+import kotlinx.android.synthetic.main.toolbar.*
 
 class CodingActivity : AppCompatActivity(){
     private val buttonVarDragMessage = "buttonVar Added"
@@ -48,6 +52,15 @@ class CodingActivity : AppCompatActivity(){
             val addVarBlock3 = binding.addVarBlock3
             addVarBlock3.removeAllViews()
         }
+
+        binding.apply {
+            icon_menu.setOnClickListener{
+                mainLayout.openDrawer(GravityCompat.START)
+            }
+        }
+
+
+        mainLayout.setScrimColor(ContextCompat.getColor(getApplicationContext(), android.R.color.transparent));
     }
 
     private fun hideKeyboard(view: View) {

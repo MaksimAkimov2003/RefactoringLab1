@@ -34,6 +34,20 @@ class CodingActivity : AppCompatActivity(){
         }
 
         //ВОТ ЗДЕСЬ АНДРЕЙ ПИШИ КОД ГЛАВНОЕ ДРОП НЕ ТРОГАЙ, ВООБЩЕ НЕ УДАЛЯЙ НИ СТРОЧКИ МОЕЙ
+        binding.deleteBlock.setOnClickListener {
+            val addVarBlock1 = binding.addVarBlock1
+            addVarBlock1.removeAllViews()
+        }
+
+        binding.deleteBlock2.setOnClickListener {
+            val addVarBlock2 = binding.addVarBlock2
+            addVarBlock2.removeAllViews()
+        }
+
+        binding.deleteBlock3.setOnClickListener {
+            val addVarBlock3 = binding.addVarBlock3
+            addVarBlock3.removeAllViews()
+        }
     }
 
     private fun hideKeyboard(view: View) {

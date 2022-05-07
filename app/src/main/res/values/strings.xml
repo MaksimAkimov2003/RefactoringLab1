@@ -8,4 +8,7 @@
     <string name="menu_second">second</string>
     <string name="menu_third">third</string>
     <string name="hint"><font size ="50">var</font></string>
+    <string name="test">test</string>
+    <string name="nameVar">NameVar</string>
+    <string name="value">Value</string>
 </resources>

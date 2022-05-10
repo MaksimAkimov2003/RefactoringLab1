@@ -1,3 +1,3 @@
-package com.example.firstapp
+package algorithms
 
 // здесь короче будет интепретатор, имба

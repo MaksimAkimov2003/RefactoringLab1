@@ -2,65 +2,52 @@
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="horizontal"
-    android:id="@+id/arithmeticOperations"
+    android:id="@+id/arithmetic"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@color/purple_500"
+    android:orientation="horizontal"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintHorizontal_bias="0"
     app:layout_constraintLeft_toLeftOf="parent"
     app:layout_constraintRight_toRightOf="parent"
     app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintHorizontal_bias="0"
-    app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintVertical_bias="0.1"
     tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
 
     <Button
         android:id="@+id/inputButton"
-        android:layout_width="20dp"
-        android:layout_height="25dp"
-        android:layout_marginEnd="5dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:foreground="@android:drawable/ic_input_add"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/addVarBlockText"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0"
         tools:ignore="UnusedAttribute" />
 
     <Button
         android:id="@+id/deleteBlock"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:foreground="@android:drawable/btn_dialog"
-        app:layout_constraintStart_toEndOf="@+id/addVarBlockText"
-        android:layout_marginStart="5dp"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="1"
-        app:layout_constraintVertical_bias="0"
         tools:ignore="UnusedAttribute" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/arithmetic"
-        android:layout_width="60dp"
-        android:layout_height="50dp"
+        android:id="@+id/arifOperations"
+        android:layout_width="140dp"
+        android:layout_height="80dp"
+        android:hint="@string/operations"
         android:inputType="text"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintVertical_bias="0.1"
         app:hintTextColor="@color/purple_500"
-        android:hint="@string/hint" >
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/deleteBlock"
+        app:layout_constraintStart_toEndOf="@+id/inputButton"
+        app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:textSize="10sp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:theme="@style/CardView.Light"/>
+            android:textSize="40sp"
+            android:theme="@style/CardView.Light" />
     </com.google.android.material.textfield.TextInputLayout>
 
 </merge>

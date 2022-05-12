@@ -7,8 +7,12 @@
     <string name="menu_first">first</string>
     <string name="menu_second">second</string>
     <string name="menu_third">third</string>
-    <string name="hint"><font size ="50">var</font></string>
+    <string name="variable"><font size ="50">Var</font></string>
     <string name="test">test</string>
     <string name="nameVar">NameVar</string>
-    <string name="value">Value</string>
+    <string name="value"><font size ="50">Value</font></string>
+    <string name="equal">=</string>
+    <string name="operations"><font size ="50">Operations</font></string>
+    <string name="openBracket"><font size ="30">(</font></string>
+    <string name="output"><font size ="50">Output</font></string>
 </resources>

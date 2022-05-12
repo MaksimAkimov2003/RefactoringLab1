@@ -2,7 +2,7 @@
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/addVarBlock"
+    android:id="@+id/addAssignOperator"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@color/purple_500"
@@ -29,21 +29,19 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:foreground="@android:drawable/btn_dialog"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/addVarBlockText"
+        app:layout_constraintStart_toEndOf="@+id/textView3"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="UnusedAttribute" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/addVarBlockText"
-        android:layout_width="140dp"
+        android:id="@+id/variableBlock"
+        android:layout_width="60dp"
         android:layout_height="80dp"
         android:hint="@string/variable"
         android:inputType="text"
         app:hintTextColor="@color/purple_500"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/inputButton"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/textView2">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -51,5 +49,50 @@
             android:textSize="40sp"
             android:theme="@style/CardView.Light" />
     </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/valueBlock"
+        android:layout_width="60dp"
+        android:layout_height="80dp"
+        android:hint="@string/value"
+        android:inputType="text"
+        app:hintTextColor="@color/purple_500"
+        app:layout_constraintStart_toEndOf="@+id/textView2"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="40sp"
+            android:theme="@style/CardView.Light" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="75dp"
+        android:layout_height="50dp"
+        android:text="While ("
+        android:textSize="24sp"
+        app:layout_constraintStart_toEndOf="@+id/inputButton"
+        app:layout_constraintTop_toBottomOf="@+id/inputButton" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="15dp"
+        android:layout_height="50dp"
+        android:text="):"
+        android:textSize="24sp"
+        app:layout_constraintStart_toEndOf="@+id/valueBlock"
+        app:layout_constraintTop_toBottomOf="@+id/inputButton" />
+
+    <Button
+        android:id="@+id/addField"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:foreground="@android:drawable/ic_menu_add"
+        tools:ignore="UnusedAttribute"
+        tools:layout_editor_absoluteX="150dp"
+        tools:layout_editor_absoluteY="100dp" />
 
 </merge>

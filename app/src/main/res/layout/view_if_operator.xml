@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/addAssignOperator"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@color/purple_500"
     android:orientation="horizontal"
     app:layout_constraintBottom_toBottomOf="parent"
@@ -29,10 +29,9 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:foreground="@android:drawable/btn_dialog"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/valueBlock"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="UnusedAttribute" />
+        tools:ignore="UnusedAttribute"
+        tools:layout_editor_absoluteX="190dp"
+        tools:layout_editor_absoluteY="0dp" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/variableBlock"
@@ -41,8 +40,8 @@
         android:hint="@string/variable"
         android:inputType="text"
         app:hintTextColor="@color/purple_500"
-        app:layout_constraintStart_toEndOf="@+id/inputButton"
-        app:layout_constraintTop_toTopOf="parent">
+        tools:layout_editor_absoluteX="30dp"
+        tools:layout_editor_absoluteY="0dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -58,25 +57,39 @@
         android:hint="@string/value"
         android:inputType="text"
         app:hintTextColor="@color/purple_500"
-        app:layout_constraintStart_toEndOf="@+id/equal"
-        app:layout_constraintTop_toTopOf="parent">
+        tools:layout_editor_absoluteX="130dp"
+        tools:layout_editor_absoluteY="0dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:textSize="40sp"
             android:theme="@style/CardView.Light" />
+
     </com.google.android.material.textfield.TextInputLayout>
 
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="40dp"
+        android:layout_height="50dp"
+        android:spinnerMode="dropdown"
+        tools:layout_editor_absoluteX="90dp"
+        tools:layout_editor_absoluteY="30dp" />
+
     <TextView
-        android:id="@+id/equal"
-        android:layout_width="20dp"
-        android:layout_height="55dp"
-        android:text="@string/equal"
-        android:textAlignment="center"
-        android:textAllCaps="false"
-        android:textSize="34sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/variableBlock" />
+        android:layout_width="30dp"
+        android:layout_height="50dp"
+        android:text="If ("
+        android:textSize="24sp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="30dp" />
+
+    <TextView
+        android:layout_width="15dp"
+        android:layout_height="50dp"
+        android:text="):"
+        android:textSize="24sp"
+        tools:layout_editor_absoluteX="190dp"
+        tools:layout_editor_absoluteY="30dp" />
 
 </merge>

@@ -18,6 +18,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import kotlinx.android.synthetic.main.activity_coding.*
 import kotlinx.android.synthetic.main.toolbar.*
+import kotlinx.android.synthetic.main.activity_main.*
 
 class CodingActivity : AppCompatActivity(){
     private val buttonVarDragMessage = "buttonVar Added"
@@ -59,9 +60,122 @@ class CodingActivity : AppCompatActivity(){
             }
         }
 
-
         mainLayout.setScrimColor(ContextCompat.getColor(getApplicationContext(), android.R.color.transparent));
+
+        
+
+
     }
+
+    private fun calc(input: String): String {
+        val rpn = invertStack(toRPN(input))
+        val result = Stack()
+        var msgError = ""
+
+        try {
+            while (!rpn.isEmpty()) {
+                val item = rpn.pop()
+                if (item.isNotEmpty()) {
+                    if (item[0].isDigit()) {
+                        result.push(item)
+                        continue
+                    }
+
+                    val num2 = result.pop().toDouble()
+                    val num1 = result.pop().toDouble()
+
+                    if (num2 == 0.0) {
+                        msgError = resources.getString(R.string.msg_error_zero)
+                        break
+                    }
+
+                    @Suppress("IMPLICIT_CAST_TO_ANY")
+                    result.push(
+                        when (item[0]) {
+                            '+' -> num1 + num2
+                            '-' -> num1 - num2
+                            '*' -> num1 * num2
+                            '/' -> num1 / num2
+                            '%' -> num1 % num2
+                            else -> 0
+                        }.toString()
+                    )
+                }
+            }
+        } catch (e: Exception) {
+            msgError = resources.getString(R.string.msg_error_unknown)
+        }
+
+        return msgError.ifEmpty {
+            result.pop()
+        }
+    }
+
+    private fun toRPN(expr: String): Stack {
+        val result = Stack()
+        val stack = SymbolsStack()
+        var buffer = ""
+
+        for(ch: Char in expr) {
+            if(ch.isDigit()) {
+                buffer += ch.toString()
+                continue
+            }
+
+            result.push(buffer)
+            buffer = ""
+            if(stack.isEmpty() || ch == '(') {
+                stack.push(ch)
+            } else if(ch == ')') {
+                loop@while(!stack.isEmpty()) {
+                    val last = stack.pop()
+                    when(last) {
+                        '(' -> break@loop
+                        else -> result.push(last.toString())
+                    }
+                }
+            } else {
+                if(stack.comparePriority(ch)) {
+                    stack.push(ch)
+                } else {
+                    while(!stack.isEmpty()) {
+                        if(!stack.comparePriority(ch)) {
+                            result.push(stack.pop().toString())
+                        } else {
+                            break
+                        }
+                    }
+                    stack.push(ch)
+                }
+            }
+        }
+
+        result.push(buffer)
+        while(!stack.isEmpty()) {
+            result.push(stack.pop().toString())
+        }
+        return result
+    }
+
+    private fun invertStack(stack: Stack): Stack {
+        val result = Stack()
+        while(!stack.isEmpty()) result.push(stack.pop())
+        return result
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     private fun hideKeyboard(view: View) {
         val inputMethodManager = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager

@@ -13,7 +13,7 @@ class arithmeticOperations @JvmOverloads constructor(
 
     ) : ConstraintLayout(context, attrs, defStyleAttr) {
 
-    private val binding = ViewArithmeticOperationsBinding.inflate(LayoutInflater.from(context), this)
+    private val bin1 = ViewArithmeticOperationsBinding.inflate(LayoutInflater.from(context), this)
 
 
     init {
@@ -22,7 +22,7 @@ class arithmeticOperations @JvmOverloads constructor(
     }
 
     private fun selfBlockDelete() {
-        binding.deleteBlock.setOnClickListener {
+        bin1.deleteBlock2.setOnClickListener {
 
 
 

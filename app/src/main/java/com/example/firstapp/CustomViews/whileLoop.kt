@@ -13,7 +13,7 @@ class whileLoop @JvmOverloads constructor(
 
     ) : ConstraintLayout(context, attrs, defStyleAttr) {
 
-    private val binding = ViewWhileLoopBinding.inflate(LayoutInflater.from(context), this)
+    private val bin6 = ViewWhileLoopBinding.inflate(LayoutInflater.from(context), this)
 
 
     init {
@@ -22,7 +22,7 @@ class whileLoop @JvmOverloads constructor(
     }
 
     private fun selfBlockDelete() {
-        binding.deleteBlock.setOnClickListener {
+        bin6.deleteBlock.setOnClickListener {
 
 
 

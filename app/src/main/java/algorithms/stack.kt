@@ -1,4 +1,4 @@
-package com.example.firstapp
+package algorithms
 
 class SymbolsStack {
 

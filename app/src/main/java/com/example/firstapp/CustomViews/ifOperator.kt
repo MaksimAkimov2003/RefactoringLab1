@@ -13,7 +13,7 @@ class ifOperator @JvmOverloads constructor(
 
     ) : ConstraintLayout(context, attrs, defStyleAttr) {
 
-    private val binding = ViewIfOperatorBinding.inflate(LayoutInflater.from(context), this)
+    private val bin4 = ViewIfOperatorBinding.inflate(LayoutInflater.from(context), this)
 
 
     init {
@@ -22,7 +22,7 @@ class ifOperator @JvmOverloads constructor(
     }
 
     private fun selfBlockDelete() {
-        binding.deleteBlock.setOnClickListener {
+        bin4.deleteBlock.setOnClickListener {
 
 
 

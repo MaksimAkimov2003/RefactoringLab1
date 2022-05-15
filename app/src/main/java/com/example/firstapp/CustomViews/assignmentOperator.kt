@@ -13,7 +13,7 @@ class assignmentOperator @JvmOverloads constructor(
 
     ) : ConstraintLayout(context, attrs, defStyleAttr) {
 
-    private val binding = ViewAssignmentOperatorBinding.inflate(LayoutInflater.from(context), this)
+    private val bin2 = ViewAssignmentOperatorBinding.inflate(LayoutInflater.from(context), this)
 
 
     init {
@@ -22,7 +22,7 @@ class assignmentOperator @JvmOverloads constructor(
     }
 
     private fun selfBlockDelete() {
-        binding.deleteBlock.setOnClickListener {
+        bin2.deleteBlock3.setOnClickListener {
 
 
 

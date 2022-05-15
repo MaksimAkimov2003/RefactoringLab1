@@ -13,7 +13,7 @@ class output @JvmOverloads constructor(
 
     ) : ConstraintLayout(context, attrs, defStyleAttr) {
 
-    private val binding = ViewOutputBinding.inflate(LayoutInflater.from(context), this)
+    private val bin5 = ViewOutputBinding.inflate(LayoutInflater.from(context), this)
 
 
     init {
@@ -22,7 +22,7 @@ class output @JvmOverloads constructor(
     }
 
     private fun selfBlockDelete() {
-        binding.deleteBlock.setOnClickListener {
+        bin5.deleteBlock.setOnClickListener {
 
 
 

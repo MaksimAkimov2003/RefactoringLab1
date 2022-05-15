@@ -1,9 +1,10 @@
 package com.example.firstapp.CustomViews
 
 import android.content.Context
-import androidx.constraintlayout.widget.ConstraintLayout
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.ViewGroup.MarginLayoutParams
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.firstapp.databinding.ViewDeclareIntegerBinding
 
 class declareInteger @JvmOverloads constructor(
@@ -13,8 +14,7 @@ class declareInteger @JvmOverloads constructor(
 
     ) : ConstraintLayout(context, attrs, defStyleAttr) {
 
-    private val binding = ViewDeclareIntegerBinding.inflate(LayoutInflater.from(context), this)
-
+    private val bin3 = ViewDeclareIntegerBinding.inflate(LayoutInflater.from(context), this)
 
     init {
         selfBlockDelete()
@@ -22,10 +22,12 @@ class declareInteger @JvmOverloads constructor(
     }
 
     private fun selfBlockDelete() {
-        binding.deleteBlock.setOnClickListener {
-
-
-
+        bin3.deleteBlock1.setOnClickListener {
+            removeAllViews()
         }
     }
+
+
+
+
 }

@@ -23,9 +23,7 @@ class arithmeticOperations @JvmOverloads constructor(
 
     private fun selfBlockDelete() {
         bin1.deleteBlock2.setOnClickListener {
-
-
-
+            removeAllViews()
         }
     }
 }

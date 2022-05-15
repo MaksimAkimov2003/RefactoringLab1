@@ -23,9 +23,7 @@ class assignmentOperator @JvmOverloads constructor(
 
     private fun selfBlockDelete() {
         bin2.deleteBlock3.setOnClickListener {
-
-
-
+            removeAllViews()
         }
     }
 }

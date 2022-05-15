@@ -4,6 +4,7 @@ import android.R
 import android.content.ClipData
 import android.content.ClipDescription
 import android.content.Context
+import android.content.Context.INPUT_METHOD_SERVICE
 import android.graphics.Canvas
 import android.graphics.Point
 import android.os.Build
@@ -17,16 +18,25 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.firstapp.databinding.ActivityCodingBinding
 import android.widget.Button
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.view.GravityCompat
+import androidx.core.view.marginTop
+import androidx.core.view.setMargins
+import androidx.core.view.updateLayoutParams
 import com.example.firstapp.CustomViews.arithmeticOperations
 import com.example.firstapp.CustomViews.assignmentOperator
 import com.example.firstapp.CustomViews.declareInteger
 import com.google.android.material.internal.ViewUtils.dpToPx
 import kotlinx.android.synthetic.main.activity_coding.*
+import kotlinx.android.synthetic.main.activity_coding.view.*
 import kotlinx.android.synthetic.main.toolbar.*
 
 class CodingActivity : AppCompatActivity(){
     private val buttonVarDragMessage = "buttonVar Added"
+
+    private val tagDeclareIntegerView = "DeclareInteger"
+    private val tagArithmeticOperationsView = "ArithmeticOperations"
+    private val tagAssignmentOperatorView = "AssignmentOperator"
 
     private lateinit var binding: ActivityCodingBinding
 
@@ -37,29 +47,13 @@ class CodingActivity : AppCompatActivity(){
 
         variablesAddedSet()
 
-
         binding.dropArea.setOnDragListener(addDragListener)
 
 //        binding.inputButton.setOnClickListener {
 //            hideKeyboard(it)
 //        }
 
-        //ВОТ ЗДЕСЬ АНДРЕЙ ПИШИ КОД ГЛАВНОЕ ДРОП НЕ ТРОГАЙ, ВООБЩЕ НЕ УДАЛЯЙ НИ СТРОЧКИ МОЕЙ
-//        binding.deleteBlock.setOnClickListener {
-//            val addVarBlock1 = binding.addVarBlock1
-//            addVarBlock1.removeAllViews()
-//        }
-//
-//        binding.deleteBlock2.setOnClickListener {
-//            val addVarBlock2 = binding.addVarBlock2
-//            addVarBlock2.removeAllViews()
-//        }
-//
-//        binding.deleteBlock3.setOnClickListener {
-//            val addVarBlock3 = binding.addVarBlock3
-//            addVarBlock3.removeAllViews()
-//        }
-//
+
         binding.apply {
             icon_menu.setOnClickListener{
                 mainLayout.openDrawer(GravityCompat.START)
@@ -70,42 +64,79 @@ class CodingActivity : AppCompatActivity(){
         mainLayout.setScrimColor(ContextCompat.getColor(getApplicationContext(), android.R.color.transparent))
     }
 
-    private fun startingAddViews(view: View) {
-        binding.helper.addView(view)
+    private fun startingAddViews(view: View, params : ConstraintLayout.LayoutParams, tag : String) {
+        view.setTag(tag)
+        binding.helper.addView(view, params)
         attachViewDragListener(view)
     }
 
     private fun variablesAddedSet() {
         val declareIntegerView = declareInteger(this)
-        startingAddViews(declareIntegerView)
-        val param = declareIntegerView.layoutParams as ConstraintLayout.LayoutParams
-        val a = binding.helper.height
-        val b = binding.helper.width
-        param.setMargins(0,a / 2,b,a / 2)
 
-        declareIntegerView.layoutParams = param
-        declareIntegerView.setTag("VariablesType")
+        val paramsDeclareIntegerView : ConstraintLayout.LayoutParams = ConstraintLayout.LayoutParams(
+            ConstraintLayout.LayoutParams.WRAP_CONTENT, //width
+            ConstraintLayout.LayoutParams.WRAP_CONTENT //height
+        )
+
+        paramsDeclareIntegerView.topToTop = binding.helper.id
+        paramsDeclareIntegerView.leftToLeft = binding.helper.id
+
+        paramsDeclareIntegerView.topMargin = 100
+        paramsDeclareIntegerView.leftMargin = 0
+
+        startingAddViews(declareIntegerView, paramsDeclareIntegerView, tagDeclareIntegerView)
 
 
-//        val assignmentOperatorView = assignmentOperator(this)
-//        assignmentOperatorView.setTag("VariablesType")
-//        startingAddViews(assignmentOperatorView)
-//
-//        val arithmeticOperationsView = arithmeticOperations(this)
-//        arithmeticOperationsView.setTag("VariablesType")
-//        startingAddViews(arithmeticOperationsView)
+        val assignmentOperatorView = assignmentOperator(this)
+
+        val paramsAssignmentOperatorView : ConstraintLayout.LayoutParams = ConstraintLayout.LayoutParams(
+            ConstraintLayout.LayoutParams.WRAP_CONTENT, //width
+            ConstraintLayout.LayoutParams.WRAP_CONTENT //height
+        )
+
+        paramsAssignmentOperatorView.topToTop = binding.helper.id
+        paramsAssignmentOperatorView.leftToLeft = binding.helper.id
+
+        paramsAssignmentOperatorView.topMargin = 400
+        paramsAssignmentOperatorView.leftMargin = 0
+
+        startingAddViews(assignmentOperatorView, paramsAssignmentOperatorView, tagAssignmentOperatorView)
+
+
+        val arithmeticOperationsView = arithmeticOperations(this)
+
+        val paramsArithmeticOperationsView : ConstraintLayout.LayoutParams = ConstraintLayout.LayoutParams(
+            ConstraintLayout.LayoutParams.WRAP_CONTENT, //width
+            ConstraintLayout.LayoutParams.WRAP_CONTENT //height
+        )
+
+        paramsArithmeticOperationsView.topToTop = binding.helper.id
+        paramsArithmeticOperationsView.leftToLeft = binding.helper.id
+
+        paramsArithmeticOperationsView.topMargin = 700
+        paramsArithmeticOperationsView.leftMargin = 0
+
+        startingAddViews(arithmeticOperationsView, paramsArithmeticOperationsView, tagArithmeticOperationsView)
     }
 
-    private fun hideKeyboard(view: View) {
-        val inputMethodManager = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
-        inputMethodManager.hideSoftInputFromWindow(view.applicationWindowToken, 0)
-    }
+
+//    private fun hideKeyboard(view: View) {
+//        val inputMethodManager = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+//        inputMethodManager.hideSoftInputFromWindow(view.applicationWindowToken, 0)
+//    }
 
     private val addDragListener = View.OnDragListener { view, dragEvent ->
         val draggableItem = dragEvent.localState as View
 
         when (dragEvent.action) {
             DragEvent.ACTION_DRAG_STARTED -> {
+                draggableItem.updateLayoutParams<ConstraintLayout.LayoutParams> {
+                    topToTop = binding.dropArea.id
+                    leftToLeft = binding.dropArea.id
+
+                    topMargin = 0
+                    leftMargin = 0
+                }
                 true
             }
             DragEvent.ACTION_DRAG_ENTERED -> {
@@ -120,7 +151,6 @@ class CodingActivity : AppCompatActivity(){
                 draggableItem.visibility = View.VISIBLE
 
                 view.invalidate()
-
                 true
             }
             DragEvent.ACTION_DROP -> {
@@ -128,7 +158,6 @@ class CodingActivity : AppCompatActivity(){
 
                 if (dragEvent.clipDescription.hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN)) {
                     val draggedData = dragEvent.clipData.getItemAt(0).text
-                    println("draggedData $draggedData")
                 }
 
                 draggableItem.x = dragEvent.x - (draggableItem.width / 2)
@@ -146,6 +175,9 @@ class CodingActivity : AppCompatActivity(){
                 }
 
                 val dropPlace = view as ConstraintLayout
+
+                val typeOfView = draggableItem.getTag()
+                println(typeOfView)
 
                 dropPlace.addView(draggableItem)
 
@@ -192,7 +224,6 @@ class CodingActivity : AppCompatActivity(){
         }
 
     }
-
 }
 
 private class MaskDragShadowBuilder(view: View) : View.DragShadowBuilder(view) {

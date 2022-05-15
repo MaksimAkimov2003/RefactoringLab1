@@ -15,4 +15,6 @@
     <string name="operations"><font size ="50">Operations</font></string>
     <string name="openBracket"><font size ="30">(</font></string>
     <string name="output"><font size ="50">Output</font></string>
+    <string name="msg_error_zero">Error: Division by zero.</string>
+    <string name="msg_error_unknown">Error: Unknown. Please check is the expression correct.</string>
 </resources>

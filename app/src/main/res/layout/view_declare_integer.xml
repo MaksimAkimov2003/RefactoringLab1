@@ -51,6 +51,17 @@
                 android:theme="@style/CardView.Light" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <EditText
+            android:layout_width="27dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="6dp"
+            android:textColorHint="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/addVarBlockText1"
+            android:id="@+id/textNumber">
+
+        </EditText>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </merge>

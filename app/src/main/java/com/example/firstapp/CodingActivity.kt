@@ -9,6 +9,7 @@ import android.graphics.Canvas
 import android.graphics.Point
 import android.os.Build
 import android.os.Bundle
+import android.text.Editable
 import android.view.DragEvent
 import android.view.View
 import android.view.ViewGroup
@@ -30,6 +31,11 @@ import com.google.android.material.internal.ViewUtils.dpToPx
 import kotlinx.android.synthetic.main.activity_coding.*
 import kotlinx.android.synthetic.main.activity_coding.view.*
 import kotlinx.android.synthetic.main.toolbar.*
+import kotlinx.android.synthetic.main.view_arithmetic_operations.*
+import kotlinx.android.synthetic.main.view_assignment_operator.*
+import kotlinx.android.synthetic.main.view_declare_integer.*
+import kotlinx.android.synthetic.main.view_declare_integer.textNumber
+import kotlinx.android.synthetic.main.view_declare_integer.view.*
 
 class CodingActivity : AppCompatActivity(){
     private val buttonVarDragMessage = "buttonVar Added"
@@ -37,6 +43,8 @@ class CodingActivity : AppCompatActivity(){
     private val tagDeclareIntegerView = "DeclareInteger"
     private val tagArithmeticOperationsView = "ArithmeticOperations"
     private val tagAssignmentOperatorView = "AssignmentOperator"
+
+    var number = 1
 
     private lateinit var binding: ActivityCodingBinding
 
@@ -66,6 +74,8 @@ class CodingActivity : AppCompatActivity(){
 
     private fun startingAddViews(view: View, params : ConstraintLayout.LayoutParams, tag : String) {
         view.setTag(tag)
+
+
         binding.helper.addView(view, params)
         attachViewDragListener(view)
     }
@@ -77,6 +87,7 @@ class CodingActivity : AppCompatActivity(){
             ConstraintLayout.LayoutParams.WRAP_CONTENT, //width
             ConstraintLayout.LayoutParams.WRAP_CONTENT //height
         )
+
 
         paramsDeclareIntegerView.topToTop = binding.helper.id
         paramsDeclareIntegerView.leftToLeft = binding.helper.id
@@ -176,10 +187,12 @@ class CodingActivity : AppCompatActivity(){
 
                 val dropPlace = view as ConstraintLayout
 
-                val typeOfView = draggableItem.getTag()
-                println(typeOfView)
+
 
                 dropPlace.addView(draggableItem)
+                val str = number.toString(10)
+                draggableItem.textNumber.setText(str)
+                number++
 
                 true
             }

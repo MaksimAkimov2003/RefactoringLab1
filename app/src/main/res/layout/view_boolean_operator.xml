@@ -2,7 +2,7 @@
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/output"
+    android:id="@+id/booleanOperator"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@color/bar"
@@ -21,8 +21,9 @@
         android:layout_height="40dp"
         android:textColorHint="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/variableOutput"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintEnd_toStartOf="@+id/nameOfVariable"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nameOfVariable">
 
     </EditText>
 
@@ -41,6 +42,7 @@
         android:layout_height="30dp"
         android:foreground="@android:drawable/btn_dialog"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/spinnerForIf"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="UnusedAttribute" />
 
@@ -51,21 +53,43 @@
         android:foreground="@android:drawable/checkbox_on_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/variableOutput"
+        app:layout_constraintStart_toEndOf="@+id/spinnerForIf"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerForIf"
         tools:ignore="UnusedAttribute" />
 
     <EditText
-        android:id="@+id/variableOutput"
-        android:layout_width="140dp"
-        android:layout_height="80dp"
-        android:hint="@string/output"
+        android:id="@+id/nameOfVariable"
+        android:layout_width="50dp"
+        android:layout_height="40dp"
+        android:gravity="bottom"
+        android:hint="Name"
         android:inputType="text"
-        app:hintTextColor="@color/bar"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/deleteBlock"
+        android:textSize="16sp"
+        android:textStyle="italic"
         app:layout_constraintStart_toEndOf="@+id/inputButton"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/inputButton">
 
     </EditText>
+
+    <Spinner
+        android:id="@+id/spinnerForIf"
+        android:layout_width="70dp"
+        android:layout_height="40dp"
+        android:entries="@array/true_or_false"
+        android:gravity="center_horizontal"
+        android:spinnerMode="dropdown"
+        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/inputButton" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="20dp"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:text="="
+        android:textSize="28sp"
+        app:layout_constraintStart_toEndOf="@+id/nameOfVariable"
+        app:layout_constraintTop_toTopOf="@+id/nameOfVariable" />
+
 
 </merge>

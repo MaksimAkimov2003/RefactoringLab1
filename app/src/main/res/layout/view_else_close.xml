@@ -2,7 +2,7 @@
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/output"
+    android:id="@+id/elseClose"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@color/bar"
@@ -21,8 +21,9 @@
         android:layout_height="40dp"
         android:textColorHint="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/variableOutput"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintEnd_toStartOf="@+id/textView2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputButton">
 
     </EditText>
 
@@ -41,6 +42,7 @@
         android:layout_height="30dp"
         android:foreground="@android:drawable/btn_dialog"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView1"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="UnusedAttribute" />
 
@@ -51,21 +53,28 @@
         android:foreground="@android:drawable/checkbox_on_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/variableOutput"
+        app:layout_constraintStart_toEndOf="@+id/textView1"
         tools:ignore="UnusedAttribute" />
 
-    <EditText
-        android:id="@+id/variableOutput"
-        android:layout_width="140dp"
-        android:layout_height="80dp"
-        android:hint="@string/output"
-        android:inputType="text"
-        app:hintTextColor="@color/bar"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/deleteBlock"
-        app:layout_constraintStart_toEndOf="@+id/inputButton"
-        app:layout_constraintTop_toTopOf="parent">
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="130dp"
+        android:layout_height="40dp"
+        android:gravity="left"
+        android:text="} else end"
+        android:textSize="28sp"
+        app:layout_constraintStart_toEndOf="@+id/textView2"
+        app:layout_constraintTop_toTopOf="@+id/textView2" />
 
-    </EditText>
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="10dp"
+        android:layout_height="40dp"
+        android:gravity="left"
+        android:text=" "
+        android:textSize="28sp"
+        app:layout_constraintStart_toEndOf="@+id/inputButton"
+        app:layout_constraintTop_toBottomOf="@+id/inputButton" />
+
 
 </merge>

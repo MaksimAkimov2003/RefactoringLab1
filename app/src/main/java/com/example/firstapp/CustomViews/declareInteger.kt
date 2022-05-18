@@ -6,6 +6,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup.MarginLayoutParams
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.firstapp.databinding.ViewDeclareIntegerBinding
+import com.example.firstapp.CodingActivity
+import com.example.firstapp.MainActivity
+
 
 class declareInteger @JvmOverloads constructor(
     context: Context,
@@ -17,15 +20,15 @@ class declareInteger @JvmOverloads constructor(
     private val bin3 = ViewDeclareIntegerBinding.inflate(LayoutInflater.from(context), this)
 
     init {
-        selfBlockDelete()
-
+        //selfBlockDelete()
     }
 
-    private fun selfBlockDelete() {
-        bin3.deleteBlock1.setOnClickListener {
-            removeAllViews()
-        }
-    }
+//    private fun selfBlockDelete() {
+//        bin3.deleteBlock.setOnClickListener {
+//            removeAllViews()
+////            (context as? CodingActivity)?.removeViewInAllViewsList(it)
+//        }
+//    }
 
 
 

@@ -1,6 +1,7 @@
 package com.example.firstapp
 
 
+import algorithms.main
 import android.annotation.SuppressLint
 import android.content.ClipData
 import android.content.ClipDescription
@@ -24,20 +25,22 @@ import com.example.firstapp.CustomViews.*
 import com.example.firstapp.databinding.ActivityCodingBinding
 import com.example.firstapp.databinding.RecyclerviewItemBinding
 import kotlinx.android.synthetic.main.view_arithmetic_operations.view.*
+import kotlinx.android.synthetic.main.view_arithmetic_operations.view.textNumber
+import kotlinx.android.synthetic.main.view_assignment_operator.view.*
+import kotlinx.android.synthetic.main.view_declare_integer.view.*
 
 val buttonVarDragMessage = "buttonVar Added"
-val tagDeclareIntegerView = "DeclareInteger"
+val tagDeclareIntegerView = "Declare"
 val tagArithmeticOperationsView = "ArithmeticOperations"
 val tagAssignmentOperatorView = "AssignmentOperator"
+
 class CodingActivity : AppCompatActivity(){
-
-
-
-
+    var allViews: MutableList<View> = mutableListOf()
     var number = 1
 
     private lateinit var binding: ActivityCodingBinding
     private lateinit var bindRecItem: RecyclerviewItemBinding
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,6 +58,9 @@ class CodingActivity : AppCompatActivity(){
 //            hideKeyboard(it)
 //        }
 
+        binding.button2.setOnClickListener{
+            main(allViews)
+        }
 
         binding.apply {
             binding.toolbar.iconMenu.setOnClickListener{
@@ -139,77 +145,34 @@ class CodingActivity : AppCompatActivity(){
 
     }
 
+    fun getAndConvertData(allViews: MutableList<View>): MutableList<MutableList<String>> {
+        var dataSet: MutableList<MutableList<String>> = mutableListOf()
+
+        for (view in allViews) {
+            var arrayForView: MutableList<String> = mutableListOf()
+
+            arrayForView.add(view.getTag().toString())
+            arrayForView.add(view.textNumber.text.toString())
+
+            if (view.getTag() == tagDeclareIntegerView) {
+                arrayForView.add(view.inputValueDeclare.text.toString())
+            }
+
+            if (view.getTag() == tagArithmeticOperationsView) {
+                arrayForView.add(view.arifOperations2.text.toString())
+            }
+
+            if (view.getTag() == tagAssignmentOperatorView) {
+                arrayForView.add(view.variableBlock3.text.toString())
+                arrayForView.add(view.valueBlock3.text.toString())
+            }
+
+            dataSet.add(arrayForView)
+        }
 
 
-
-//    private fun OperAddedSet() {
-//        val declareIntegerView = declareInteger(this)
-//
-//        val paramsDeclareIntegerView : ConstraintLayout.LayoutParams = ConstraintLayout.LayoutParams(
-//            ConstraintLayout.LayoutParams.WRAP_CONTENT, //width
-//            ConstraintLayout.LayoutParams.WRAP_CONTENT //height
-//        )
-//
-//        val titl = listOf("Variables", "Operations", "Conditions", "Input|Output")
-//
-//        val RecAdptr = CustomRecyclerAdapter(titl)
-//        val recConstraint = RecAdptr.getConstraint(0)
-//
-//
-//        paramsDeclareIntegerView.topToTop =   .id
-//                paramsDeclareIntegerView.leftToLeft = binding.helper.id
-//
-//
-//
-//        paramsDeclareIntegerView.topMargin = 100
-//        paramsDeclareIntegerView.leftMargin = 0
-//
-//        startingAddViews(declareIntegerView, paramsDeclareIntegerView, tagDeclareIntegerView, constr)
-//
-//
-//        val assignmentOperatorView = assignmentOperator(this)
-//
-//        val paramsAssignmentOperatorView : ConstraintLayout.LayoutParams = ConstraintLayout.LayoutParams(
-//            ConstraintLayout.LayoutParams.WRAP_CONTENT, //width
-//            ConstraintLayout.LayoutParams.WRAP_CONTENT //height
-//        )
-//
-////        paramsAssignmentOperatorView.topToTop = binding.helper.id
-////        paramsAssignmentOperatorView.leftToLeft = binding.helper.id
-//
-//        paramsAssignmentOperatorView.topToTop = constr.id
-//        paramsAssignmentOperatorView.leftToLeft = constr.id
-//
-//        paramsAssignmentOperatorView.topMargin = 400
-//        paramsAssignmentOperatorView.leftMargin = 0
-//
-//        startingAddViews(assignmentOperatorView, paramsAssignmentOperatorView, tagAssignmentOperatorView, constr)
-//
-//
-//        val arithmeticOperationsView = arithmeticOperations(this)
-//
-//        val paramsArithmeticOperationsView : ConstraintLayout.LayoutParams = ConstraintLayout.LayoutParams(
-//            ConstraintLayout.LayoutParams.WRAP_CONTENT, //width
-//            ConstraintLayout.LayoutParams.WRAP_CONTENT //height
-//        )
-//
-////        paramsArithmeticOperationsView.topToTop = binding.helper.id
-////        paramsArithmeticOperationsView.leftToLeft = binding.helper.id
-//
-//        paramsArithmeticOperationsView.topToTop = constr.id
-//        paramsArithmeticOperationsView.leftToLeft = constr.id
-//
-//        paramsArithmeticOperationsView.topMargin = 700
-//        paramsArithmeticOperationsView.leftMargin = 0
-//
-//        startingAddViews(arithmeticOperationsView, paramsArithmeticOperationsView, tagArithmeticOperationsView, constr)
-//    }
-
-
-//    private fun hideKeyboard(view: View) {
-//        val inputMethodManager = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
-//        inputMethodManager.hideSoftInputFromWindow(view.applicationWindowToken, 0)
-//    }
+        return dataSet
+    }
 
     private val addDragListener = View.OnDragListener { view, dragEvent ->
         val draggableItem = dragEvent.localState as View
@@ -250,25 +213,44 @@ class CodingActivity : AppCompatActivity(){
                 draggableItem.y = dragEvent.y - (draggableItem.height / 2)
 
                 val parent = draggableItem.parent as ConstraintLayout
+                val dropPlace = view as ConstraintLayout
 
                 if (parent != binding.dropArea) {
                     parent.removeAllViews()
+                    allViews.add(draggableItem)
 
+                    val str = number.toString(10)
+                    draggableItem.textNumber.setText(str)
+
+                    if (draggableItem.getTag() == tagDeclareIntegerView){
+                        draggableItem.deleteBlock1.setOnClickListener {
+                            removeViewInAllViewsList(draggableItem)
+                        }
+                    }
+
+                    if (draggableItem.getTag() == tagArithmeticOperationsView){
+                        draggableItem.deleteBlock2.setOnClickListener {
+                            removeViewInAllViewsList(draggableItem)
+                        }
+                    }
+
+                    if (draggableItem.getTag() == tagAssignmentOperatorView){
+                        draggableItem.deleteBlock3.setOnClickListener {
+                            removeViewInAllViewsList(draggableItem)
+                        }
+                    }
+
+                    number++
                 }
 
-                parent.removeView(draggableItem)
-
-
-                val dropPlace = view as ConstraintLayout
-
-
+                if (parent == binding.dropArea) {
+                    parent.removeView(draggableItem)
+                }
 
                 dropPlace.addView(draggableItem)
-                val str = number.toString(10)
-                draggableItem.textNumber.setText(str)
-                number++
 
                 true
+
             }
             DragEvent.ACTION_DRAG_ENDED -> {
                 draggableItem.visibility = View.VISIBLE
@@ -281,6 +263,27 @@ class CodingActivity : AppCompatActivity(){
             }
 
         }
+    }
+
+    private fun removeViewInAllViewsList(someView: View) {
+        println(2)
+        val index = allViews.indexOf(someView)
+        allViews.remove(someView)
+        binding.dropArea.removeView(someView)
+
+
+        for (i in index..allViews.size - 1) {
+            var currentNumber = allViews[i].textNumber.text
+            var currentNumberString = currentNumber.toString()
+            var currentNumberInt = currentNumberString.toInt()
+
+            currentNumberInt -= 1
+            currentNumberString = currentNumberInt.toString()
+            allViews[i].textNumber.setText(currentNumberString)
+
+        }
+        number -= 1
+
     }
 
 
@@ -374,6 +377,7 @@ class CustomRecyclerAdapter(private val names: List<Obectsi>):  RecyclerView.Ada
 
 
                 holder.expendConVar.addView(declareIntegerView, paramsDeclareIntegerView)
+                declareIntegerView.setTag(tagDeclareIntegerView)
                 attachViewDragListener(declareIntegerView)
 
 
@@ -432,9 +436,11 @@ class CustomRecyclerAdapter(private val names: List<Obectsi>):  RecyclerView.Ada
 
 
                 holder.expendConOperations.addView(declareArithmeticView, paramsDeclareArithmeticView)
+                declareArithmeticView.setTag(tagArithmeticOperationsView)
                 attachViewDragListener(declareArithmeticView)
 
                 holder.expendConOperations.addView(assignmentOperatorView, paramsDeclareAssignOperatorView)
+                assignmentOperatorView.setTag(tagAssignmentOperatorView)
                 attachViewDragListener(assignmentOperatorView)
 
 //                holder.expendConOperations.addView(whileView, paramsWhileView)
@@ -499,9 +505,11 @@ class CustomRecyclerAdapter(private val names: List<Obectsi>):  RecyclerView.Ada
                 paramsDeclareAssignOperatorView.leftMargin = 0
 
                 holder.expendConConditions.addView(declareArithmeticView, paramsDeclareArithmeticView)
+                declareArithmeticView.setTag(tagArithmeticOperationsView)
                 attachViewDragListener(declareArithmeticView)
 
                 holder.expendConConditions.addView(assignmentOperatorView, paramsDeclareAssignOperatorView)
+                assignmentOperatorView.setTag(tagAssignmentOperatorView)
                 attachViewDragListener(assignmentOperatorView)
 
             }
@@ -561,9 +569,11 @@ class CustomRecyclerAdapter(private val names: List<Obectsi>):  RecyclerView.Ada
                 paramsDeclareAssignOperatorView.leftMargin = 0
 
                 holder.expendConInputOutput.addView(declareArithmeticView, paramsDeclareArithmeticView)
+                declareArithmeticView.setTag(tagArithmeticOperationsView)
                 attachViewDragListener(declareArithmeticView)
 
                 holder.expendConInputOutput.addView(assignmentOperatorView, paramsDeclareAssignOperatorView)
+                assignmentOperatorView.setTag(tagAssignmentOperatorView)
                 attachViewDragListener(assignmentOperatorView)
 
 

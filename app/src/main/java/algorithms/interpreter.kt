@@ -1,85 +1,98 @@
-//package algorithms
-//
-//import android.R
-//
-//class DataClass {
-//    var name: MutableList<String> = mutableListOf()
-//    var value: MutableList<Int> = mutableListOf()
-//
-//    private fun findValue(nameVar : String): Int {
-//        for(i in 0..name.size) {
-//            if (name[i] == nameVar) {
-//                return i
-//            }
-//        }
-//        return -1
-//    }
-//
-//    fun declaration(nameVars : String) {
-//        var temp = ""
-//        for(i in nameVars.indices) {
-//            if (nameVars[i] == ',') {
-//                name.add(temp)
-//                value.add(0)
-//                temp = ""
-//            }
-//            else if (nameVars[i] == ' ') {
-//                continue
-//            }
-//            else if (i == nameVars.length-1){
-//                temp += nameVars[i]
-//                name.add(temp);
-//                value.add(0)
-//            }
-//            else {
-//                temp += nameVars[i]
-//            }
-//        }
-//    }
-//
-//    fun assignment(nameVar : String, valueVar : Int) {
-//                value[findValue(nameVar)] = valueVar
-//    }
-//
-//    fun output(nameVars : String): MutableList<Int> {
-//        var temp = ""
-//        var values : MutableList<Int> = mutableListOf()
-//        for(i in nameVars.indices) {
-//            if (nameVars[i] == ',') {
-//                values.add(value[findValue(temp)])
-//                temp = ""
-//            }
-//            else if (nameVars[i] == ' ') {
-//                continue
-//            }
-//            else if (i == nameVars.length-1){
-//                temp += nameVars[i]
-//                values.add(value[findValue(temp)])
-//            }
-//            else {
-//                temp += nameVars[i]
-//            }
-//        }
-//        return values
-//    }
-//}
-//
-//class Queue {
-//    var queue: MutableList<MutableList<String>> = mutableListOf()
-//
-//    fun push(element : MutableList<String>) {
-//        queue.add(element)
-//    }
-//
-//    fun size(): Int {
-//        return queue.size
-//    }
-//}
-//
-//fun main() {
-//    var q = Queue()
-//    var data = DataClass()
-//
+package algorithms
+
+import android.R
+import android.view.View
+import com.example.firstapp.CodingActivity
+
+class DataClass {
+    var name: MutableList<String> = mutableListOf()
+    var value: MutableList<Int> = mutableListOf()
+
+    private fun findValue(nameVar : String): Int {
+        for(i in 0..name.size) {
+            if (name[i] == nameVar) {
+                return i
+            }
+        }
+        return -1
+    }
+
+    fun declaration(nameVars : String) {
+        var temp = ""
+        for(i in nameVars.indices) {
+            if (nameVars[i] == ',') {
+                name.add(temp)
+                value.add(0)
+                temp = ""
+            }
+            else if (nameVars[i] == ' ') {
+                continue
+            }
+            else if (i == nameVars.length-1){
+                temp += nameVars[i]
+                name.add(temp);
+                value.add(0)
+            }
+            else {
+                temp += nameVars[i]
+            }
+        }
+    }
+
+    fun assignment(nameVar : String, valueVar : Int) {
+                value[findValue(nameVar)] = valueVar
+    }
+
+    fun output(nameVars : String): MutableList<Int> {
+        var temp = ""
+        var values : MutableList<Int> = mutableListOf()
+        for(i in nameVars.indices) {
+            if (nameVars[i] == ',') {
+                values.add(value[findValue(temp)])
+                temp = ""
+            }
+            else if (nameVars[i] == ' ') {
+                continue
+            }
+            else if (i == nameVars.length-1){
+                temp += nameVars[i]
+                values.add(value[findValue(temp)])
+            }
+            else {
+                temp += nameVars[i]
+            }
+        }
+        return values
+    }
+}
+
+class Queue {
+    var queue: MutableList<MutableList<String>> = mutableListOf()
+
+    fun push(element : MutableList<String>) {
+        queue.add(element)
+    }
+
+    fun size(): Int {
+        return queue.size
+    }
+}
+
+fun main(dataSet: MutableList<View>) {
+    var codingActivity = CodingActivity()
+    var DataSet = dataSet
+
+    var q = Queue()
+    q.queue = codingActivity.getAndConvertData(DataSet)
+
+    for(i in 0..q.queue.size - 1) {
+        println(q.queue[i])
+    }
+
+
+    //var data = DataClass()
+
+
 //    for(i in 0..q.size()) {
 //        var temp: MutableList<String> = mutableListOf()
 //        temp = q.queue[i]
@@ -93,8 +106,8 @@
 //            data.output(temp[1])
 //        }
 //    }
-//}
-//
+}
+
 //private fun calc(input: String): String {
 //    val rpn = invertStack(toRPN(input))
 //    val result = Stack()

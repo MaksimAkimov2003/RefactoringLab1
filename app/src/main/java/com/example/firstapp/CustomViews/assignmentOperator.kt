@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.constraintlayout.widget.ConstraintLayout
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import com.example.firstapp.CodingActivity
 import com.example.firstapp.databinding.ViewAssignmentOperatorBinding
 
 class assignmentOperator @JvmOverloads constructor(
@@ -17,13 +18,14 @@ class assignmentOperator @JvmOverloads constructor(
 
 
     init {
-        selfBlockDelete()
+        //selfBlockDelete()
 
     }
 
-    private fun selfBlockDelete() {
-        bin2.deleteBlock3.setOnClickListener {
-            removeAllViews()
-        }
-    }
+//    private fun selfBlockDelete() {
+//        bin2.deleteBlock.setOnClickListener {
+//            removeAllViews()
+//            //(context as? CodingActivity)?.removeViewInAllViewsList(it)
+//        }
+//    }
 }

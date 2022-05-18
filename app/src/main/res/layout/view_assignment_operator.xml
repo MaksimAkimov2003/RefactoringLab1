@@ -7,7 +7,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="146dp"
         android:layout_height="78dp"
-        android:background="@color/bar"
+        android:background="@color/purple_500"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -30,24 +30,18 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="UnusedAttribute" />
 
-        <com.google.android.material.textfield.TextInputLayout
+        <EditText
             android:id="@+id/variableBlock3"
             android:layout_width="31dp"
             android:layout_height="78dp"
             android:hint="@string/variable"
             android:inputType="text"
-            app:hintTextColor="@color/bar"
+            app:hintTextColor="@color/purple_500"
             app:layout_constraintStart_toEndOf="@+id/inputButton3"
             app:layout_constraintTop_toTopOf="parent">
+        </EditText>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="63dp"
-                android:textSize="40sp"
-                android:theme="@style/CardView.Light" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
+        <EditText
             android:id="@+id/valueBlock3"
             android:layout_width="34dp"
             android:layout_height="79dp"
@@ -56,13 +50,8 @@
             app:hintTextColor="@color/purple_500"
             app:layout_constraintStart_toEndOf="@+id/equal"
             app:layout_constraintTop_toTopOf="parent">
+        </EditText>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="33dp"
-                android:layout_height="65dp"
-                android:textSize="40sp"
-                android:theme="@style/CardView.Light" />
-        </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
             android:id="@+id/equal"
@@ -83,7 +72,8 @@
             android:textColorHint="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/valueBlock3">
+            app:layout_constraintStart_toEndOf="@+id/valueBlock3"
+            android:inputType="number">
 
         </EditText>
 

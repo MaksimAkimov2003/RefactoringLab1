@@ -5,7 +5,7 @@
     android:id="@+id/addAssignOperator"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@color/purple_500"
+    android:background="@color/bar"
     android:orientation="horizontal"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintHorizontal_bias="0"
@@ -39,7 +39,7 @@
         android:layout_height="80dp"
         android:hint="@string/variable"
         android:inputType="text"
-        app:hintTextColor="@color/purple_500"
+        app:hintTextColor="@color/bar"
         app:layout_constraintStart_toEndOf="@+id/inputButton"
         app:layout_constraintTop_toBottomOf="@+id/textView2">
 
@@ -56,7 +56,7 @@
         android:layout_height="80dp"
         android:hint="@string/value"
         android:inputType="text"
-        app:hintTextColor="@color/purple_500"
+        app:hintTextColor="@color/bar"
         app:layout_constraintStart_toEndOf="@+id/textView2"
         app:layout_constraintTop_toTopOf="parent">
 

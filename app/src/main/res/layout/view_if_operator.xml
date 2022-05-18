@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/addAssignOperator"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/purple_500"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/bar"
     android:orientation="horizontal"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintHorizontal_bias="0"
@@ -29,9 +29,10 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:foreground="@android:drawable/btn_dialog"
-        tools:ignore="UnusedAttribute"
-        tools:layout_editor_absoluteX="190dp"
-        tools:layout_editor_absoluteY="0dp" />
+        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintStart_toEndOf="@+id/valueBlock"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="UnusedAttribute" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/variableBlock"
@@ -39,7 +40,7 @@
         android:layout_height="80dp"
         android:hint="@string/variable"
         android:inputType="text"
-        app:hintTextColor="@color/purple_500"
+        app:hintTextColor="@color/bar"
         tools:layout_editor_absoluteX="30dp"
         tools:layout_editor_absoluteY="0dp">
 
@@ -56,7 +57,7 @@
         android:layout_height="80dp"
         android:hint="@string/value"
         android:inputType="text"
-        app:hintTextColor="@color/purple_500"
+        app:hintTextColor="@color/bar"
         tools:layout_editor_absoluteX="130dp"
         tools:layout_editor_absoluteY="0dp">
 
@@ -72,9 +73,11 @@
         android:id="@+id/spinner"
         android:layout_width="40dp"
         android:layout_height="50dp"
+        android:layout_marginTop="30dp"
         android:spinnerMode="dropdown"
-        tools:layout_editor_absoluteX="90dp"
-        tools:layout_editor_absoluteY="30dp" />
+        app:layout_constraintEnd_toStartOf="@+id/valueBlock"
+        app:layout_constraintStart_toEndOf="@+id/variableBlock"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:layout_width="30dp"
@@ -85,6 +88,7 @@
         tools:layout_editor_absoluteY="30dp" />
 
     <TextView
+        android:id="@+id/textView"
         android:layout_width="15dp"
         android:layout_height="50dp"
         android:text="):"

@@ -7,7 +7,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="146dp"
         android:layout_height="78dp"
-        android:background="@color/purple_500"
+        android:background="@color/bar"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -36,7 +36,7 @@
             android:layout_height="78dp"
             android:hint="@string/variable"
             android:inputType="text"
-            app:hintTextColor="@color/purple_500"
+            app:hintTextColor="@color/bar"
             app:layout_constraintStart_toEndOf="@+id/inputButton3"
             app:layout_constraintTop_toTopOf="parent">
 

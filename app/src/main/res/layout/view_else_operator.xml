@@ -61,7 +61,9 @@
         android:layout_height="40dp"
         android:gravity="left"
         android:text="else {"
+        android:inputType="text"
         android:textSize="28sp"
+        android:textStyle="italic"
         app:layout_constraintStart_toEndOf="@+id/textNumber"
         tools:layout_editor_absoluteY="30dp" />
 

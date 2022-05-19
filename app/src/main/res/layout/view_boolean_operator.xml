@@ -22,8 +22,7 @@
         android:textColorHint="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/nameOfVariable"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nameOfVariable">
+        app:layout_constraintStart_toStartOf="parent">
 
     </EditText>
 
@@ -54,13 +53,12 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/spinnerForIf"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerForIf"
         tools:ignore="UnusedAttribute" />
 
     <EditText
         android:id="@+id/nameOfVariable"
         android:layout_width="50dp"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:gravity="bottom"
         android:hint="Name"
         android:inputType="text"
@@ -74,7 +72,7 @@
     <Spinner
         android:id="@+id/spinnerForIf"
         android:layout_width="70dp"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:entries="@array/true_or_false"
         android:gravity="center_horizontal"
         android:spinnerMode="dropdown"
@@ -84,7 +82,7 @@
     <TextView
         android:id="@+id/textView"
         android:layout_width="20dp"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:gravity="center"
         android:text="="
         android:textSize="28sp"

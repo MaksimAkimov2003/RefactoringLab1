@@ -63,6 +63,8 @@
         android:gravity="left"
         android:text="} else end"
         android:textSize="28sp"
+        android:inputType="text"
+        android:textStyle="italic"
         app:layout_constraintStart_toEndOf="@+id/textView2"
         app:layout_constraintTop_toTopOf="@+id/textView2" />
 

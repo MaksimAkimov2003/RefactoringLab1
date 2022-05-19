@@ -62,7 +62,9 @@
         android:layout_height="40dp"
         android:gravity="left"
         android:text="} If end"
+        android:inputType="text"
         android:textSize="28sp"
+        android:textStyle="italic"
         app:layout_constraintStart_toEndOf="@+id/textView2"
         app:layout_constraintTop_toTopOf="@+id/textView2" />
 

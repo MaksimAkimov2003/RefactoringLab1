@@ -147,37 +147,35 @@ class DataClass {
         }
     }
 
-    fun checker(s : String) : Int {
-        var f = 1
-        for(i in 0..s.length) {
-            if ((s[i].isDigit()) || (s[i] != '.') || (s[i] != '+') || (s[i] != '-') || (s[i] != '/') || (s[i] != '*')) {
-                if ((s[i] != '%') || (s[i] != '(') || (s[i] != ')')) {
-                    f = 0
-                    break
-                }
-            }
-        }
-        return f
-    }
-
     fun varReplacement(input : String) : String {
         var s = input
-        while(checker(input) != 1) {
             for (i in 0..name.size - 1) {
                 s = Regex(name[i]).replace(s, value[i].toString())
             }
             s = Regex(" ").replace(s, "")
-        }
         return s
     }
 
     fun assignment(nameVar : String, valueVar : String) {
         var newValueVar = varReplacement(valueVar);
-        var finalValue = calc(newValueVar);
-        value[findValue(nameVar)] = finalValue.toDouble()
+        for(i in 0..5) {
+            newValueVar = varReplacement(newValueVar);
+        }
+        var finalValue = calc(newValueVar)
+        var nameV = nameVar
+        if (findValue(nameV) == -1) {
+            for (i in 0..name.size - 1) {
+                if (Regex(name[i]).find(nameV) != null) {
+                    nameV = Regex(name[i]).replace(nameV, value[i].toInt().toString())
+                    break
+                }
+            }
+        }
+        value[findValue(nameV)] = finalValue.toDouble()
     }
 
     fun deleteVar(nameVar: String) {
+        value[findValue(nameVar)] = 0.0
         name[findValue(nameVar)] = ""
     }
 
@@ -302,8 +300,30 @@ fun main(dataSet: MutableList<View>) {
     var q = Queue()
     q.queue = codingActivity.getAndConvertData(DataSet)
     var data = DataClass()
-
-    for(i in 0..q.size()-1) {
+    var tempc: MutableList<String> = mutableListOf()
+    tempc.add(declare)
+    tempc.add("0")
+    tempc.add("x")
+    q.queue.add(tempc)
+    var temp1: MutableList<String> = mutableListOf()
+    temp1.add(forLoop)
+    temp1.add("0")
+    temp1.add("i")
+    temp1.add("1")
+    temp1.add("3")
+    q.queue.add(temp1)
+    var temp3: MutableList<String> = mutableListOf()
+    temp3.add(assignmentOperator)
+    temp3.add("0")
+    temp3.add("x")
+    temp3.add("x + 3")
+    q.queue.add(temp3)
+    var temp2: MutableList<String> = mutableListOf()
+    temp2.add(forEnd)
+    temp2.add("0")
+    q.queue.add(temp2)
+    println(q.queue)
+    for(i in 0..q.queue.size-1) {
         var temp: MutableList<String> = mutableListOf()
         temp = q.queue[i]
         when {
@@ -332,14 +352,11 @@ fun main(dataSet: MutableList<View>) {
             }
             temp[0] == forLoop -> {
                 data.declaration(temp[2])
-                val start = data.calc(data.varReplacement(temp[4])).toInt()
-                val finish = data.calc(data.varReplacement(temp[3])).toInt()
+                val start = data.calc(data.varReplacement(temp[3])).toInt()
+                val finish = data.calc(data.varReplacement(temp[4])).toInt()
                 for(j in start..finish) {
                     data.assignment(temp[2], j.toString())
                     for(k in i+1..data.loop(q, i)) {
-                        if(k == data.loop(q, i)-1) {
-                            q.queue[k][0] = ""
-                        }
                         var tempNew = q.queue[k]
                         when {
                             tempNew[0] == "" -> { // пустой блок
@@ -357,14 +374,17 @@ fun main(dataSet: MutableList<View>) {
                             tempNew[0] == ifCondition -> {
                                 var flag = data.condition(tempNew[2], tempNew[3], tempNew[4], i, q)
                                 if (flag != -1) {
-                                    for(j in i+1..flag) {
-                                        q.queue[i][j] = ""
+                                    for(e in i+1..flag) {
+                                        q.queue[i][e] = ""
                                     }
                                 }
                             }
                             tempNew[0] == ifEnd -> {
                                 continue
                             }
+                        }
+                        if(j == finish) {
+                            q.queue[k][0] = ""
                         }
                     }
                 }
@@ -378,6 +398,8 @@ fun main(dataSet: MutableList<View>) {
             }
         }
     }
+    println(data.name)
+    println(data.value)
 }
 
 

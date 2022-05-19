@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/forOperator"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/bar"
+    android:orientation="horizontal"
+    tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
+
+
+    <Button
+        android:id="@+id/inputButton"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:foreground="@android:drawable/ic_input_add"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="UnusedAttribute" />
+
+    <Button
+        android:id="@+id/deleteBlock"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:foreground="@android:drawable/btn_dialog"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="UnusedAttribute" />
+
+    <Button
+        android:id="@+id/removeKeyboard"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:foreground="@android:drawable/checkbox_on_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView3"
+        tools:ignore="UnusedAttribute" />
+
+    <EditText
+        android:id="@+id/textNumber"
+        android:layout_width="30dp"
+        android:layout_height="40dp"
+        android:textColorHint="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView5">
+
+    </EditText>
+
+    <EditText
+        android:id="@+id/forOperatorVariable"
+        android:layout_width="60dp"
+        android:layout_height="40dp"
+        android:gravity="bottom"
+        android:hint="@string/variable"
+        android:inputType="text"
+        android:textSize="16sp"
+        android:textStyle="italic"
+        app:layout_constraintStart_toEndOf="@+id/textView5"
+        app:layout_constraintTop_toBottomOf="@+id/inputButton">
+
+    </EditText>
+
+    <EditText
+        android:id="@+id/forOperatorFrom"
+        android:layout_width="50dp"
+        android:layout_height="40dp"
+        android:gravity="bottom"
+        android:hint="from"
+        android:inputType="text"
+        android:textSize="16sp"
+        android:textStyle="italic"
+        app:layout_constraintStart_toEndOf="@+id/textView4"
+        app:layout_constraintTop_toBottomOf="@+id/forOperatorVariable">
+
+    </EditText>
+
+    <EditText
+        android:id="@+id/forOperatorTo"
+        android:layout_width="50dp"
+        android:layout_height="40dp"
+        android:gravity="bottom"
+        android:hint="to"
+        android:inputType="text"
+        android:textSize="16sp"
+        android:textStyle="italic"
+        app:layout_constraintStart_toEndOf="@+id/textView6"
+        app:layout_constraintTop_toBottomOf="@+id/textView2">
+
+    </EditText>
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="20dp"
+        android:layout_height="40dp"
+        android:inputType="text"
+        android:text="){"
+        android:textSize="28sp"
+        android:textStyle="italic"
+        app:layout_constraintStart_toEndOf="@+id/forOperatorTo"
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="10dp"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:inputType="text"
+        android:text="@string/semicolon"
+        android:textSize="28sp"
+        android:textStyle="italic"
+        app:layout_constraintStart_toEndOf="@+id/forOperatorFrom"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="10dp"
+        android:layout_height="40dp"
+        android:inputType="text"
+        android:text="("
+        android:textSize="28sp"
+        android:textStyle="italic"
+        app:layout_constraintStart_toEndOf="@+id/textNumber"
+        app:layout_constraintTop_toBottomOf="@+id/forOperatorVariable" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:inputType="text"
+        android:text="in range"
+        android:textSize="28sp"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="@+id/deleteBlock"
+        app:layout_constraintStart_toEndOf="@+id/forOperatorVariable"
+        app:layout_constraintTop_toBottomOf="@+id/deleteBlock" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:inputType="text"
+        android:text="for"
+        android:textSize="28sp"
+        android:textStyle="italic"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputButton" />
+
+</merge>

@@ -2,6 +2,7 @@ package com.example.firstapp
 
 
 import algorithms.main
+import algorithms.sortAllViewList
 import android.annotation.SuppressLint
 import android.content.ClipData
 import android.content.ClipDescription
@@ -9,12 +10,10 @@ import android.graphics.Canvas
 import android.graphics.Point
 import android.os.Build
 import android.os.Bundle
-import android.view.DragEvent
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
@@ -29,11 +28,19 @@ import kotlinx.android.synthetic.main.view_arithmetic_operations.view.*
 import kotlinx.android.synthetic.main.view_arithmetic_operations.view.textNumber
 import kotlinx.android.synthetic.main.view_assignment_operator.view.*
 import kotlinx.android.synthetic.main.view_declare_integer.view.*
+import kotlinx.android.synthetic.main.view_if_close.view.*
+import kotlinx.android.synthetic.main.view_if_operator.view.*
 
 val buttonVarDragMessage = "buttonVar Added"
+
+// ниже - теги
 val tagDeclareIntegerView = "Declare"
 val tagArithmeticOperationsView = "ArithmeticOperations"
 val tagAssignmentOperatorView = "AssignmentOperator"
+
+// ниже - сообщения ошибок
+val emptyEditField = "Неверно заполненное поле"
+val repeatingNumbers = "Повторяется номер блока"
 
 class CodingActivity : AppCompatActivity(){
     var allViews: MutableList<View> = mutableListOf()
@@ -60,7 +67,8 @@ class CodingActivity : AppCompatActivity(){
 //        }
 
         binding.button2.setOnClickListener{
-            main(allViews)
+//            main()
+            getAndConvertData(allViews)
         }
 
         binding.apply {
@@ -69,23 +77,10 @@ class CodingActivity : AppCompatActivity(){
             }
         }
 
-
-
-
         binding.mainLayout.setScrimColor(ContextCompat.getColor(getApplicationContext(), android.R.color.transparent))
 
-
-        //Создание ресайклера
         initData()
         setRecyclerView()
-
-
-
-        //Добавление customView на констрэинты
-
-
-
-
 
     }
 
@@ -118,44 +113,54 @@ class CodingActivity : AppCompatActivity(){
             ))
     }
 
+    fun getAndConvertData(allViews: MutableList<View>) {
+        sortAllViewList(allViews, 0, allViews.size - 1)
 
-    fun startingAddViews(view: View, params : ConstraintLayout.LayoutParams, tag : String) {
-        view.setTag(tag)
-        bindRecItem.expandConstraint1.addView(view,params)
-        attachViewDragListener(view)
-    }
+        var errorFlag = false
+        var errorMessage: String
 
-    fun VarAddedSet() {
-
-
-
-        val declareIntegerView = declareInteger(this)
-
-        val paramsDeclareIntegerView : ConstraintLayout.LayoutParams = ConstraintLayout.LayoutParams(
-            ConstraintLayout.LayoutParams.WRAP_CONTENT, //width
-            ConstraintLayout.LayoutParams.WRAP_CONTENT //height
-        )
-
-
-        paramsDeclareIntegerView.topToTop =  bindRecItem.expandConstraint1.id
-        paramsDeclareIntegerView.leftToLeft = bindRecItem.expandConstraint1.id
-
-
-
-        startingAddViews(declareIntegerView, paramsDeclareIntegerView, tagDeclareIntegerView)
-
-    }
-
-    fun getAndConvertData(allViews: MutableList<View>): MutableList<MutableList<String>> {
         var dataSet: MutableList<MutableList<String>> = mutableListOf()
+        var previousView = allViews[0]
+        var flag = false
 
         for (view in allViews) {
             var arrayForView: MutableList<String> = mutableListOf()
+
+            if ((flag) && (view.textNumber.text.toString() == previousView.textNumber.text.toString())) {
+                errorMessage = repeatingNumbers
+
+                val mToast = Toast.makeText(this, errorMessage + " " + view.textNumber.text.toString(), Toast.LENGTH_LONG)
+                mToast.setGravity(Gravity.TOP, 0, 0)
+                mToast.show()
+
+                errorFlag = true
+
+                break
+
+            }
+
+            previousView = view
+            flag = true
 
             arrayForView.add(view.getTag().toString())
             arrayForView.add(view.textNumber.text.toString())
 
             if (view.getTag() == tagDeclareIntegerView) {
+                """[A-z]([0-9]|[A-z])*""".toRegex()
+                var myString = view.inputValueDeclare.text.toString()
+
+                if (!myString.matches(Regex("""[A-z]([0-9]|[A-z])*"""))) {
+                    errorMessage = emptyEditField
+
+                    val mToast = Toast.makeText(this, errorMessage + " " + view.textNumber.text.toString(), Toast.LENGTH_LONG)
+                    mToast.setGravity(Gravity.TOP, 0, 0)
+                    mToast.show()
+
+                    errorFlag = true
+
+                    break
+                }
+
                 arrayForView.add(view.inputValueDeclare.text.toString())
             }
 
@@ -164,15 +169,44 @@ class CodingActivity : AppCompatActivity(){
             }
 
             if (view.getTag() == tagAssignmentOperatorView) {
+                """[A-z]([0-9]|[A-z])*""".toRegex()
+
+                var myString1 = view.variableOfBlock.text.toString()
+                var myString2 = view.valueOfBlock.text.toString()
+
+                if ((!myString1.matches(Regex("""[A-z]([0-9]|[A-z])*"""))) || (!myString2.matches(Regex("""([A-z]([0-9]|[A-z])*)|([0-9])""")))) {
+                    errorMessage = emptyEditField
+
+                    val mToast = Toast.makeText(this, errorMessage + " " + view.textNumber.text.toString(), Toast.LENGTH_LONG)
+                    mToast.setGravity(Gravity.TOP, 0, 0)
+                    mToast.show()
+
+                    errorFlag = true
+
+                    break
+                }
+
+
                 arrayForView.add(view.variableOfBlock.text.toString())
                 arrayForView.add(view.valueOfBlock.text.toString())
+
+
             }
 
             dataSet.add(arrayForView)
         }
 
+        if (!errorFlag) {
+            var answer: MutableList<String> = mutableListOf()
+            var allVariables: MutableList<String> = mutableListOf()
 
-        return dataSet
+//            main(dataSet)
+            val mToast = Toast.makeText(this, "Заебись", Toast.LENGTH_LONG)
+            mToast.setGravity(Gravity.TOP, 0, 0)
+            mToast.show()
+        }
+
+
     }
 
     private val addDragListener = View.OnDragListener { view, dragEvent ->
@@ -270,10 +304,8 @@ class CodingActivity : AppCompatActivity(){
         val viewNumberValueString = someView.textNumber.text.toString()
         val viewNumberValueInt = viewNumberValueString.toInt()
 
-        val index = allViews.indexOf(someView)
         allViews.remove(someView)
         binding.dropArea.removeView(someView)
-
 
         for (i in 0..allViews.size - 1) {
             var currentNumber = allViews[i].textNumber.text
@@ -341,9 +373,6 @@ class CustomRecyclerAdapter(private val names: List<Obectsi>):  RecyclerView.Ada
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.recyclerview_item, parent, false)
         return MyViewHolder(itemView)
     }
-
-
-
 
     @SuppressLint("ResourceType", "SetTextI18n")
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {

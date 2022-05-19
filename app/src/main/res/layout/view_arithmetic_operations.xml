@@ -17,7 +17,7 @@
             android:layout_height="40dp"
             android:textColorHint="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/arifOperations"
+            app:layout_constraintEnd_toStartOf="@+id/arifOperations2"
             app:layout_constraintStart_toStartOf="parent">
 
         </EditText>
@@ -32,12 +32,12 @@
             tools:ignore="UnusedAttribute" />
 
         <Button
-            android:id="@+id/deleteBlock"
+            android:id="@+id/deleteBlock2"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:foreground="@android:drawable/btn_dialog"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/arifOperations"
+            app:layout_constraintStart_toEndOf="@+id/arifOperations2"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="UnusedAttribute" />
 
@@ -48,11 +48,11 @@
             android:foreground="@android:drawable/checkbox_on_background"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/arifOperations"
+            app:layout_constraintStart_toEndOf="@+id/arifOperations2"
             tools:ignore="UnusedAttribute" />
 
         <EditText
-            android:id="@+id/arifOperations"
+            android:id="@+id/arifOperations2"
             android:layout_width="140dp"
             android:layout_height="50dp"
             android:hint="@string/operations"

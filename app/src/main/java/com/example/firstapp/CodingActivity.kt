@@ -24,6 +24,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.firstapp.CustomViews.*
 import com.example.firstapp.databinding.ActivityCodingBinding
 import com.example.firstapp.databinding.RecyclerviewItemBinding
+import kotlinx.android.synthetic.main.activity_coding.*
 import kotlinx.android.synthetic.main.view_arithmetic_operations.view.*
 import kotlinx.android.synthetic.main.view_arithmetic_operations.view.textNumber
 import kotlinx.android.synthetic.main.view_assignment_operator.view.*
@@ -163,8 +164,8 @@ class CodingActivity : AppCompatActivity(){
             }
 
             if (view.getTag() == tagAssignmentOperatorView) {
-                arrayForView.add(view.variableBlock3.text.toString())
-                arrayForView.add(view.valueBlock3.text.toString())
+                arrayForView.add(view.variableOfBlock.text.toString())
+                arrayForView.add(view.valueOfBlock.text.toString())
             }
 
             dataSet.add(arrayForView)
@@ -266,27 +267,29 @@ class CodingActivity : AppCompatActivity(){
     }
 
     private fun removeViewInAllViewsList(someView: View) {
-        println(2)
+        val viewNumberValueString = someView.textNumber.text.toString()
+        val viewNumberValueInt = viewNumberValueString.toInt()
+
         val index = allViews.indexOf(someView)
         allViews.remove(someView)
         binding.dropArea.removeView(someView)
 
 
-        for (i in index..allViews.size - 1) {
+        for (i in 0..allViews.size - 1) {
             var currentNumber = allViews[i].textNumber.text
             var currentNumberString = currentNumber.toString()
             var currentNumberInt = currentNumberString.toInt()
 
-            currentNumberInt -= 1
-            currentNumberString = currentNumberInt.toString()
-            allViews[i].textNumber.setText(currentNumberString)
+            if (currentNumberInt >= viewNumberValueInt) {
+                currentNumberInt -= 1
+                currentNumberString = currentNumberInt.toString()
+                allViews[i].textNumber.setText(currentNumberString)
+            }
 
         }
         number -= 1
 
     }
-
-
 
 }
 
@@ -321,11 +324,6 @@ fun attachViewDragListener(someView: View) {
 
 
 class CustomRecyclerAdapter(private val names: List<Obectsi>):  RecyclerView.Adapter<CustomRecyclerAdapter.MyViewHolder>(){
-
-
-
-
-
 
     class MyViewHolder(itemView:View):RecyclerView.ViewHolder(itemView){
 
@@ -419,22 +417,6 @@ class CustomRecyclerAdapter(private val names: List<Obectsi>):  RecyclerView.Ada
                 paramsDeclareAssignOperatorView.topMargin = 400
                 paramsDeclareAssignOperatorView.leftMargin = 0
 
-//                val whileView = whileLoop(holder.itemView.context)
-//
-//                val paramsWhileView: ConstraintLayout.LayoutParams =
-//                    ConstraintLayout.LayoutParams(
-//                        ConstraintLayout.LayoutParams.WRAP_CONTENT, //width
-//                        ConstraintLayout.LayoutParams.WRAP_CONTENT //height
-//                    )
-//
-//                paramsWhileView.topToTop = holder.expendConOperations.id
-//                paramsWhileView.leftToLeft = holder.expendConOperations.id
-//
-//                paramsWhileView.topMargin = 700
-//                paramsWhileView.leftMargin = 0
-
-
-
                 holder.expendConOperations.addView(declareArithmeticView, paramsDeclareArithmeticView)
                 declareArithmeticView.setTag(tagArithmeticOperationsView)
                 attachViewDragListener(declareArithmeticView)
@@ -443,8 +425,6 @@ class CustomRecyclerAdapter(private val names: List<Obectsi>):  RecyclerView.Ada
                 assignmentOperatorView.setTag(tagAssignmentOperatorView)
                 attachViewDragListener(assignmentOperatorView)
 
-//                holder.expendConOperations.addView(whileView, paramsWhileView)
-//                attachViewDragListener(whileView)
 
 
 
@@ -455,25 +435,6 @@ class CustomRecyclerAdapter(private val names: List<Obectsi>):  RecyclerView.Ada
                 holder.expendConVar.visibility = View.GONE
                 holder.expendConInputOutput.visibility = View.GONE
                 holder.expendConOperations.visibility = View.GONE
-
-//                val declareIfView = ifOperator(holder.itemView.context)
-//
-//                val paramsDeclareIfView: ConstraintLayout.LayoutParams =
-//                    ConstraintLayout.LayoutParams(
-//                        ConstraintLayout.LayoutParams.WRAP_CONTENT, //width
-//                        ConstraintLayout.LayoutParams.WRAP_CONTENT //height
-//                    )
-//
-//                paramsDeclareIfView.topToTop = holder.expendConConditions.id
-//                paramsDeclareIfView.leftToLeft = holder.expendConConditions.id
-//
-//                paramsDeclareIfView.topMargin = 100
-//                paramsDeclareIfView.leftMargin = 0
-//
-//
-//
-//                holder.expendConConditions.addView(declareIfView, paramsDeclareIfView)
-//                attachViewDragListener(declareIfView)
 
                 val declareArithmeticView = arithmeticOperations(holder.itemView.context)
 
@@ -520,25 +481,6 @@ class CustomRecyclerAdapter(private val names: List<Obectsi>):  RecyclerView.Ada
                 holder.expendConOperations.visibility = View.GONE
                 holder.expendConConditions.visibility = View.GONE
 
-//                val declareOutputView = output(holder.itemView.context)
-//
-//                val paramsDeclareOutputView: ConstraintLayout.LayoutParams =
-//                    ConstraintLayout.LayoutParams(
-//                        ConstraintLayout.LayoutParams.WRAP_CONTENT, //width
-//                        ConstraintLayout.LayoutParams.WRAP_CONTENT //height
-//                    )
-//
-//                paramsDeclareOutputView.topToTop = holder.expendConInputOutput.id
-//                paramsDeclareOutputView.leftToLeft = holder.expendConInputOutput.id
-//
-//                paramsDeclareOutputView.topMargin = 100
-//                paramsDeclareOutputView.leftMargin = 0
-//
-//
-//
-//                holder.expendConInputOutput.addView(declareOutputView, paramsDeclareOutputView)
-//                attachViewDragListener(declareOutputView)
-
                 val declareArithmeticView = arithmeticOperations(holder.itemView.context)
 
                 val paramsDeclareArithmeticView: ConstraintLayout.LayoutParams =
@@ -580,16 +522,10 @@ class CustomRecyclerAdapter(private val names: List<Obectsi>):  RecyclerView.Ada
             }
         }
 
-
-
-
-
         holder.linearLayout.setOnClickListener {
             val obectises = names[position]
             obectises.expandeble = !obectises.expandeble
             notifyItemChanged(position)
-
-
         }
 
     }
@@ -597,12 +533,6 @@ class CustomRecyclerAdapter(private val names: List<Obectsi>):  RecyclerView.Ada
     override fun getItemCount() = names.size
 
 }
-
-
-
-
-
-
 
 private class MaskDragShadowBuilder(view: View) : View.DragShadowBuilder(view) {
     private val shadow = view

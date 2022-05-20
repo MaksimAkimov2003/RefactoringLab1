@@ -26,7 +26,8 @@ class DataClass {
     }
 
     fun calc(input: String): String {
-        val rpn = invertStack(toRPN(input))
+        var s = Regex(" ").replace(input, "")
+        val rpn = invertStack(toRPN(s))
         val result = Stack()
         var msgError = ""
 
@@ -129,6 +130,9 @@ class DataClass {
                     name.add(temp)
                     value.add(0.0)
                 }
+                else {
+                    value[findValue(temp)] = 0.0
+                }
                 temp = ""
             }
             else if (nameVars[i] == ' ') {
@@ -140,6 +144,9 @@ class DataClass {
                     name.add(temp);
                     value.add(0.0)
                 }
+                else {
+                    value[findValue(temp)] = 0.0
+                }
             }
             else {
                 temp += nameVars[i]
@@ -150,7 +157,9 @@ class DataClass {
     fun varReplacement(input : String) : String {
         var s = input
         for (i in 0..name.size - 1) {
-            s = Regex(name[i]).replace(s, value[i].toString())
+            if (name[i] != "") {
+                s = Regex(name[i]).replace(s, value[i].toString())
+            }
         }
         s = Regex(" ").replace(s, "")
         return s
@@ -165,7 +174,7 @@ class DataClass {
         var nameV = nameVar
         if (findValue(nameV) == -1) {
             for (i in 0..name.size - 1) {
-                if (Regex(name[i]).find(nameV) != null) {
+                if ((Regex(name[i]).find(nameV) != null) && (name[i] != "")) {
                     nameV = Regex(name[i]).replace(nameV, value[i].toInt().toString())
                     break
                 }
@@ -254,12 +263,17 @@ class DataClass {
         }
     }
 
-    fun output(nameVars : String): MutableList<Double> {
+    fun output(nameVars : String, answer: MutableList<MutableList<String>> = mutableListOf(), allVariables: MutableList<MutableList<String>> = mutableListOf()) {
         var temp = ""
-        var values : MutableList<Double> = mutableListOf()
         for(i in nameVars.indices) {
             if (nameVars[i] == ',') {
-                values.add(value[findValue(temp)])
+                if (value[findValue(temp)].toInt().toDouble() == value[findValue(temp)]) {
+                    answer[1].add(value[findValue(temp)].toInt().toString())
+                }
+                else {
+                    answer[1].add(value[findValue(temp)].toString())
+                }
+                answer[0].add(name[findValue(temp)])
                 temp = ""
             }
             else if (nameVars[i] == ' ') {
@@ -267,16 +281,19 @@ class DataClass {
             }
             else if (i == nameVars.length-1){
                 temp += nameVars[i]
-                values.add(value[findValue(temp)])
+                if (value[findValue(temp)].toInt().toDouble() == value[findValue(temp)]) {
+                    answer[1].add(value[findValue(temp)].toInt().toString())
+                }
+                else {
+                    answer[1].add(value[findValue(temp)].toString())
+                }
+                answer[0].add(name[findValue(temp)])
             }
             else {
                 temp += nameVars[i]
             }
         }
-        return values // он вернет массив значений введеных переменных типа Double, но некоторые
-        // например, будут x = 24.0, вам нужно сделать проверку
-        // if (x.toInt().toDouble() == x) x = x.toInt()
-        // чтобы пользователю уже вышло без точки x = 24
+        answer
     }
 }
 
@@ -292,11 +309,34 @@ class Queue {
     fun size(): Int {
         return size
     }
+
+    fun paste(new: MutableList<MutableList<String>> = mutableListOf(), index : Int) {
+        var newArray : MutableList<MutableList<String>> = mutableListOf()
+        for(i in 0..index-1) {
+            newArray.add(queue[i])
+        }
+        var count = 0
+        for(i in index..index+new.size-1) {
+            newArray.add(new[count])
+            count++
+        }
+        count = index
+        for(i in index+new.size..queue.size+new.size-1) {
+            newArray.add(queue[count])
+            count++;
+        }
+    }
 }
 
 fun main(dataSet: MutableList<MutableList<String>>, answer: MutableList<MutableList<String>> = mutableListOf(), allVariables: MutableList<MutableList<String>> = mutableListOf()) {
     var q = Queue()
     q.queue = dataSet
+
+    var t : MutableList<String> = mutableListOf()
+    for(i in 0..1) {
+        answer.add(t)
+        allVariables.add(t)
+    }
 
     var data = DataClass()
     var tempc: MutableList<String> = mutableListOf()
@@ -322,11 +362,16 @@ fun main(dataSet: MutableList<MutableList<String>>, answer: MutableList<MutableL
     temp2.add("0")
     q.queue.add(temp2)
     println(q.queue)
-    for(i in 0..q.queue.size-1) {
+    var i = 0
+    while(true) {
         var temp: MutableList<String> = mutableListOf()
         temp = q.queue[i]
         when {
             temp[0] == "" -> { // пустой блок
+                i++
+                if (i == q.queue.size-1) {
+                    break
+                }
                 continue
             }
             temp[0] == declare -> { // обозначение типа блока объявления переменной
@@ -342,59 +387,65 @@ fun main(dataSet: MutableList<MutableList<String>>, answer: MutableList<MutableL
                 var flag = data.condition(temp[2], temp[3], temp[4], i, q)
                 if (flag != -1) {
                     for(j in i+1..flag) {
-                        q.queue[i][j] = ""
+                        q.queue[j][0] = ""
                     }
                 }
             }
             temp[0] == ifEnd -> {
+                i++
+                if (i == q.queue.size-1) {
+                    break
+                }
                 continue
             }
             temp[0] == forLoop -> {
                 data.declaration(temp[2])
                 val start = data.calc(data.varReplacement(temp[3])).toInt()
                 val finish = data.calc(data.varReplacement(temp[4])).toInt()
-                for(j in start..finish) {
-                    data.assignment(temp[2], j.toString())
-                    for(k in i+1..data.loop(q, i)) {
-                        var tempNew = q.queue[k]
-                        when {
-                            tempNew[0] == "" -> { // пустой блок
-                                continue
-                            }
-                            tempNew[0] == declare -> { // обозначение типа блока объявления переменной
-                                data.declaration(tempNew[2])
-                            }
-                            tempNew[0] == assignmentOperator -> { // обозначение блока присваивания
-                                data.assignment(tempNew[2], tempNew[3])
-                            }
-                            tempNew[0] == output -> { // обозначение блока вывода
-                                data.output(tempNew[2])
-                            }
-                            tempNew[0] == ifCondition -> {
-                                var flag = data.condition(tempNew[2], tempNew[3], tempNew[4], i, q)
-                                if (flag != -1) {
-                                    for(e in i+1..flag) {
-                                        q.queue[i][e] = ""
-                                    }
-                                }
-                            }
-                            tempNew[0] == ifEnd -> {
-                                continue
-                            }
+                var new : MutableList<MutableList<String>> = mutableListOf()
+                for(k in start..finish) {
+                    var newBlock : MutableList<String> = mutableListOf()
+                    newBlock.add(assignmentOperator)
+                    newBlock.add("0")
+                    newBlock.add(temp[2])
+                    newBlock.add(k.toString())
+                    new.add(newBlock)
+                    for (j in i + 1..data.loop(q, i) - 1) {
+                        var t : MutableList<String> = mutableListOf()
+                        for(h in 0..q.queue[j].size-1) {
+                            t.add(q.queue[j][h])
                         }
-                        if(j == finish) {
-                            q.queue[k][0] = ""
-                        }
+                        new.add(t)
                     }
                 }
-                data.deleteVar(temp[2])
+                var newBlock : MutableList<String> = mutableListOf()
+                newBlock.add(assignmentOperator)
+                newBlock.add("0")
+                newBlock.add(temp[2])
+                newBlock.add(finish.toString())
+                new.add(newBlock)
+                q.paste(new, i+1)
             }
             temp[0] == forEnd -> {
+                i++
+                if (i == q.queue.size-1) {
+                    break
+                }
                 continue
             }
             temp[0] == createArray -> {
                 data.newArray(temp[2], temp[3])
             }
+        }
+        i++
+        if (i == q.queue.size-1) {
+            break
+        }
+    }
+    for(i in 0..data.name.size-1) {
+        if (data.name[i] != "") {
+            allVariables[0].add(data.name[i])
+            allVariables[1].add(data.value[data.findValue(data.name[i])].toString())
         }
     }
     println(data.name)

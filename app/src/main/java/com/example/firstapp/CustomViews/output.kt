@@ -16,16 +16,16 @@ class output @JvmOverloads constructor(
     private val bin5 = ViewOutputBinding.inflate(LayoutInflater.from(context), this)
 
 
-    init {
-        selfBlockDelete()
-
-    }
-
-    private fun selfBlockDelete() {
-        bin5.deleteBlock.setOnClickListener {
-
-
-
-        }
-    }
+//    init {
+//        selfBlockDelete()
+//
+//    }
+//
+//    private fun selfBlockDelete() {
+//        bin5.deleteBlock.setOnClickListener {
+//
+//
+//
+//        }
+//    }
 }

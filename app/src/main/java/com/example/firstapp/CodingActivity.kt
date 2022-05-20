@@ -27,10 +27,14 @@ import com.example.firstapp.databinding.RecyclerviewItemBinding
 import kotlinx.android.synthetic.main.activity_coding.*
 import kotlinx.android.synthetic.main.view_arithmetic_operations.view.*
 import kotlinx.android.synthetic.main.view_arithmetic_operations.view.textNumber
+import kotlinx.android.synthetic.main.view_array_operator.view.*
 import kotlinx.android.synthetic.main.view_assignment_operator.view.*
 import kotlinx.android.synthetic.main.view_declare_integer.view.*
+import kotlinx.android.synthetic.main.view_for_close.view.*
+import kotlinx.android.synthetic.main.view_for_operator.view.*
 import kotlinx.android.synthetic.main.view_if_close.view.*
 import kotlinx.android.synthetic.main.view_if_operator.view.*
+import kotlinx.android.synthetic.main.view_output.view.*
 
 val buttonVarDragMessage = "buttonVar Added"
 
@@ -38,6 +42,12 @@ val buttonVarDragMessage = "buttonVar Added"
 val tagDeclareIntegerView = "Declare"
 val tagArithmeticOperationsView = "ArithmeticOperations"
 val tagAssignmentOperatorView = "AssignmentOperator"
+val tagIfOperatorView = "IF"
+val tagIfCloseView = "IFend"
+val tagArrayOperatorView = "CreateArray"
+val tagForOperatorView = "ForLoop"
+val tagForCloseView = "ForEnd"
+val tagOutputView = "Output"
 
 // ниже - сообщения ошибок
 val emptyEditField = "Неверно заполненное поле"
@@ -68,7 +78,6 @@ class CodingActivity : AppCompatActivity(){
 //        }
 
         binding.button2.setOnClickListener{
-//            main()
             getAndConvertData(allViews)
         }
 
@@ -187,12 +196,97 @@ class CodingActivity : AppCompatActivity(){
                     break
                 }
 
-
                 arrayForView.add(view.variableOfBlock.text.toString())
                 arrayForView.add(view.valueOfBlock.text.toString())
+            }
 
+            if (view.getTag() == tagIfOperatorView) {
+                """((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*)|((([A-z]([0-9]|[A-z])*)\s*\[\s*(([A-z]([0-9]|[A-z])*)|([0])|([1-9][0-9]*)|(((([1-9][0-9]*)|([0]))|([a-z]([0-9]|[a-z])*))(\s*[-+*\/]\s*((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*)))*))\s*\])))(\s*[-+*\/]\s*((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*)|((([A-z]([0-9]|[A-z])*)\s*\[\s*(([A-z]([0-9]|[A-z])*)|([0])|([1-9][0-9]*)|(((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*))(\s*[-+*\/]\s*((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*)))*))\s*\]))))*""".toRegex()
+
+                var myString1 = view.secondCondition.text.toString()
+                var myString2 = view.firstCondition.text.toString()
+
+                if ((!myString1.matches(Regex("""((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*)|((([A-z]([0-9]|[A-z])*)\s*\[\s*(([A-z]([0-9]|[A-z])*)|([0])|([1-9][0-9]*)|(((([1-9][0-9]*)|([0]))|([a-z]([0-9]|[a-z])*))(\s*[-+*\/]\s*((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*)))*))\s*\])))(\s*[-+*\/]\s*((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*)|((([A-z]([0-9]|[A-z])*)\s*\[\s*(([A-z]([0-9]|[A-z])*)|([0])|([1-9][0-9]*)|(((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*))(\s*[-+*\/]\s*((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*)))*))\s*\]))))*"""))) || (!myString2.matches(Regex("""((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*)|((([A-z]([0-9]|[A-z])*)\s*\[\s*(([A-z]([0-9]|[A-z])*)|([0])|([1-9][0-9]*)|(((([1-9][0-9]*)|([0]))|([a-z]([0-9]|[a-z])*))(\s*[-+*\/]\s*((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*)))*))\s*\])))(\s*[-+*\/]\s*((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*)|((([A-z]([0-9]|[A-z])*)\s*\[\s*(([A-z]([0-9]|[A-z])*)|([0])|([1-9][0-9]*)|(((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*))(\s*[-+*\/]\s*((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*)))*))\s*\]))))*""")))) {
+                    errorMessage = emptyEditField
+
+                    val mToast = Toast.makeText(this, errorMessage + " " + view.textNumber.text.toString(), Toast.LENGTH_LONG)
+                    mToast.setGravity(Gravity.TOP, 0, 0)
+                    mToast.show()
+
+                    errorFlag = true
+
+                    break
+                }
+
+                arrayForView.add(view.secondCondition.text.toString())
+                arrayForView.add(view.spinnerForIf.selectedItem.toString())
+                arrayForView.add(view.firstCondition.text.toString())
 
             }
+
+            if (view.getTag() == tagArrayOperatorView) {
+                """[A-z]([0-9]|[A-z])*""".toRegex()
+                var myString = view.nameOfArray.text.toString()
+
+                if (!myString.matches(Regex("""[A-z]([0-9]|[A-z])*"""))) {
+                    errorMessage = emptyEditField
+
+                    val mToast = Toast.makeText(this, errorMessage + " " + view.textNumber.text.toString(), Toast.LENGTH_LONG)
+                    mToast.setGravity(Gravity.TOP, 0, 0)
+                    mToast.show()
+
+                    errorFlag = true
+
+                    break
+                }
+
+                arrayForView.add(view.nameOfArray.text.toString())
+                arrayForView.add(view.arraySize.text.toString())
+            }
+
+            if (view.getTag() == tagForOperatorView) {
+                """[A-z]([0-9]|[A-z])*""".toRegex()
+                var myString = view.forOperatorVariable.text.toString()
+
+                if (!myString.matches(Regex("""[A-z]([0-9]|[A-z])*"""))) {
+                    errorMessage = emptyEditField
+
+                    val mToast = Toast.makeText(this, errorMessage + " " + view.textNumber.text.toString(), Toast.LENGTH_LONG)
+                    mToast.setGravity(Gravity.TOP, 0, 0)
+                    mToast.show()
+
+                    errorFlag = true
+
+                    break
+                }
+
+                arrayForView.add(view.forOperatorVariable.text.toString())
+                arrayForView.add(view.forOperatorFrom.text.toString())
+                arrayForView.add(view.forOperatorTo.text.toString())
+            }
+
+            if (view.getTag() == tagOutputView) {
+                """[A-z]([0-9]|[A-z])*""".toRegex()
+                var myString = view.variableOutput.text.toString()
+
+                if (!myString.matches(Regex("""[A-z]([0-9]|[A-z])*"""))) {
+                    errorMessage = emptyEditField
+
+                    val mToast = Toast.makeText(this, errorMessage + " " + view.textNumber.text.toString(), Toast.LENGTH_LONG)
+                    mToast.setGravity(Gravity.TOP, 0, 0)
+                    mToast.show()
+
+                    errorFlag = true
+
+                    break
+                }
+
+                arrayForView.add(view.variableOutput.text.toString())
+            }
+
+
+
+
 
             dataSet.add(arrayForView)
         }
@@ -304,6 +398,42 @@ class CodingActivity : AppCompatActivity(){
                         }
                     }
 
+                    if (draggableItem.getTag() == tagIfOperatorView){
+                        draggableItem.deleteBlock4.setOnClickListener {
+                            removeViewInAllViewsList(draggableItem)
+                        }
+                    }
+
+                    if (draggableItem.getTag() == tagIfCloseView){
+                        draggableItem.deleteBlock5.setOnClickListener {
+                            removeViewInAllViewsList(draggableItem)
+                        }
+                    }
+
+                    if (draggableItem.getTag() == tagArrayOperatorView){
+                        draggableItem.deleteBlock6.setOnClickListener {
+                            removeViewInAllViewsList(draggableItem)
+                        }
+                    }
+
+                    if (draggableItem.getTag() == tagForOperatorView){
+                        draggableItem.deleteBlock7.setOnClickListener {
+                            removeViewInAllViewsList(draggableItem)
+                        }
+                    }
+
+                    if (draggableItem.getTag() == tagForCloseView){
+                        draggableItem.deleteBlock8.setOnClickListener {
+                            removeViewInAllViewsList(draggableItem)
+                        }
+                    }
+
+                    if (draggableItem.getTag() == tagOutputView){
+                        draggableItem.deleteBlock9.setOnClickListener {
+                            removeViewInAllViewsList(draggableItem)
+                        }
+                    }
+
                     number++
                 }
 
@@ -409,7 +539,7 @@ class CustomRecyclerAdapter(private val names: List<Obectsi>):  RecyclerView.Ada
         holder.nameBlocks.text = itemObects.name
 
         when (position) {
-            0 -> {
+            0 -> { //variables
                 val isExpandeble: Boolean = names[position].expandeble
                 holder.expendConVar.visibility = if (isExpandeble) View.VISIBLE else View.GONE
                 holder.expendConOperations.visibility = View.GONE
@@ -431,35 +561,41 @@ class CustomRecyclerAdapter(private val names: List<Obectsi>):  RecyclerView.Ada
                 paramsDeclareIntegerView.topMargin = 100
                 paramsDeclareIntegerView.leftMargin = 0
 
-
                 holder.expendConVar.addView(declareIntegerView, paramsDeclareIntegerView)
                 declareIntegerView.setTag(tagDeclareIntegerView)
                 attachViewDragListener(declareIntegerView)
 
 
+                val arrayOperatorView = arrayOperator(holder.itemView.context)
 
-            }
-            1 -> {
-                val isExpandeble: Boolean = names[position].expandeble
-                holder.expendConOperations.visibility = if (isExpandeble) View.VISIBLE else View.GONE
-                holder.expendConVar.visibility = View.GONE
-                holder.expendConInputOutput.visibility = View.GONE
-                holder.expendConConditions.visibility = View.GONE
-
-                val declareArithmeticView = arithmeticOperations(holder.itemView.context)
-
-                val paramsDeclareArithmeticView: ConstraintLayout.LayoutParams =
+                val paramsArrayOperatorView: ConstraintLayout.LayoutParams =
                     ConstraintLayout.LayoutParams(
                         ConstraintLayout.LayoutParams.WRAP_CONTENT, //width
                         ConstraintLayout.LayoutParams.WRAP_CONTENT //height
                     )
 
-                paramsDeclareArithmeticView.topToTop = holder.expendConOperations.id
-                paramsDeclareArithmeticView.leftToLeft = holder.expendConOperations.id
+                paramsArrayOperatorView.topToTop = holder.expendConVar.id
+                paramsArrayOperatorView.leftToLeft = holder.expendConVar.id
 
-                paramsDeclareArithmeticView.topMargin = 100
-                paramsDeclareArithmeticView.leftMargin = 0
+                paramsArrayOperatorView.topMargin = 400
+                paramsArrayOperatorView.leftMargin = 0
 
+                holder.expendConVar.addView(arrayOperatorView, paramsArrayOperatorView)
+                arrayOperatorView.setTag(tagArrayOperatorView)
+                attachViewDragListener(arrayOperatorView)
+
+
+
+
+
+
+            }
+            1 -> { // Opetations
+                val isExpandeble: Boolean = names[position].expandeble
+                holder.expendConOperations.visibility = if (isExpandeble) View.VISIBLE else View.GONE
+                holder.expendConVar.visibility = View.GONE
+                holder.expendConInputOutput.visibility = View.GONE
+                holder.expendConConditions.visibility = View.GONE
 
                 val assignmentOperatorView = assignmentOperator(holder.itemView.context)
 
@@ -472,109 +608,123 @@ class CustomRecyclerAdapter(private val names: List<Obectsi>):  RecyclerView.Ada
                 paramsDeclareAssignOperatorView.topToTop = holder.expendConOperations.id
                 paramsDeclareAssignOperatorView.leftToLeft = holder.expendConOperations.id
 
-                paramsDeclareAssignOperatorView.topMargin = 400
+                paramsDeclareAssignOperatorView.topMargin = 100
                 paramsDeclareAssignOperatorView.leftMargin = 0
-
-                holder.expendConOperations.addView(declareArithmeticView, paramsDeclareArithmeticView)
-                declareArithmeticView.setTag(tagArithmeticOperationsView)
-                attachViewDragListener(declareArithmeticView)
 
                 holder.expendConOperations.addView(assignmentOperatorView, paramsDeclareAssignOperatorView)
                 assignmentOperatorView.setTag(tagAssignmentOperatorView)
                 attachViewDragListener(assignmentOperatorView)
 
 
+                val forOperatorView = forOperator(holder.itemView.context)
 
+                val paramsForOperatorView: ConstraintLayout.LayoutParams =
+                    ConstraintLayout.LayoutParams(
+                        ConstraintLayout.LayoutParams.WRAP_CONTENT, //width
+                        ConstraintLayout.LayoutParams.WRAP_CONTENT //height
+                    )
+
+                paramsForOperatorView.topToTop = holder.expendConOperations.id
+                paramsForOperatorView.leftToLeft = holder.expendConOperations.id
+
+                paramsForOperatorView.topMargin = 400
+                paramsForOperatorView.leftMargin = 0
+
+                holder.expendConOperations.addView(forOperatorView, paramsForOperatorView)
+                forOperatorView.setTag(tagForOperatorView)
+                attachViewDragListener(forOperatorView)
+
+
+                val forCloseView = forClose(holder.itemView.context)
+
+                val paramsForCloseView: ConstraintLayout.LayoutParams =
+                    ConstraintLayout.LayoutParams(
+                        ConstraintLayout.LayoutParams.WRAP_CONTENT, //width
+                        ConstraintLayout.LayoutParams.WRAP_CONTENT //height
+                    )
+
+                paramsForCloseView.topToTop = holder.expendConOperations.id
+                paramsForCloseView.leftToLeft = holder.expendConOperations.id
+
+                paramsForCloseView.topMargin = 800
+                paramsForCloseView.leftMargin = 0
+
+                holder.expendConOperations.addView(forCloseView, paramsForCloseView)
+                forCloseView.setTag(tagForCloseView)
+                attachViewDragListener(forCloseView)
 
             }
-            2 ->{
+            2 ->{ // Conditions
                 val isExpandeble: Boolean = names[position].expandeble
                 holder.expendConConditions.visibility = if (isExpandeble) View.VISIBLE else View.GONE
                 holder.expendConVar.visibility = View.GONE
                 holder.expendConInputOutput.visibility = View.GONE
                 holder.expendConOperations.visibility = View.GONE
 
-                val declareArithmeticView = arithmeticOperations(holder.itemView.context)
+                val ifOperatorView = ifOperator(holder.itemView.context)
 
-                val paramsDeclareArithmeticView: ConstraintLayout.LayoutParams =
+                val paramsIfOperatorView: ConstraintLayout.LayoutParams =
                     ConstraintLayout.LayoutParams(
                         ConstraintLayout.LayoutParams.WRAP_CONTENT, //width
                         ConstraintLayout.LayoutParams.WRAP_CONTENT //height
                     )
 
-                paramsDeclareArithmeticView.topToTop =  holder.expendConConditions.id
-                paramsDeclareArithmeticView.leftToLeft =  holder.expendConConditions.id
+                paramsIfOperatorView.topToTop =  holder.expendConConditions.id
+                paramsIfOperatorView.leftToLeft =  holder.expendConConditions.id
 
-                paramsDeclareArithmeticView.topMargin = 100
-                paramsDeclareArithmeticView.leftMargin = 0
+                paramsIfOperatorView.topMargin = 280
+                paramsIfOperatorView.leftMargin = 0
+
+                holder.expendConConditions.addView(ifOperatorView, paramsIfOperatorView)
+                ifOperatorView.setTag(tagIfOperatorView)
+                attachViewDragListener(ifOperatorView)
 
 
-                val assignmentOperatorView = assignmentOperator(holder.itemView.context)
+                val ifCloseView = ifClose(holder.itemView.context)
 
-                val paramsDeclareAssignOperatorView: ConstraintLayout.LayoutParams =
+                val paramsIfCloseView: ConstraintLayout.LayoutParams =
                     ConstraintLayout.LayoutParams(
                         ConstraintLayout.LayoutParams.WRAP_CONTENT, //width
                         ConstraintLayout.LayoutParams.WRAP_CONTENT //height
                     )
 
-                paramsDeclareAssignOperatorView.topToTop =  holder.expendConConditions.id
-                paramsDeclareAssignOperatorView.leftToLeft =  holder.expendConConditions.id
+                paramsIfCloseView.topToTop =  ifOperatorView.id
+                paramsIfCloseView.leftToLeft =  holder.expendConConditions.id
 
-                paramsDeclareAssignOperatorView.topMargin = 400
-                paramsDeclareAssignOperatorView.leftMargin = 0
+                paramsIfCloseView.topMargin = 1000
+                paramsIfCloseView.leftMargin = 0
 
-                holder.expendConConditions.addView(declareArithmeticView, paramsDeclareArithmeticView)
-                declareArithmeticView.setTag(tagArithmeticOperationsView)
-                attachViewDragListener(declareArithmeticView)
+                holder.expendConConditions.addView(ifCloseView, paramsIfCloseView)
+                ifCloseView.setTag(tagIfCloseView)
+                attachViewDragListener(ifCloseView)
 
-                holder.expendConConditions.addView(assignmentOperatorView, paramsDeclareAssignOperatorView)
-                assignmentOperatorView.setTag(tagAssignmentOperatorView)
-                attachViewDragListener(assignmentOperatorView)
 
             }
-            3 ->{
+            3 ->{ // Input/Output
                 val isExpandeble: Boolean = names[position].expandeble
                 holder.expendConInputOutput.visibility = if (isExpandeble) View.VISIBLE else View.GONE
                 holder.expendConVar.visibility = View.GONE
                 holder.expendConOperations.visibility = View.GONE
                 holder.expendConConditions.visibility = View.GONE
 
-                val declareArithmeticView = arithmeticOperations(holder.itemView.context)
+                val outputView = output(holder.itemView.context)
 
-                val paramsDeclareArithmeticView: ConstraintLayout.LayoutParams =
+                val paramsOutputView: ConstraintLayout.LayoutParams =
                     ConstraintLayout.LayoutParams(
                         ConstraintLayout.LayoutParams.WRAP_CONTENT, //width
                         ConstraintLayout.LayoutParams.WRAP_CONTENT //height
                     )
 
-                paramsDeclareArithmeticView.topToTop = holder.expendConInputOutput.id
-                paramsDeclareArithmeticView.leftToLeft = holder.expendConInputOutput.id
+                paramsOutputView.topToTop = holder.expendConInputOutput.id
+                paramsOutputView.leftToLeft = holder.expendConInputOutput.id
 
-                paramsDeclareArithmeticView.topMargin = 100
-                paramsDeclareArithmeticView.leftMargin = 0
+                paramsOutputView.topMargin = 10
+                paramsOutputView.leftMargin = 0
 
+                holder.expendConInputOutput.addView(outputView, paramsOutputView)
+                outputView.setTag(tagOutputView)
+                attachViewDragListener(outputView)
 
-                val assignmentOperatorView = assignmentOperator(holder.itemView.context)
-
-                val paramsDeclareAssignOperatorView: ConstraintLayout.LayoutParams =
-                    ConstraintLayout.LayoutParams(
-                        ConstraintLayout.LayoutParams.WRAP_CONTENT, //width
-                        ConstraintLayout.LayoutParams.WRAP_CONTENT //height
-                    )
-
-                paramsDeclareAssignOperatorView.topToTop = holder.expendConInputOutput.id
-                paramsDeclareAssignOperatorView.leftToLeft = holder.expendConInputOutput.id
-
-                paramsDeclareAssignOperatorView.topMargin = 400
-                paramsDeclareAssignOperatorView.leftMargin = 0
-
-                holder.expendConInputOutput.addView(declareArithmeticView, paramsDeclareArithmeticView)
-                declareArithmeticView.setTag(tagArithmeticOperationsView)
-                attachViewDragListener(declareArithmeticView)
-
-                holder.expendConInputOutput.addView(assignmentOperatorView, paramsDeclareAssignOperatorView)
-                assignmentOperatorView.setTag(tagAssignmentOperatorView)
-                attachViewDragListener(assignmentOperatorView)
 
 
             }

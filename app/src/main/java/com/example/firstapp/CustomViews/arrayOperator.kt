@@ -15,7 +15,7 @@ class arrayOperator @JvmOverloads constructor(
 
     private val bin7 = ViewArrayOperatorBinding.inflate(LayoutInflater.from(context), this)
 
-    init {
-
-    }
+//    init {
+//
+//    }
 }

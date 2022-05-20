@@ -156,9 +156,24 @@ class DataClass {
 
     fun varReplacement(input : String) : String {
         var s = input
+        for(j in 0..s.length-1) {
+            if (s[j] == '[') {
+                for (i in 0..name.size - 1) {
+                    if (name[i] != "") {
+                        s = Regex(name[i]).replace(s, value[i].toInt().toString())
+                    }
+                }
+                break;
+            }
+        }
         for (i in 0..name.size - 1) {
             if (name[i] != "") {
                 s = Regex(name[i]).replace(s, value[i].toString())
+            }
+        }
+        for (i in 0..name.size - 1) {
+            if (name[i] == s) {
+                s = value[findValue(name[i])].toString()
             }
         }
         s = Regex(" ").replace(s, "")
@@ -257,7 +272,8 @@ class DataClass {
     }
 
     fun newArray(nameArray : String, countValues : String) {
-        for(i in 0..countValues.toInt()-1) {
+        var size = calc(varReplacement(countValues)).toDouble().toInt()
+        for(i in 0..size-1) {
             var arrayElem = "$nameArray[$i]"
             declaration(arrayElem)
         }
@@ -392,8 +408,8 @@ fun main(dataSet: MutableList<MutableList<String>>, answer: MutableList<MutableL
             }
             temp[0] == forLoop -> {
                 data.declaration(temp[2])
-                val start = data.calc(data.varReplacement(temp[3])).toInt()
-                val finish = data.calc(data.varReplacement(temp[4])).toInt()
+                val start = data.calc(data.varReplacement(temp[3])).toDouble().toInt()
+                val finish = data.calc(data.varReplacement(temp[4])).toDouble().toInt()
                 var new : MutableList<MutableList<String>> = mutableListOf()
                 for(k in start..finish-1) {
                     var newBlock : MutableList<String> = mutableListOf()

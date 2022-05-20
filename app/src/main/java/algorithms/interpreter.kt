@@ -301,15 +301,6 @@ class Queue {
     var queue: MutableList<MutableList<String>> = mutableListOf()
     var size : Int = 0
 
-    fun push(element : MutableList<String>) {
-        queue.add(element)
-        size += 1
-    }
-
-    fun size(): Int {
-        return size
-    }
-
     fun paste(new: MutableList<MutableList<String>> = mutableListOf(), index : Int) {
         var newArray : MutableList<MutableList<String>> = mutableListOf()
         for(i in 0..index-1) {
@@ -325,6 +316,7 @@ class Queue {
             newArray.add(queue[count])
             count++;
         }
+        queue = newArray
     }
 }
 
@@ -403,7 +395,7 @@ fun main(dataSet: MutableList<MutableList<String>>, answer: MutableList<MutableL
                 val start = data.calc(data.varReplacement(temp[3])).toInt()
                 val finish = data.calc(data.varReplacement(temp[4])).toInt()
                 var new : MutableList<MutableList<String>> = mutableListOf()
-                for(k in start..finish) {
+                for(k in start..finish-1) {
                     var newBlock : MutableList<String> = mutableListOf()
                     newBlock.add(assignmentOperator)
                     newBlock.add("0")

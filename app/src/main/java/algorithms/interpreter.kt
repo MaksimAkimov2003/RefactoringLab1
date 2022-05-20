@@ -294,11 +294,10 @@ class Queue {
     }
 }
 
-fun main(dataSet: MutableList<View>) {
-    var codingActivity = CodingActivity()
-    var DataSet = dataSet
+fun main(dataSet: MutableList<MutableList<String>>, answer: MutableList<MutableList<String>> = mutableListOf(), allVariables: MutableList<MutableList<String>> = mutableListOf()) {
     var q = Queue()
-        //q.queue = codingActivity.getAndConvertData(DataSet)
+    q.queue = dataSet
+
     var data = DataClass()
     var tempc: MutableList<String> = mutableListOf()
     tempc.add(declare)

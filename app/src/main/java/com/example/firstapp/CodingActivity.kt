@@ -197,10 +197,11 @@ class CodingActivity : AppCompatActivity(){
         }
 
         if (!errorFlag) {
-            var answer: MutableList<String> = mutableListOf()
-            var allVariables: MutableList<String> = mutableListOf()
 
-//            main(dataSet)
+            var answer: MutableList<MutableList<String>> = mutableListOf()
+            var allVariables: MutableList<MutableList<String>> = mutableListOf()
+
+            //main(dataSet, answer, allVariables)
             val mToast = Toast.makeText(this, "Заебись", Toast.LENGTH_LONG)
             mToast.setGravity(Gravity.TOP, 0, 0)
             mToast.show()

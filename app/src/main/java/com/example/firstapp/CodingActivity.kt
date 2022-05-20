@@ -14,6 +14,7 @@ import android.view.*
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
@@ -198,13 +199,40 @@ class CodingActivity : AppCompatActivity(){
 
         if (!errorFlag) {
 
-            var answer: MutableList<MutableList<String>> = mutableListOf()
-            var allVariables: MutableList<MutableList<String>> = mutableListOf()
-
-            //main(dataSet, answer, allVariables)
-            val mToast = Toast.makeText(this, "Заебись", Toast.LENGTH_LONG)
-            mToast.setGravity(Gravity.TOP, 0, 0)
-            mToast.show()
+//            var answer: MutableList<MutableList<String>> = mutableListOf()
+//            var allVariables: MutableList<MutableList<String>> = mutableListOf()
+//
+//            main(dataSet, answer, allVariables)
+//
+//            var answerString = ""
+//            var allVariablesString = ""
+//
+//            for (i in 0..answer[0].size - 1){
+//                var variable = answer[0][i]
+//                var value = answer[1][i]
+//
+//                answerString += variable + " " + "=" + " " + value + "\n"
+//
+//            }
+//
+//            for (i in 0..allVariables[0].size - 1) {
+//                var variable = allVariables[0][i]
+//                var value = allVariables[1][i]
+//
+//                allVariablesString += variable + " " + "=" + " " + value + "\n"
+//            }
+//            val builder2 = AlertDialog.Builder(this)
+//            builder2.setTitle("All variables:")
+//            builder2.setMessage(allVariablesString)
+//            val alertDialog2: AlertDialog = builder2.create()
+//            alertDialog2.show()
+//            alertDialog2.window?.setGravity(Gravity.TOP)
+//
+//            val builder1 = AlertDialog.Builder(this)
+//            builder1.setTitle("Answer:")
+//            builder1.setMessage(answerString)
+//            val alertDialog1: AlertDialog = builder1.create()
+//            alertDialog1.show()
         }
 
 

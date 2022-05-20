@@ -309,7 +309,6 @@ class DataClass {
                 temp += nameVars[i]
             }
         }
-        answer
     }
 }
 
@@ -341,35 +340,15 @@ fun main(dataSet: MutableList<MutableList<String>>, answer: MutableList<MutableL
     q.queue = dataSet
 
     var t : MutableList<String> = mutableListOf()
+
     for(i in 0..1) {
         answer.add(t)
         allVariables.add(t)
     }
 
     var data = DataClass()
-    var tempc: MutableList<String> = mutableListOf()
-    tempc.add(declare)
-    tempc.add("0")
-    tempc.add("x")
-    q.queue.add(tempc)
-    var temp1: MutableList<String> = mutableListOf()
-    temp1.add(forLoop)
-    temp1.add("0")
-    temp1.add("i")
-    temp1.add("1")
-    temp1.add("3")
-    q.queue.add(temp1)
-    var temp3: MutableList<String> = mutableListOf()
-    temp3.add(assignmentOperator)
-    temp3.add("0")
-    temp3.add("x")
-    temp3.add("x + 3")
-    q.queue.add(temp3)
-    var temp2: MutableList<String> = mutableListOf()
-    temp2.add(forEnd)
-    temp2.add("0")
-    q.queue.add(temp2)
-    println(q.queue)
+
+
     var i = 0
     while(true) {
         var temp: MutableList<String> = mutableListOf()

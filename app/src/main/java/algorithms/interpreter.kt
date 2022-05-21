@@ -435,8 +435,6 @@ fun main(dataSet: MutableList<MutableList<String>>, answer: MutableList<MutableL
             allVariables[1].add(data.value[data.findValue(data.name[i])].toString())
         }
     }
-    println(data.name)
-    println(data.value)
 }
 
 

@@ -3,8 +3,10 @@ package com.example.firstapp.CustomViews
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.inputmethod.InputMethodManager
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.firstapp.databinding.ViewArrayOperatorBinding
+import kotlinx.android.synthetic.main.view_output.view.*
 
 class arrayOperator @JvmOverloads constructor(
     context: Context,
@@ -15,7 +17,16 @@ class arrayOperator @JvmOverloads constructor(
 
     private val bin7 = ViewArrayOperatorBinding.inflate(LayoutInflater.from(context), this)
 
-//    init {
-//
-//    }
+    init {
+        hideKeyboard()
+
+    }
+
+    private fun hideKeyboard() {
+        removeKeyboard.setOnClickListener {
+            val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(windowToken, 0)
+        }
+
+    }
 }

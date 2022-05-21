@@ -4,7 +4,9 @@ import android.content.Context
 import androidx.constraintlayout.widget.ConstraintLayout
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.inputmethod.InputMethodManager
 import com.example.firstapp.databinding.ViewIfOperatorBinding
+import kotlinx.android.synthetic.main.view_output.view.*
 
 class ifOperator @JvmOverloads constructor(
     context: Context,
@@ -17,15 +19,15 @@ class ifOperator @JvmOverloads constructor(
 
 
     init {
-//        selfBlockDelete()
+        hideKeyboard()
 
     }
 
-//    private fun selfBlockDelete() {
-//        bin4.deleteBlock.setOnClickListener {
-//
-//
-//
-//        }
-//    }
+    private fun hideKeyboard() {
+        removeKeyboard.setOnClickListener {
+            val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(windowToken, 0)
+        }
+
+    }
 }

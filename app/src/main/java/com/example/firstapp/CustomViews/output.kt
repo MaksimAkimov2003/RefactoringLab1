@@ -1,10 +1,13 @@
 package com.example.firstapp.CustomViews
 
 import android.content.Context
-import androidx.constraintlayout.widget.ConstraintLayout
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.inputmethod.InputMethodManager
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.firstapp.databinding.ViewOutputBinding
+import kotlinx.android.synthetic.main.view_output.view.*
+
 
 class output @JvmOverloads constructor(
     context: Context,
@@ -16,16 +19,17 @@ class output @JvmOverloads constructor(
     private val bin5 = ViewOutputBinding.inflate(LayoutInflater.from(context), this)
 
 
-//    init {
-//        selfBlockDelete()
-//
-//    }
-//
-//    private fun selfBlockDelete() {
-//        bin5.deleteBlock.setOnClickListener {
-//
-//
-//
-//        }
-//    }
+    init {
+        hideKeyboard()
+
+    }
+
+    private fun hideKeyboard() {
+        removeKeyboard.setOnClickListener {
+            val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(windowToken, 0)
+        }
+
+    }
+
 }

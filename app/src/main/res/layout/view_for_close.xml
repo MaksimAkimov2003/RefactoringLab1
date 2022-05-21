@@ -71,8 +71,7 @@
                 android:layout_width="130dp"
                 android:layout_height="40dp"
                 android:gravity="left"
-                android:inputType="text"
-                android:text="} for end"
+                android:text="@string/for_end"
                 android:textSize="28sp"
                 android:textStyle="italic"
                 app:layout_constraintStart_toEndOf="@+id/textView2"
@@ -83,7 +82,6 @@
                 android:layout_width="10dp"
                 android:layout_height="40dp"
                 android:gravity="left"
-                android:text=" "
                 android:textSize="28sp"
                 app:layout_constraintStart_toEndOf="@+id/inputButton"
                 app:layout_constraintTop_toBottomOf="@+id/inputButton" />

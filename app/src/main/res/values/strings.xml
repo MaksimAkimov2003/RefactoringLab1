@@ -23,6 +23,22 @@
     <string name="values"><font size ="20">Values</font></string>
     <string name="variables"><font size ="20">Variables</font></string>
     <string name="semicolon"><font size ="20">;</font></string>
+    <string name="generate">Generate</string>
+    <string name="left_square_bracket">[</string>
+    <string name="right_square_bracket">]</string>
+    <string name="else_end">} else end</string>
+    <string name="else_braket">else {</string>
+    <string name="for_end">} for end</string>
+    <string name="from">from</string>
+    <string name="to">to</string>
+    <string name="some_brakets">){</string>
+    <string name="in_range">in range</string>
+    <string name="brakets_left">(</string>
+    <string name="for_f">for</string>
+    <string name="if_end">} If end</string>
+    <string name="if_o">If</string>
+    <string name="left_braket">)</string>
+    <string name="right_breaket">(</string>
     <string-array name="sings_for_if">
         <item>></item>
         <item>&lt;</item>

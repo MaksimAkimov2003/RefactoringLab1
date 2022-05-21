@@ -14,7 +14,7 @@
     <string name="equal">=</string>
     <string name="operations"><font size ="25">Operations</font></string>
     <string name="openBracket"><font size ="30">(</font></string>
-    <string name="output"><font size ="30">Output</font></string>
+    <string name="output"><font size ="25">Output</font></string>
     <string name="msg_error_zero">Error: Division by zero.</string>
     <string name="msg_error_unknown">Error: Unknown. Please check is the expression correct.</string>
     <string name="condition"><font size ="20">Condition</font></string>

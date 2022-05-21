@@ -39,8 +39,8 @@
 
             <Button
                 android:id="@+id/inputButton"
-                android:layout_width="27dp"
-                android:layout_height="27dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:foreground="@android:drawable/ic_input_add"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -48,8 +48,8 @@
 
             <Button
                 android:id="@+id/deleteBlock"
-                android:layout_width="27dp"
-                android:layout_height="27dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:foreground="@android:drawable/btn_dialog"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView1"
@@ -58,8 +58,8 @@
 
             <Button
                 android:id="@+id/removeKeyboard"
-                android:layout_width="27dp"
-                android:layout_height="27dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:foreground="@android:drawable/checkbox_on_background"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

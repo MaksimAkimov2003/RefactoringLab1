@@ -155,138 +155,135 @@ class CodingActivity : AppCompatActivity(){
             arrayForView.add(view.getTag().toString())
             arrayForView.add(view.textNumber.text.toString())
 
-            if (view.getTag() == tagDeclareIntegerView) {
-                """(([A-z]([0-9]|[A-z])*)(\s{0,1},{1}\s{0,1}([A-z]([0-9]|[A-z])*))*)""".toRegex()
-                var myString = view.inputValueDeclare.text.toString()
 
-                if (!myString.matches(Regex("""(([A-z]([0-9]|[A-z])*)(\s{0,1},{1}\s{0,1}([A-z]([0-9]|[A-z])*))*)"""))) {
-                    errorMessage = emptyEditField
+            when(view.getTag()){
+                tagDeclareIntegerView->{
+                    """(([A-z]([0-9]|[A-z])*)(\s{0,1},{1}\s{0,1}([A-z]([0-9]|[A-z])*))*)""".toRegex()
+                    var myString = view.inputValueDeclare.text.toString()
 
-                    val mToast = Toast.makeText(this, errorMessage + " " + view.textNumber.text.toString(), Toast.LENGTH_LONG)
-                    mToast.setGravity(Gravity.TOP, 0, 0)
-                    mToast.show()
+                    if (!myString.matches(Regex("""(([A-z]([0-9]|[A-z])*)(\s{0,1},{1}\s{0,1}([A-z]([0-9]|[A-z])*))*)"""))) {
+                        errorMessage = emptyEditField
 
-                    errorFlag = true
+                        val mToast = Toast.makeText(this, errorMessage + " " + view.textNumber.text.toString(), Toast.LENGTH_LONG)
+                        mToast.setGravity(Gravity.TOP, 0, 0)
+                        mToast.show()
 
-                    break
+                        errorFlag = true
+
+                        break
+                    }
+
+                    arrayForView.add(view.inputValueDeclare.text.toString())
+                }
+                tagArithmeticOperationsView->{
+                    arrayForView.add(view.arifOperations2.text.toString())
+                }
+                tagAssignmentOperatorView->{
+                    """[A-z]([0-9]|[A-z])*""".toRegex()
+
+                    var myString1 = view.variableOfBlock.text.toString()
+                    var myString2 = view.valueOfBlock.text.toString()
+
+                    if ((!myString1.matches(Regex("""[A-z]([0-9]|[A-z])*"""))) || (!myString2.matches(Regex("""([A-z]([0-9]|[A-z])*)|([0-9])""")))) {
+                        errorMessage = emptyEditField
+
+                        val mToast = Toast.makeText(this, errorMessage + " " + view.textNumber.text.toString(), Toast.LENGTH_LONG)
+                        mToast.setGravity(Gravity.TOP, 0, 0)
+                        mToast.show()
+
+                        errorFlag = true
+
+                        break
+                    }
+
+                    arrayForView.add(view.variableOfBlock.text.toString())
+                    arrayForView.add(view.valueOfBlock.text.toString())
+                }
+                tagIfOperatorView->{
+
+                    """((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*)|((([A-z]([0-9]|[A-z])*)\s*\[\s*(([A-z]([0-9]|[A-z])*)|([0])|([1-9][0-9]*)|(((([1-9][0-9]*)|([0]))|([a-z]([0-9]|[a-z])*))(\s*[-+*\/]\s*((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*)))*))\s*\])))(\s*[-+*\/]\s*((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*)|((([A-z]([0-9]|[A-z])*)\s*\[\s*(([A-z]([0-9]|[A-z])*)|([0])|([1-9][0-9]*)|(((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*))(\s*[-+*\/]\s*((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*)))*))\s*\]))))*""".toRegex()
+
+                    var myString1 = view.secondCondition.text.toString()
+                    var myString2 = view.firstCondition.text.toString()
+
+                    if ((!myString1.matches(Regex("""((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*)|((([A-z]([0-9]|[A-z])*)\s*\[\s*(([A-z]([0-9]|[A-z])*)|([0])|([1-9][0-9]*)|(((([1-9][0-9]*)|([0]))|([a-z]([0-9]|[a-z])*))(\s*[-+*\/]\s*((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*)))*))\s*\])))(\s*[-+*\/]\s*((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*)|((([A-z]([0-9]|[A-z])*)\s*\[\s*(([A-z]([0-9]|[A-z])*)|([0])|([1-9][0-9]*)|(((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*))(\s*[-+*\/]\s*((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*)))*))\s*\]))))*"""))) || (!myString2.matches(Regex("""((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*)|((([A-z]([0-9]|[A-z])*)\s*\[\s*(([A-z]([0-9]|[A-z])*)|([0])|([1-9][0-9]*)|(((([1-9][0-9]*)|([0]))|([a-z]([0-9]|[a-z])*))(\s*[-+*\/]\s*((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*)))*))\s*\])))(\s*[-+*\/]\s*((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*)|((([A-z]([0-9]|[A-z])*)\s*\[\s*(([A-z]([0-9]|[A-z])*)|([0])|([1-9][0-9]*)|(((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*))(\s*[-+*\/]\s*((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*)))*))\s*\]))))*""")))) {
+                        errorMessage = emptyEditField
+
+                        val mToast = Toast.makeText(this, errorMessage + " " + view.textNumber.text.toString(), Toast.LENGTH_LONG)
+                        mToast.setGravity(Gravity.TOP, 0, 0)
+                        mToast.show()
+
+                        errorFlag = true
+
+                        break
+                    }
+
+                    arrayForView.add(view.secondCondition.text.toString())
+                    arrayForView.add(view.spinnerForIf.selectedItem.toString())
+                    arrayForView.add(view.firstCondition.text.toString())
+
+                }
+                tagArrayOperatorView->{
+
+                    """[A-z]([0-9]|[A-z])*""".toRegex()
+                    var myString = view.nameOfArray.text.toString()
+
+                    if (!myString.matches(Regex("""[A-z]([0-9]|[A-z])*"""))) {
+                        errorMessage = emptyEditField
+
+                        val mToast = Toast.makeText(this, errorMessage + " " + view.textNumber.text.toString(), Toast.LENGTH_LONG)
+                        mToast.setGravity(Gravity.TOP, 0, 0)
+                        mToast.show()
+
+                        errorFlag = true
+
+                        break
+                    }
+
+                    arrayForView.add(view.nameOfArray.text.toString())
+                    arrayForView.add(view.arraySize.text.toString())
+                }
+                tagForOperatorView->{
+                    """[A-z]([0-9]|[A-z])*""".toRegex()
+                    var myString = view.forOperatorVariable.text.toString()
+
+                    if (!myString.matches(Regex("""[A-z]([0-9]|[A-z])*"""))) {
+                        errorMessage = emptyEditField
+
+                        val mToast = Toast.makeText(this, errorMessage + " " + view.textNumber.text.toString(), Toast.LENGTH_LONG)
+                        mToast.setGravity(Gravity.TOP, 0, 0)
+                        mToast.show()
+
+                        errorFlag = true
+
+                        break
+                    }
+
+                    arrayForView.add(view.forOperatorVariable.text.toString())
+                    arrayForView.add(view.forOperatorFrom.text.toString())
+                    arrayForView.add(view.forOperatorTo.text.toString())
+                }
+                tagOutputView->{
+                    """(([A-z]([0-9]|[A-z])*)(\s{0,1},{1}\s{0,1}([A-z]([0-9]|[A-z])*))*)""".toRegex()
+                    var myString = view.variableOutput.text.toString()
+
+                    if (!myString.matches(Regex("""(([A-z]([0-9]|[A-z])*)(\s{0,1},{1}\s{0,1}([A-z]([0-9]|[A-z])*))*)"""))) {
+                        errorMessage = emptyEditField
+
+                        val mToast = Toast.makeText(this, errorMessage + " " + view.textNumber.text.toString(), Toast.LENGTH_LONG)
+                        mToast.setGravity(Gravity.TOP, 0, 0)
+                        mToast.show()
+
+                        errorFlag = true
+
+                        break
+                    }
+
+                    arrayForView.add(view.variableOutput.text.toString())
                 }
 
-                arrayForView.add(view.inputValueDeclare.text.toString())
-            }
-
-            if (view.getTag() == tagArithmeticOperationsView) {
-                arrayForView.add(view.arifOperations2.text.toString())
-            }
-
-            if (view.getTag() == tagAssignmentOperatorView) {
-                """[A-z]([0-9]|[A-z])*""".toRegex()
-
-                var myString1 = view.variableOfBlock.text.toString()
-                var myString2 = view.valueOfBlock.text.toString()
-
-                if ((!myString1.matches(Regex("""[A-z]([0-9]|[A-z])*"""))) || (!myString2.matches(Regex("""([A-z]([0-9]|[A-z])*)|([0-9])""")))) {
-                    errorMessage = emptyEditField
-
-                    val mToast = Toast.makeText(this, errorMessage + " " + view.textNumber.text.toString(), Toast.LENGTH_LONG)
-                    mToast.setGravity(Gravity.TOP, 0, 0)
-                    mToast.show()
-
-                    errorFlag = true
-
-                    break
-                }
-
-                arrayForView.add(view.variableOfBlock.text.toString())
-                arrayForView.add(view.valueOfBlock.text.toString())
-            }
-
-            if (view.getTag() == tagIfOperatorView) {
-                """((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*)|((([A-z]([0-9]|[A-z])*)\s*\[\s*(([A-z]([0-9]|[A-z])*)|([0])|([1-9][0-9]*)|(((([1-9][0-9]*)|([0]))|([a-z]([0-9]|[a-z])*))(\s*[-+*\/]\s*((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*)))*))\s*\])))(\s*[-+*\/]\s*((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*)|((([A-z]([0-9]|[A-z])*)\s*\[\s*(([A-z]([0-9]|[A-z])*)|([0])|([1-9][0-9]*)|(((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*))(\s*[-+*\/]\s*((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*)))*))\s*\]))))*""".toRegex()
-
-                var myString1 = view.secondCondition.text.toString()
-                var myString2 = view.firstCondition.text.toString()
-
-                if ((!myString1.matches(Regex("""((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*)|((([A-z]([0-9]|[A-z])*)\s*\[\s*(([A-z]([0-9]|[A-z])*)|([0])|([1-9][0-9]*)|(((([1-9][0-9]*)|([0]))|([a-z]([0-9]|[a-z])*))(\s*[-+*\/]\s*((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*)))*))\s*\])))(\s*[-+*\/]\s*((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*)|((([A-z]([0-9]|[A-z])*)\s*\[\s*(([A-z]([0-9]|[A-z])*)|([0])|([1-9][0-9]*)|(((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*))(\s*[-+*\/]\s*((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*)))*))\s*\]))))*"""))) || (!myString2.matches(Regex("""((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*)|((([A-z]([0-9]|[A-z])*)\s*\[\s*(([A-z]([0-9]|[A-z])*)|([0])|([1-9][0-9]*)|(((([1-9][0-9]*)|([0]))|([a-z]([0-9]|[a-z])*))(\s*[-+*\/]\s*((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*)))*))\s*\])))(\s*[-+*\/]\s*((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*)|((([A-z]([0-9]|[A-z])*)\s*\[\s*(([A-z]([0-9]|[A-z])*)|([0])|([1-9][0-9]*)|(((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*))(\s*[-+*\/]\s*((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*)))*))\s*\]))))*""")))) {
-                    errorMessage = emptyEditField
-
-                    val mToast = Toast.makeText(this, errorMessage + " " + view.textNumber.text.toString(), Toast.LENGTH_LONG)
-                    mToast.setGravity(Gravity.TOP, 0, 0)
-                    mToast.show()
-
-                    errorFlag = true
-
-                    break
-                }
-
-                arrayForView.add(view.secondCondition.text.toString())
-                arrayForView.add(view.spinnerForIf.selectedItem.toString())
-                arrayForView.add(view.firstCondition.text.toString())
 
             }
-
-            if (view.getTag() == tagArrayOperatorView) {
-                """[A-z]([0-9]|[A-z])*""".toRegex()
-                var myString = view.nameOfArray.text.toString()
-
-                if (!myString.matches(Regex("""[A-z]([0-9]|[A-z])*"""))) {
-                    errorMessage = emptyEditField
-
-                    val mToast = Toast.makeText(this, errorMessage + " " + view.textNumber.text.toString(), Toast.LENGTH_LONG)
-                    mToast.setGravity(Gravity.TOP, 0, 0)
-                    mToast.show()
-
-                    errorFlag = true
-
-                    break
-                }
-
-                arrayForView.add(view.nameOfArray.text.toString())
-                arrayForView.add(view.arraySize.text.toString())
-            }
-
-            if (view.getTag() == tagForOperatorView) {
-                """[A-z]([0-9]|[A-z])*""".toRegex()
-                var myString = view.forOperatorVariable.text.toString()
-
-                if (!myString.matches(Regex("""[A-z]([0-9]|[A-z])*"""))) {
-                    errorMessage = emptyEditField
-
-                    val mToast = Toast.makeText(this, errorMessage + " " + view.textNumber.text.toString(), Toast.LENGTH_LONG)
-                    mToast.setGravity(Gravity.TOP, 0, 0)
-                    mToast.show()
-
-                    errorFlag = true
-
-                    break
-                }
-
-                arrayForView.add(view.forOperatorVariable.text.toString())
-                arrayForView.add(view.forOperatorFrom.text.toString())
-                arrayForView.add(view.forOperatorTo.text.toString())
-            }
-
-            if (view.getTag() == tagOutputView) {
-                """(([A-z]([0-9]|[A-z])*)(\s{0,1},{1}\s{0,1}([A-z]([0-9]|[A-z])*))*)""".toRegex()
-                var myString = view.variableOutput.text.toString()
-
-                if (!myString.matches(Regex("""(([A-z]([0-9]|[A-z])*)(\s{0,1},{1}\s{0,1}([A-z]([0-9]|[A-z])*))*)"""))) {
-                    errorMessage = emptyEditField
-
-                    val mToast = Toast.makeText(this, errorMessage + " " + view.textNumber.text.toString(), Toast.LENGTH_LONG)
-                    mToast.setGravity(Gravity.TOP, 0, 0)
-                    mToast.show()
-
-                    errorFlag = true
-
-                    break
-                }
-
-                arrayForView.add(view.variableOutput.text.toString())
-            }
-
-
-
-
 
             dataSet.add(arrayForView)
         }
@@ -380,60 +377,56 @@ class CodingActivity : AppCompatActivity(){
                     val str = number.toString(10)
                     draggableItem.textNumber.setText(str)
 
-                    if (draggableItem.getTag() == tagDeclareIntegerView){
-                        draggableItem.deleteBlock1.setOnClickListener {
-                            removeViewInAllViewsList(draggableItem)
-                        }
-                    }
 
-                    if (draggableItem.getTag() == tagArithmeticOperationsView){
-                        draggableItem.deleteBlock2.setOnClickListener {
-                            removeViewInAllViewsList(draggableItem)
-                        }
-                    }
+                    when(draggableItem.getTag()){
 
-                    if (draggableItem.getTag() == tagAssignmentOperatorView){
-                        draggableItem.deleteBlock3.setOnClickListener {
-                            removeViewInAllViewsList(draggableItem)
+                        tagDeclareIntegerView->{
+                            draggableItem.deleteBlock1.setOnClickListener {
+                                removeViewInAllViewsList(draggableItem)
+                            }
                         }
-                    }
-
-                    if (draggableItem.getTag() == tagIfOperatorView){
-                        draggableItem.deleteBlock4.setOnClickListener {
-                            removeViewInAllViewsList(draggableItem)
+                        tagArithmeticOperationsView->{
+                            draggableItem.deleteBlock2.setOnClickListener {
+                                removeViewInAllViewsList(draggableItem)
+                            }
                         }
-                    }
-
-                    if (draggableItem.getTag() == tagIfCloseView){
-                        draggableItem.deleteBlock5.setOnClickListener {
-                            removeViewInAllViewsList(draggableItem)
+                        tagAssignmentOperatorView->{
+                            draggableItem.deleteBlock3.setOnClickListener {
+                                removeViewInAllViewsList(draggableItem)
+                            }
                         }
-                    }
-
-                    if (draggableItem.getTag() == tagArrayOperatorView){
-                        draggableItem.deleteBlock6.setOnClickListener {
-                            removeViewInAllViewsList(draggableItem)
+                        tagIfOperatorView->{
+                            draggableItem.deleteBlock4.setOnClickListener {
+                                removeViewInAllViewsList(draggableItem)
+                            }
                         }
-                    }
-
-                    if (draggableItem.getTag() == tagForOperatorView){
-                        draggableItem.deleteBlock7.setOnClickListener {
-                            removeViewInAllViewsList(draggableItem)
+                        tagIfCloseView->{
+                            draggableItem.deleteBlock5.setOnClickListener {
+                                removeViewInAllViewsList(draggableItem)
+                            }
                         }
-                    }
-
-                    if (draggableItem.getTag() == tagForCloseView){
-                        draggableItem.deleteBlock8.setOnClickListener {
-                            removeViewInAllViewsList(draggableItem)
+                        tagArrayOperatorView->{
+                            draggableItem.deleteBlock6.setOnClickListener {
+                                removeViewInAllViewsList(draggableItem)
+                            }
                         }
-                    }
-
-                    if (draggableItem.getTag() == tagOutputView){
-                        draggableItem.deleteBlock9.setOnClickListener {
-                            removeViewInAllViewsList(draggableItem)
+                        tagForOperatorView->{
+                            draggableItem.deleteBlock7.setOnClickListener {
+                                removeViewInAllViewsList(draggableItem)
+                            }
                         }
-                    }
+                        tagForCloseView->{
+                            draggableItem.deleteBlock8.setOnClickListener {
+                                removeViewInAllViewsList(draggableItem)
+                            }
+                        }
+                        tagOutputView->{
+                            draggableItem.deleteBlock9.setOnClickListener {
+                                removeViewInAllViewsList(draggableItem)
+                            }
+                        }
 
+                    }
                     number++
                 }
 

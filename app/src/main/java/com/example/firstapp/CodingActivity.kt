@@ -190,12 +190,10 @@ class CodingActivity : AppCompatActivity(){
                     }
                     tagAssignmentOperatorView->{
                         """[A-z]([0-9]|[A-z])*""".toRegex()
-                        """((([1-9][0-9]*)|([0]))|([a-z]([0-9]|[a-z])*)|((([a-z]([0-9]|[a-z])*)\s*\[\s*(([a-z]([0-9]|[a-z])*)|([0])|([1-9][0-9]*)|(((([1-9][0-9]*)|([0]))|([a-z]([0-9]|[a-z])*))(\s*[-+*\/]\s*((([1-9][0-9]*)|([0]))|([a-z]([0-9]|[a-z])*)))*))\s*\])))(\s*[-+*\/]\s*((([1-9][0-9]*)|([0]))|([a-z]([0-9]|[a-z])*)|((([a-z]([0-9]|[a-z])*)\s*\[\s*(([a-z]([0-9]|[a-z])*)|([0])|([1-9][0-9]*)|(((([1-9][0-9]*)|([0]))|([a-z]([0-9]|[a-z])*))(\s*[-+*\/]\s*((([1-9][0-9]*)|([0]))|([a-z]([0-9]|[a-z])*)))*))\s*\]))))*""".toRegex()
 
                         var myString1 = view.variableOfBlock.text.toString()
-                        var myString2 = view.valueOfBlock.text.toString()
 
-                        if ((!myString1.matches(Regex("""[A-z]([0-9]|[A-z])*"""))) || (!myString2.matches(Regex("""((([1-9][0-9]*)|([0]))|([a-z]([0-9]|[a-z])*)|((([a-z]([0-9]|[a-z])*)\s*\[\s*(([a-z]([0-9]|[a-z])*)|([0])|([1-9][0-9]*)|(((([1-9][0-9]*)|([0]))|([a-z]([0-9]|[a-z])*))(\s*[-+*\/]\s*((([1-9][0-9]*)|([0]))|([a-z]([0-9]|[a-z])*)))*))\s*\])))(\s*[-+*\/]\s*((([1-9][0-9]*)|([0]))|([a-z]([0-9]|[a-z])*)|((([a-z]([0-9]|[a-z])*)\s*\[\s*(([a-z]([0-9]|[a-z])*)|([0])|([1-9][0-9]*)|(((([1-9][0-9]*)|([0]))|([a-z]([0-9]|[a-z])*))(\s*[-+*\/]\s*((([1-9][0-9]*)|([0]))|([a-z]([0-9]|[a-z])*)))*))\s*\]))))*""")))) {
+                        if ((!myString1.matches(Regex("""[A-z]([0-9]|[A-z])*""")))) {
                             errorMessage = emptyEditField
 
                             val mToast = Toast.makeText(this, errorMessage + " " + view.textNumber.text.toString(), Toast.LENGTH_LONG)
@@ -211,24 +209,7 @@ class CodingActivity : AppCompatActivity(){
                         arrayForView.add(view.valueOfBlock.text.toString())
                     }
                     tagIfOperatorView->{
-
-                        """((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*)|((([A-z]([0-9]|[A-z])*)\s*\[\s*(([A-z]([0-9]|[A-z])*)|([0])|([1-9][0-9]*)|(((([1-9][0-9]*)|([0]))|([a-z]([0-9]|[a-z])*))(\s*[-+*\/]\s*((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*)))*))\s*\])))(\s*[-+*\/]\s*((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*)|((([A-z]([0-9]|[A-z])*)\s*\[\s*(([A-z]([0-9]|[A-z])*)|([0])|([1-9][0-9]*)|(((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*))(\s*[-+*\/]\s*((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*)))*))\s*\]))))*""".toRegex()
-
-                        var myString1 = view.secondCondition.text.toString()
-                        var myString2 = view.firstCondition.text.toString()
-
-                        if ((!myString1.matches(Regex("""((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*)|((([A-z]([0-9]|[A-z])*)\s*\[\s*(([A-z]([0-9]|[A-z])*)|([0])|([1-9][0-9]*)|(((([1-9][0-9]*)|([0]))|([a-z]([0-9]|[a-z])*))(\s*[-+*\/]\s*((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*)))*))\s*\])))(\s*[-+*\/]\s*((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*)|((([A-z]([0-9]|[A-z])*)\s*\[\s*(([A-z]([0-9]|[A-z])*)|([0])|([1-9][0-9]*)|(((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*))(\s*[-+*\/]\s*((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*)))*))\s*\]))))*"""))) || (!myString2.matches(Regex("""((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*)|((([A-z]([0-9]|[A-z])*)\s*\[\s*(([A-z]([0-9]|[A-z])*)|([0])|([1-9][0-9]*)|(((([1-9][0-9]*)|([0]))|([a-z]([0-9]|[a-z])*))(\s*[-+*\/]\s*((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*)))*))\s*\])))(\s*[-+*\/]\s*((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*)|((([A-z]([0-9]|[A-z])*)\s*\[\s*(([A-z]([0-9]|[A-z])*)|([0])|([1-9][0-9]*)|(((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*))(\s*[-+*\/]\s*((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*)))*))\s*\]))))*""")))) {
-                            errorMessage = emptyEditField
-
-                            val mToast = Toast.makeText(this, errorMessage + " " + view.textNumber.text.toString(), Toast.LENGTH_LONG)
-                            mToast.setGravity(Gravity.TOP, 0, 0)
-                            mToast.show()
-
-                            errorFlag = true
-
-                            break
-                        }
-
+                        
                         arrayForView.add(view.secondCondition.text.toString())
                         arrayForView.add(view.spinnerForIf.selectedItem.toString())
                         arrayForView.add(view.firstCondition.text.toString())

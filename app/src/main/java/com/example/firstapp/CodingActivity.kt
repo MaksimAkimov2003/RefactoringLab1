@@ -124,209 +124,223 @@ class CodingActivity : AppCompatActivity(){
     }
 
     fun getAndConvertData(allViews: MutableList<View>) {
-        sortAllViewList(allViews, 0, allViews.size - 1)
-
         var errorFlag = false
         var errorMessage: String
 
-        var dataSet: MutableList<MutableList<String>> = mutableListOf()
-        var previousView = allViews[0]
-        var flag = false
+        if (allViews.size == 0) {
+            errorFlag = true
+            errorMessage = "Нет добавленных view"
 
-        for (view in allViews) {
-            var arrayForView: MutableList<String> = mutableListOf()
-
-            if ((flag) && (view.textNumber.text.toString() == previousView.textNumber.text.toString())) {
-                errorMessage = repeatingNumbers
-
-                val mToast = Toast.makeText(this, errorMessage + " " + view.textNumber.text.toString(), Toast.LENGTH_LONG)
-                mToast.setGravity(Gravity.TOP, 0, 0)
-                mToast.show()
-
-                errorFlag = true
-
-                break
-
-            }
-
-            previousView = view
-            flag = true
-
-            arrayForView.add(view.getTag().toString())
-            arrayForView.add(view.textNumber.text.toString())
-
-
-            when(view.getTag()){
-                tagDeclareIntegerView->{
-                    """(([A-z]([0-9]|[A-z])*)(\s{0,1},{1}\s{0,1}([A-z]([0-9]|[A-z])*))*)""".toRegex()
-                    var myString = view.inputValueDeclare.text.toString()
-
-                    if (!myString.matches(Regex("""(([A-z]([0-9]|[A-z])*)(\s{0,1},{1}\s{0,1}([A-z]([0-9]|[A-z])*))*)"""))) {
-                        errorMessage = emptyEditField
-
-                        val mToast = Toast.makeText(this, errorMessage + " " + view.textNumber.text.toString(), Toast.LENGTH_LONG)
-                        mToast.setGravity(Gravity.TOP, 0, 0)
-                        mToast.show()
-
-                        errorFlag = true
-
-                        break
-                    }
-
-                    arrayForView.add(view.inputValueDeclare.text.toString())
-                }
-                tagArithmeticOperationsView->{
-                    arrayForView.add(view.arifOperations2.text.toString())
-                }
-                tagAssignmentOperatorView->{
-                    """[A-z]([0-9]|[A-z])*""".toRegex()
-                    """((([1-9][0-9]*)|([0]))|([a-z]([0-9]|[a-z])*)|((([a-z]([0-9]|[a-z])*)\s*\[\s*(([a-z]([0-9]|[a-z])*)|([0])|([1-9][0-9]*)|(((([1-9][0-9]*)|([0]))|([a-z]([0-9]|[a-z])*))(\s*[-+*\/]\s*((([1-9][0-9]*)|([0]))|([a-z]([0-9]|[a-z])*)))*))\s*\])))(\s*[-+*\/]\s*((([1-9][0-9]*)|([0]))|([a-z]([0-9]|[a-z])*)|((([a-z]([0-9]|[a-z])*)\s*\[\s*(([a-z]([0-9]|[a-z])*)|([0])|([1-9][0-9]*)|(((([1-9][0-9]*)|([0]))|([a-z]([0-9]|[a-z])*))(\s*[-+*\/]\s*((([1-9][0-9]*)|([0]))|([a-z]([0-9]|[a-z])*)))*))\s*\]))))*""".toRegex()
-
-                    var myString1 = view.variableOfBlock.text.toString()
-                    var myString2 = view.valueOfBlock.text.toString()
-
-                    if ((!myString1.matches(Regex("""[A-z]([0-9]|[A-z])*"""))) || (!myString2.matches(Regex("""((([1-9][0-9]*)|([0]))|([a-z]([0-9]|[a-z])*)|((([a-z]([0-9]|[a-z])*)\s*\[\s*(([a-z]([0-9]|[a-z])*)|([0])|([1-9][0-9]*)|(((([1-9][0-9]*)|([0]))|([a-z]([0-9]|[a-z])*))(\s*[-+*\/]\s*((([1-9][0-9]*)|([0]))|([a-z]([0-9]|[a-z])*)))*))\s*\])))(\s*[-+*\/]\s*((([1-9][0-9]*)|([0]))|([a-z]([0-9]|[a-z])*)|((([a-z]([0-9]|[a-z])*)\s*\[\s*(([a-z]([0-9]|[a-z])*)|([0])|([1-9][0-9]*)|(((([1-9][0-9]*)|([0]))|([a-z]([0-9]|[a-z])*))(\s*[-+*\/]\s*((([1-9][0-9]*)|([0]))|([a-z]([0-9]|[a-z])*)))*))\s*\]))))*""")))) {
-                        errorMessage = emptyEditField
-
-                        val mToast = Toast.makeText(this, errorMessage + " " + view.textNumber.text.toString(), Toast.LENGTH_LONG)
-                        mToast.setGravity(Gravity.TOP, 0, 0)
-                        mToast.show()
-
-                        errorFlag = true
-
-                        break
-                    }
-
-                    arrayForView.add(view.variableOfBlock.text.toString())
-                    arrayForView.add(view.valueOfBlock.text.toString())
-                }
-                tagIfOperatorView->{
-
-                    """((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*)|((([A-z]([0-9]|[A-z])*)\s*\[\s*(([A-z]([0-9]|[A-z])*)|([0])|([1-9][0-9]*)|(((([1-9][0-9]*)|([0]))|([a-z]([0-9]|[a-z])*))(\s*[-+*\/]\s*((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*)))*))\s*\])))(\s*[-+*\/]\s*((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*)|((([A-z]([0-9]|[A-z])*)\s*\[\s*(([A-z]([0-9]|[A-z])*)|([0])|([1-9][0-9]*)|(((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*))(\s*[-+*\/]\s*((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*)))*))\s*\]))))*""".toRegex()
-
-                    var myString1 = view.secondCondition.text.toString()
-                    var myString2 = view.firstCondition.text.toString()
-
-                    if ((!myString1.matches(Regex("""((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*)|((([A-z]([0-9]|[A-z])*)\s*\[\s*(([A-z]([0-9]|[A-z])*)|([0])|([1-9][0-9]*)|(((([1-9][0-9]*)|([0]))|([a-z]([0-9]|[a-z])*))(\s*[-+*\/]\s*((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*)))*))\s*\])))(\s*[-+*\/]\s*((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*)|((([A-z]([0-9]|[A-z])*)\s*\[\s*(([A-z]([0-9]|[A-z])*)|([0])|([1-9][0-9]*)|(((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*))(\s*[-+*\/]\s*((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*)))*))\s*\]))))*"""))) || (!myString2.matches(Regex("""((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*)|((([A-z]([0-9]|[A-z])*)\s*\[\s*(([A-z]([0-9]|[A-z])*)|([0])|([1-9][0-9]*)|(((([1-9][0-9]*)|([0]))|([a-z]([0-9]|[a-z])*))(\s*[-+*\/]\s*((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*)))*))\s*\])))(\s*[-+*\/]\s*((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*)|((([A-z]([0-9]|[A-z])*)\s*\[\s*(([A-z]([0-9]|[A-z])*)|([0])|([1-9][0-9]*)|(((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*))(\s*[-+*\/]\s*((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*)))*))\s*\]))))*""")))) {
-                        errorMessage = emptyEditField
-
-                        val mToast = Toast.makeText(this, errorMessage + " " + view.textNumber.text.toString(), Toast.LENGTH_LONG)
-                        mToast.setGravity(Gravity.TOP, 0, 0)
-                        mToast.show()
-
-                        errorFlag = true
-
-                        break
-                    }
-
-                    arrayForView.add(view.secondCondition.text.toString())
-                    arrayForView.add(view.spinnerForIf.selectedItem.toString())
-                    arrayForView.add(view.firstCondition.text.toString())
-
-                }
-                tagArrayOperatorView->{
-
-                    """[A-z]([0-9]|[A-z])*""".toRegex()
-                    var myString = view.nameOfArray.text.toString()
-
-                    if (!myString.matches(Regex("""[A-z]([0-9]|[A-z])*"""))) {
-                        errorMessage = emptyEditField
-
-                        val mToast = Toast.makeText(this, errorMessage + " " + view.textNumber.text.toString(), Toast.LENGTH_LONG)
-                        mToast.setGravity(Gravity.TOP, 0, 0)
-                        mToast.show()
-
-                        errorFlag = true
-
-                        break
-                    }
-
-                    arrayForView.add(view.nameOfArray.text.toString())
-                    arrayForView.add(view.arraySize.text.toString())
-                }
-                tagForOperatorView->{
-                    """[A-z]([0-9]|[A-z])*""".toRegex()
-                    var myString = view.forOperatorVariable.text.toString()
-
-                    if (!myString.matches(Regex("""[A-z]([0-9]|[A-z])*"""))) {
-                        errorMessage = emptyEditField
-
-                        val mToast = Toast.makeText(this, errorMessage + " " + view.textNumber.text.toString(), Toast.LENGTH_LONG)
-                        mToast.setGravity(Gravity.TOP, 0, 0)
-                        mToast.show()
-
-                        errorFlag = true
-
-                        break
-                    }
-
-                    arrayForView.add(view.forOperatorVariable.text.toString())
-                    arrayForView.add(view.forOperatorFrom.text.toString())
-                    arrayForView.add(view.forOperatorTo.text.toString())
-                }
-                tagOutputView->{
-                    """(([A-z]([0-9]|[A-z])*)(\s{0,1},{1}\s{0,1}([A-z]([0-9]|[A-z])*))*)""".toRegex()
-                    var myString = view.variableOutput.text.toString()
-
-                    if (!myString.matches(Regex("""(([A-z]([0-9]|[A-z])*)(\s{0,1},{1}\s{0,1}([A-z]([0-9]|[A-z])*))*)"""))) {
-                        errorMessage = emptyEditField
-
-                        val mToast = Toast.makeText(this, errorMessage + " " + view.textNumber.text.toString(), Toast.LENGTH_LONG)
-                        mToast.setGravity(Gravity.TOP, 0, 0)
-                        mToast.show()
-
-                        errorFlag = true
-
-                        break
-                    }
-
-                    arrayForView.add(view.variableOutput.text.toString())
-                }
-
-
-            }
-
-            dataSet.add(arrayForView)
+            val mToast = Toast.makeText(this, errorMessage , Toast.LENGTH_LONG)
+            mToast.setGravity(Gravity.TOP, 0, 0)
+            mToast.show()
         }
 
-        if (!errorFlag) {
+        else {
+            sortAllViewList(allViews, 0, allViews.size - 1)
 
-            var answer: MutableList<MutableList<String>> = mutableListOf()
-            var allVariables: MutableList<MutableList<String>> = mutableListOf()
+            var dataSet: MutableList<MutableList<String>> = mutableListOf()
+            var previousView = allViews[0]
+            var flag = false
 
-            main(dataSet, answer, allVariables)
+            for (view in allViews) {
+                var arrayForView: MutableList<String> = mutableListOf()
+
+                if ((flag) && (view.textNumber.text.toString() == previousView.textNumber.text.toString())) {
+                    errorMessage = repeatingNumbers
+
+                    val mToast = Toast.makeText(this, errorMessage + " " + view.textNumber.text.toString(), Toast.LENGTH_LONG)
+                    mToast.setGravity(Gravity.TOP, 0, 0)
+                    mToast.show()
+
+                    errorFlag = true
+
+                    break
+
+                }
+
+                previousView = view
+                flag = true
+
+                arrayForView.add(view.getTag().toString())
+                arrayForView.add(view.textNumber.text.toString())
 
 
-            var answerString = ""
-            var allVariablesString = ""
+                when(view.getTag()){
+                    tagDeclareIntegerView->{
+                        """(([A-z]([0-9]|[A-z])*)(\s{0,1},{1}\s{0,1}([A-z]([0-9]|[A-z])*))*)""".toRegex()
+                        var myString = view.inputValueDeclare.text.toString()
 
-            for (i in 0..answer[0].size - 1){
-                var variable = answer[0][i]
-                var value = answer[1][i]
+                        if (!myString.matches(Regex("""(([A-z]([0-9]|[A-z])*)(\s{0,1},{1}\s{0,1}([A-z]([0-9]|[A-z])*))*)"""))) {
+                            errorMessage = emptyEditField
 
-                answerString += variable + " " + "=" + " " + value + "\n"
+                            val mToast = Toast.makeText(this, errorMessage + " " + view.textNumber.text.toString(), Toast.LENGTH_LONG)
+                            mToast.setGravity(Gravity.TOP, 0, 0)
+                            mToast.show()
 
+                            errorFlag = true
+
+                            break
+                        }
+
+                        arrayForView.add(view.inputValueDeclare.text.toString())
+                    }
+                    tagArithmeticOperationsView->{
+                        arrayForView.add(view.arifOperations2.text.toString())
+                    }
+                    tagAssignmentOperatorView->{
+                        """[A-z]([0-9]|[A-z])*""".toRegex()
+                        """((([1-9][0-9]*)|([0]))|([a-z]([0-9]|[a-z])*)|((([a-z]([0-9]|[a-z])*)\s*\[\s*(([a-z]([0-9]|[a-z])*)|([0])|([1-9][0-9]*)|(((([1-9][0-9]*)|([0]))|([a-z]([0-9]|[a-z])*))(\s*[-+*\/]\s*((([1-9][0-9]*)|([0]))|([a-z]([0-9]|[a-z])*)))*))\s*\])))(\s*[-+*\/]\s*((([1-9][0-9]*)|([0]))|([a-z]([0-9]|[a-z])*)|((([a-z]([0-9]|[a-z])*)\s*\[\s*(([a-z]([0-9]|[a-z])*)|([0])|([1-9][0-9]*)|(((([1-9][0-9]*)|([0]))|([a-z]([0-9]|[a-z])*))(\s*[-+*\/]\s*((([1-9][0-9]*)|([0]))|([a-z]([0-9]|[a-z])*)))*))\s*\]))))*""".toRegex()
+
+                        var myString1 = view.variableOfBlock.text.toString()
+                        var myString2 = view.valueOfBlock.text.toString()
+
+                        if ((!myString1.matches(Regex("""[A-z]([0-9]|[A-z])*"""))) || (!myString2.matches(Regex("""((([1-9][0-9]*)|([0]))|([a-z]([0-9]|[a-z])*)|((([a-z]([0-9]|[a-z])*)\s*\[\s*(([a-z]([0-9]|[a-z])*)|([0])|([1-9][0-9]*)|(((([1-9][0-9]*)|([0]))|([a-z]([0-9]|[a-z])*))(\s*[-+*\/]\s*((([1-9][0-9]*)|([0]))|([a-z]([0-9]|[a-z])*)))*))\s*\])))(\s*[-+*\/]\s*((([1-9][0-9]*)|([0]))|([a-z]([0-9]|[a-z])*)|((([a-z]([0-9]|[a-z])*)\s*\[\s*(([a-z]([0-9]|[a-z])*)|([0])|([1-9][0-9]*)|(((([1-9][0-9]*)|([0]))|([a-z]([0-9]|[a-z])*))(\s*[-+*\/]\s*((([1-9][0-9]*)|([0]))|([a-z]([0-9]|[a-z])*)))*))\s*\]))))*""")))) {
+                            errorMessage = emptyEditField
+
+                            val mToast = Toast.makeText(this, errorMessage + " " + view.textNumber.text.toString(), Toast.LENGTH_LONG)
+                            mToast.setGravity(Gravity.TOP, 0, 0)
+                            mToast.show()
+
+                            errorFlag = true
+
+                            break
+                        }
+
+                        arrayForView.add(view.variableOfBlock.text.toString())
+                        arrayForView.add(view.valueOfBlock.text.toString())
+                    }
+                    tagIfOperatorView->{
+
+                        """((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*)|((([A-z]([0-9]|[A-z])*)\s*\[\s*(([A-z]([0-9]|[A-z])*)|([0])|([1-9][0-9]*)|(((([1-9][0-9]*)|([0]))|([a-z]([0-9]|[a-z])*))(\s*[-+*\/]\s*((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*)))*))\s*\])))(\s*[-+*\/]\s*((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*)|((([A-z]([0-9]|[A-z])*)\s*\[\s*(([A-z]([0-9]|[A-z])*)|([0])|([1-9][0-9]*)|(((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*))(\s*[-+*\/]\s*((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*)))*))\s*\]))))*""".toRegex()
+
+                        var myString1 = view.secondCondition.text.toString()
+                        var myString2 = view.firstCondition.text.toString()
+
+                        if ((!myString1.matches(Regex("""((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*)|((([A-z]([0-9]|[A-z])*)\s*\[\s*(([A-z]([0-9]|[A-z])*)|([0])|([1-9][0-9]*)|(((([1-9][0-9]*)|([0]))|([a-z]([0-9]|[a-z])*))(\s*[-+*\/]\s*((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*)))*))\s*\])))(\s*[-+*\/]\s*((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*)|((([A-z]([0-9]|[A-z])*)\s*\[\s*(([A-z]([0-9]|[A-z])*)|([0])|([1-9][0-9]*)|(((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*))(\s*[-+*\/]\s*((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*)))*))\s*\]))))*"""))) || (!myString2.matches(Regex("""((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*)|((([A-z]([0-9]|[A-z])*)\s*\[\s*(([A-z]([0-9]|[A-z])*)|([0])|([1-9][0-9]*)|(((([1-9][0-9]*)|([0]))|([a-z]([0-9]|[a-z])*))(\s*[-+*\/]\s*((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*)))*))\s*\])))(\s*[-+*\/]\s*((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*)|((([A-z]([0-9]|[A-z])*)\s*\[\s*(([A-z]([0-9]|[A-z])*)|([0])|([1-9][0-9]*)|(((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*))(\s*[-+*\/]\s*((([1-9][0-9]*)|([0]))|([A-z]([0-9]|[A-z])*)))*))\s*\]))))*""")))) {
+                            errorMessage = emptyEditField
+
+                            val mToast = Toast.makeText(this, errorMessage + " " + view.textNumber.text.toString(), Toast.LENGTH_LONG)
+                            mToast.setGravity(Gravity.TOP, 0, 0)
+                            mToast.show()
+
+                            errorFlag = true
+
+                            break
+                        }
+
+                        arrayForView.add(view.secondCondition.text.toString())
+                        arrayForView.add(view.spinnerForIf.selectedItem.toString())
+                        arrayForView.add(view.firstCondition.text.toString())
+
+                    }
+                    tagArrayOperatorView->{
+
+                        """[A-z]([0-9]|[A-z])*""".toRegex()
+                        var myString = view.nameOfArray.text.toString()
+
+                        if (!myString.matches(Regex("""[A-z]([0-9]|[A-z])*"""))) {
+                            errorMessage = emptyEditField
+
+                            val mToast = Toast.makeText(this, errorMessage + " " + view.textNumber.text.toString(), Toast.LENGTH_LONG)
+                            mToast.setGravity(Gravity.TOP, 0, 0)
+                            mToast.show()
+
+                            errorFlag = true
+
+                            break
+                        }
+
+                        arrayForView.add(view.nameOfArray.text.toString())
+                        arrayForView.add(view.arraySize.text.toString())
+                    }
+                    tagForOperatorView->{
+                        """[A-z]([0-9]|[A-z])*""".toRegex()
+                        var myString = view.forOperatorVariable.text.toString()
+
+                        if (!myString.matches(Regex("""[A-z]([0-9]|[A-z])*"""))) {
+                            errorMessage = emptyEditField
+
+                            val mToast = Toast.makeText(this, errorMessage + " " + view.textNumber.text.toString(), Toast.LENGTH_LONG)
+                            mToast.setGravity(Gravity.TOP, 0, 0)
+                            mToast.show()
+
+                            errorFlag = true
+
+                            break
+                        }
+
+                        arrayForView.add(view.forOperatorVariable.text.toString())
+                        arrayForView.add(view.forOperatorFrom.text.toString())
+                        arrayForView.add(view.forOperatorTo.text.toString())
+                    }
+                    tagOutputView->{
+                        """(([A-z]([0-9]|[A-z])*)(\s{0,1},{1}\s{0,1}([A-z]([0-9]|[A-z])*))*)""".toRegex()
+                        var myString = view.variableOutput.text.toString()
+
+                        if (!myString.matches(Regex("""(([A-z]([0-9]|[A-z])*)(\s{0,1},{1}\s{0,1}([A-z]([0-9]|[A-z])*))*)"""))) {
+                            errorMessage = emptyEditField
+
+                            val mToast = Toast.makeText(this, errorMessage + " " + view.textNumber.text.toString(), Toast.LENGTH_LONG)
+                            mToast.setGravity(Gravity.TOP, 0, 0)
+                            mToast.show()
+
+                            errorFlag = true
+
+                            break
+                        }
+
+                        arrayForView.add(view.variableOutput.text.toString())
+                    }
+
+
+                }
+
+                dataSet.add(arrayForView)
             }
 
-            for (i in 0..allVariables[0].size - 1) {
-                var variable = allVariables[0][i]
-                var value = allVariables[1][i]
+            if (!errorFlag) {
 
-                allVariablesString += variable + " " + "=" + " " + value + "\n"
+                var answer: MutableList<MutableList<String>> = mutableListOf()
+                var allVariables: MutableList<MutableList<String>> = mutableListOf()
+
+                main(dataSet, answer, allVariables)
+
+
+                var answerString = ""
+                var allVariablesString = ""
+
+                for (i in 0..answer[0].size - 1){
+                    var variable = answer[0][i]
+                    var value = answer[1][i]
+
+                    answerString += variable + " " + "=" + " " + value + "\n"
+
+                }
+
+                for (i in 0..allVariables[0].size - 1) {
+                    var variable = allVariables[0][i]
+                    var value = allVariables[1][i]
+
+                    allVariablesString += variable + " " + "=" + " " + value + "\n"
+                }
+                val builder2 = AlertDialog.Builder(this)
+                builder2.setTitle("All variables:")
+                builder2.setMessage(allVariablesString)
+                val alertDialog2: AlertDialog = builder2.create()
+                alertDialog2.show()
+                alertDialog2.window?.setGravity(Gravity.TOP)
+
+                val builder1 = AlertDialog.Builder(this)
+                builder1.setTitle("Answer:")
+                builder1.setMessage(answerString)
+                val alertDialog1: AlertDialog = builder1.create()
+                alertDialog1.show()
             }
-            val builder2 = AlertDialog.Builder(this)
-            builder2.setTitle("All variables:")
-            builder2.setMessage(allVariablesString)
-            val alertDialog2: AlertDialog = builder2.create()
-            alertDialog2.show()
-            alertDialog2.window?.setGravity(Gravity.TOP)
 
-            val builder1 = AlertDialog.Builder(this)
-            builder1.setTitle("Answer:")
-            builder1.setMessage(answerString)
-            val alertDialog1: AlertDialog = builder1.create()
-            alertDialog1.show()
         }
+
+
 
 
     }

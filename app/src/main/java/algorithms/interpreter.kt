@@ -214,33 +214,33 @@ class DataClass {
             }
         }
         when {
-            cond == "==" -> {
-                if (calc(varReplacement(firstBlock)) != calc(varReplacement(secBlock))) {
+            cond == "=" -> {
+                if (calc(varReplacement(firstBlock)).toDouble() != calc(varReplacement(secBlock)).toDouble()) {
                     return indexOfEnd
                 }
             }
             cond == "!=" -> {
-                if (calc(varReplacement(firstBlock)) == calc(varReplacement(secBlock))) {
+                if (calc(varReplacement(firstBlock)).toDouble() == calc(varReplacement(secBlock)).toDouble()) {
                     return indexOfEnd
                 }
             }
             cond == ">=" -> {
-                if (calc(varReplacement(firstBlock)) < calc(varReplacement(secBlock))) {
+                if (calc(varReplacement(firstBlock)).toDouble() < calc(varReplacement(secBlock)).toDouble()) {
                     return indexOfEnd
                 }
             }
             cond == "<=" -> {
-                if (calc(varReplacement(firstBlock)) > calc(varReplacement(secBlock))) {
+                if (calc(varReplacement(firstBlock)).toDouble() > calc(varReplacement(secBlock)).toDouble()) {
                     return indexOfEnd
                 }
             }
             cond == ">" -> {
-                if (calc(varReplacement(firstBlock)) <= calc(varReplacement(secBlock))) {
+                if (calc(varReplacement(firstBlock)).toDouble() <= calc(varReplacement(secBlock)).toDouble()) {
                     return indexOfEnd
                 }
             }
             cond == "<" -> {
-                if (calc(varReplacement(firstBlock)) >= calc(varReplacement(secBlock))) {
+                if (calc(varReplacement(firstBlock)).toDouble() >= calc(varReplacement(secBlock)).toDouble()) {
                     return indexOfEnd
                 }
             }

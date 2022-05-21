@@ -356,7 +356,7 @@ fun main(dataSet: MutableList<MutableList<String>>, answer: MutableList<MutableL
         when {
             temp[0] == "" -> { // пустой блок
                 i++
-                if (i == q.queue.size-1) {
+                if (i == q.queue.size) {
                     break
                 }
                 continue
@@ -380,7 +380,7 @@ fun main(dataSet: MutableList<MutableList<String>>, answer: MutableList<MutableL
             }
             temp[0] == ifEnd -> {
                 i++
-                if (i == q.queue.size-1) {
+                if (i == q.queue.size) {
                     break
                 }
                 continue
@@ -415,7 +415,7 @@ fun main(dataSet: MutableList<MutableList<String>>, answer: MutableList<MutableL
             }
             temp[0] == forEnd -> {
                 i++
-                if (i == q.queue.size-1) {
+                if (i == q.queue.size) {
                     break
                 }
                 continue

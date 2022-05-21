@@ -180,11 +180,12 @@ class CodingActivity : AppCompatActivity(){
                 }
                 tagAssignmentOperatorView->{
                     """[A-z]([0-9]|[A-z])*""".toRegex()
+                    """((([1-9][0-9]*)|([0]))|([a-z]([0-9]|[a-z])*)|((([a-z]([0-9]|[a-z])*)\s*\[\s*(([a-z]([0-9]|[a-z])*)|([0])|([1-9][0-9]*)|(((([1-9][0-9]*)|([0]))|([a-z]([0-9]|[a-z])*))(\s*[-+*\/]\s*((([1-9][0-9]*)|([0]))|([a-z]([0-9]|[a-z])*)))*))\s*\])))(\s*[-+*\/]\s*((([1-9][0-9]*)|([0]))|([a-z]([0-9]|[a-z])*)|((([a-z]([0-9]|[a-z])*)\s*\[\s*(([a-z]([0-9]|[a-z])*)|([0])|([1-9][0-9]*)|(((([1-9][0-9]*)|([0]))|([a-z]([0-9]|[a-z])*))(\s*[-+*\/]\s*((([1-9][0-9]*)|([0]))|([a-z]([0-9]|[a-z])*)))*))\s*\]))))*""".toRegex()
 
                     var myString1 = view.variableOfBlock.text.toString()
                     var myString2 = view.valueOfBlock.text.toString()
 
-                    if ((!myString1.matches(Regex("""[A-z]([0-9]|[A-z])*"""))) || (!myString2.matches(Regex("""([A-z]([0-9]|[A-z])*)|([0-9])""")))) {
+                    if ((!myString1.matches(Regex("""[A-z]([0-9]|[A-z])*"""))) || (!myString2.matches(Regex("""((([1-9][0-9]*)|([0]))|([a-z]([0-9]|[a-z])*)|((([a-z]([0-9]|[a-z])*)\s*\[\s*(([a-z]([0-9]|[a-z])*)|([0])|([1-9][0-9]*)|(((([1-9][0-9]*)|([0]))|([a-z]([0-9]|[a-z])*))(\s*[-+*\/]\s*((([1-9][0-9]*)|([0]))|([a-z]([0-9]|[a-z])*)))*))\s*\])))(\s*[-+*\/]\s*((([1-9][0-9]*)|([0]))|([a-z]([0-9]|[a-z])*)|((([a-z]([0-9]|[a-z])*)\s*\[\s*(([a-z]([0-9]|[a-z])*)|([0])|([1-9][0-9]*)|(((([1-9][0-9]*)|([0]))|([a-z]([0-9]|[a-z])*))(\s*[-+*\/]\s*((([1-9][0-9]*)|([0]))|([a-z]([0-9]|[a-z])*)))*))\s*\]))))*""")))) {
                         errorMessage = emptyEditField
 
                         val mToast = Toast.makeText(this, errorMessage + " " + view.textNumber.text.toString(), Toast.LENGTH_LONG)
@@ -290,40 +291,41 @@ class CodingActivity : AppCompatActivity(){
 
         if (!errorFlag) {
 
-//            var answer: MutableList<MutableList<String>> = mutableListOf()
-//            var allVariables: MutableList<MutableList<String>> = mutableListOf()
-//
-//            main(dataSet, answer, allVariables)
-//
-//            var answerString = ""
-//            var allVariablesString = ""
-//
-//            for (i in 0..answer[0].size - 1){
-//                var variable = answer[0][i]
-//                var value = answer[1][i]
-//
-//                answerString += variable + " " + "=" + " " + value + "\n"
-//
-//            }
-//
-//            for (i in 0..allVariables[0].size - 1) {
-//                var variable = allVariables[0][i]
-//                var value = allVariables[1][i]
-//
-//                allVariablesString += variable + " " + "=" + " " + value + "\n"
-//            }
-//            val builder2 = AlertDialog.Builder(this)
-//            builder2.setTitle("All variables:")
-//            builder2.setMessage(allVariablesString)
-//            val alertDialog2: AlertDialog = builder2.create()
-//            alertDialog2.show()
-//            alertDialog2.window?.setGravity(Gravity.TOP)
-//
-//            val builder1 = AlertDialog.Builder(this)
-//            builder1.setTitle("Answer:")
-//            builder1.setMessage(answerString)
-//            val alertDialog1: AlertDialog = builder1.create()
-//            alertDialog1.show()
+            var answer: MutableList<MutableList<String>> = mutableListOf()
+            var allVariables: MutableList<MutableList<String>> = mutableListOf()
+
+            main(dataSet, answer, allVariables)
+
+
+            var answerString = ""
+            var allVariablesString = ""
+
+            for (i in 0..answer[0].size - 1){
+                var variable = answer[0][i]
+                var value = answer[1][i]
+
+                answerString += variable + " " + "=" + " " + value + "\n"
+
+            }
+
+            for (i in 0..allVariables[0].size - 1) {
+                var variable = allVariables[0][i]
+                var value = allVariables[1][i]
+
+                allVariablesString += variable + " " + "=" + " " + value + "\n"
+            }
+            val builder2 = AlertDialog.Builder(this)
+            builder2.setTitle("All variables:")
+            builder2.setMessage(allVariablesString)
+            val alertDialog2: AlertDialog = builder2.create()
+            alertDialog2.show()
+            alertDialog2.window?.setGravity(Gravity.TOP)
+
+            val builder1 = AlertDialog.Builder(this)
+            builder1.setTitle("Answer:")
+            builder1.setMessage(answerString)
+            val alertDialog1: AlertDialog = builder1.create()
+            alertDialog1.show()
         }
 
 

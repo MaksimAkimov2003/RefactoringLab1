@@ -43,11 +43,6 @@ class DataClass {
                     val num2 = result.pop().toDouble()
                     val num1 = result.pop().toDouble()
 
-                    if(num2 == 0.0) {
-
-                        break
-                    }
-
                     @Suppress("IMPLICIT_CAST_TO_ANY")
                     result.push(when(item[0]) {
                         '+' -> num1+num2
@@ -279,17 +274,19 @@ class DataClass {
         }
     }
 
-    fun output(nameVars : String, answer: MutableList<MutableList<String>> = mutableListOf(), allVariables: MutableList<MutableList<String>> = mutableListOf()) {
+    fun output(nameVars : String, answer: MutableList<MutableList<String>> = mutableListOf(), allVariables: MutableList<MutableList<String>> = mutableListOf()): MutableList<MutableList<String>> {
         var temp = ""
+        var copyAns : MutableList<MutableList<String>> = mutableListOf()
+        copyAns = answer
         for(i in nameVars.indices) {
             if (nameVars[i] == ',') {
                 if (value[findValue(temp)].toInt().toDouble() == value[findValue(temp)]) {
-                    answer[1].add(value[findValue(temp)].toInt().toString())
+                    copyAns[1].add(value[findValue(temp)].toInt().toString())
                 }
                 else {
-                    answer[1].add(value[findValue(temp)].toString())
+                    copyAns[1].add(value[findValue(temp)].toString())
                 }
-                answer[0].add(name[findValue(temp)])
+                copyAns[0].add(name[findValue(temp)])
                 temp = ""
             }
             else if (nameVars[i] == ' ') {
@@ -298,17 +295,18 @@ class DataClass {
             else if (i == nameVars.length-1){
                 temp += nameVars[i]
                 if (value[findValue(temp)].toInt().toDouble() == value[findValue(temp)]) {
-                    answer[1].add(value[findValue(temp)].toInt().toString())
+                    copyAns[1].add(value[findValue(temp)].toInt().toString())
                 }
                 else {
-                    answer[1].add(value[findValue(temp)].toString())
+                    copyAns[1].add(value[findValue(temp)].toString())
                 }
-                answer[0].add(name[findValue(temp)])
+                copyAns[0].add(name[findValue(temp)])
             }
             else {
                 temp += nameVars[i]
             }
         }
+        return copyAns
     }
 }
 
@@ -339,12 +337,17 @@ fun main(dataSet: MutableList<MutableList<String>>, answer: MutableList<MutableL
     var q = Queue()
     q.queue = dataSet
 
-    var t : MutableList<String> = mutableListOf()
 
-    for(i in 0..1) {
-        answer.add(t)
-        allVariables.add(t)
-    }
+
+    var t : MutableList<String> = mutableListOf()
+    var z : MutableList<String> = mutableListOf()
+    var y : MutableList<String> = mutableListOf()
+    var x : MutableList<String> = mutableListOf()
+
+    answer.add(t)
+    answer.add(z)
+    allVariables.add(y)
+    allVariables.add(x)
 
     var data = DataClass()
 

@@ -274,19 +274,17 @@ class DataClass {
         }
     }
 
-    fun output(nameVars : String, answer: MutableList<MutableList<String>> = mutableListOf(), allVariables: MutableList<MutableList<String>> = mutableListOf()): MutableList<MutableList<String>> {
+    fun output(nameVars : String, answer: MutableList<MutableList<String>>) {
         var temp = ""
-        var copyAns : MutableList<MutableList<String>> = mutableListOf()
-        copyAns = answer
         for(i in nameVars.indices) {
             if (nameVars[i] == ',') {
                 if (value[findValue(temp)].toInt().toDouble() == value[findValue(temp)]) {
-                    copyAns[1].add(value[findValue(temp)].toInt().toString())
+                    answer[1].add(value[findValue(temp)].toInt().toString())
                 }
                 else {
-                    copyAns[1].add(value[findValue(temp)].toString())
+                    answer[1].add(value[findValue(temp)].toString())
                 }
-                copyAns[0].add(name[findValue(temp)])
+                answer[0].add(name[findValue(temp)])
                 temp = ""
             }
             else if (nameVars[i] == ' ') {
@@ -295,18 +293,17 @@ class DataClass {
             else if (i == nameVars.length-1){
                 temp += nameVars[i]
                 if (value[findValue(temp)].toInt().toDouble() == value[findValue(temp)]) {
-                    copyAns[1].add(value[findValue(temp)].toInt().toString())
+                    answer[1].add(value[findValue(temp)].toInt().toString())
                 }
                 else {
-                    copyAns[1].add(value[findValue(temp)].toString())
+                    answer[1].add(value[findValue(temp)].toString())
                 }
-                copyAns[0].add(name[findValue(temp)])
+                answer[0].add(name[findValue(temp)])
             }
             else {
                 temp += nameVars[i]
             }
         }
-        return copyAns
     }
 }
 
@@ -371,7 +368,7 @@ fun main(dataSet: MutableList<MutableList<String>>, answer: MutableList<MutableL
                 data.assignment(temp[2], temp[3])
             }
             temp[0] == output -> { // обозначение блока вывода
-                data.output(temp[2])
+                data.output(temp[2], answer)
             }
             temp[0] == ifCondition -> {
                 var flag = data.condition(temp[2], temp[3], temp[4], i, q)
@@ -428,7 +425,7 @@ fun main(dataSet: MutableList<MutableList<String>>, answer: MutableList<MutableL
             }
         }
         i++
-        if (i == q.queue.size-1) {
+        if (i == q.queue.size) {
             break
         }
     }

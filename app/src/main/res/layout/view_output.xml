@@ -28,6 +28,7 @@
 
             <EditText
                 android:id="@+id/textNumber"
+                android:inputType="number"
                 android:layout_width="30dp"
                 android:layout_height="40dp"
                 android:textColorHint="@color/black"

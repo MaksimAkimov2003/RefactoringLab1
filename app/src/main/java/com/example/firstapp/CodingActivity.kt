@@ -156,10 +156,10 @@ class CodingActivity : AppCompatActivity(){
             arrayForView.add(view.textNumber.text.toString())
 
             if (view.getTag() == tagDeclareIntegerView) {
-                """[A-z]([0-9]|[A-z])*""".toRegex()
+                """(([A-z]([0-9]|[A-z])*)(\s{0,1},{1}\s{0,1}([A-z]([0-9]|[A-z])*))*)""".toRegex()
                 var myString = view.inputValueDeclare.text.toString()
 
-                if (!myString.matches(Regex("""[A-z]([0-9]|[A-z])*"""))) {
+                if (!myString.matches(Regex("""(([A-z]([0-9]|[A-z])*)(\s{0,1},{1}\s{0,1}([A-z]([0-9]|[A-z])*))*)"""))) {
                     errorMessage = emptyEditField
 
                     val mToast = Toast.makeText(this, errorMessage + " " + view.textNumber.text.toString(), Toast.LENGTH_LONG)
@@ -266,10 +266,10 @@ class CodingActivity : AppCompatActivity(){
             }
 
             if (view.getTag() == tagOutputView) {
-                """[A-z]([0-9]|[A-z])*""".toRegex()
+                """(([A-z]([0-9]|[A-z])*)(\s{0,1},{1}\s{0,1}([A-z]([0-9]|[A-z])*))*)""".toRegex()
                 var myString = view.variableOutput.text.toString()
 
-                if (!myString.matches(Regex("""[A-z]([0-9]|[A-z])*"""))) {
+                if (!myString.matches(Regex("""(([A-z]([0-9]|[A-z])*)(\s{0,1},{1}\s{0,1}([A-z]([0-9]|[A-z])*))*)"""))) {
                     errorMessage = emptyEditField
 
                     val mToast = Toast.makeText(this, errorMessage + " " + view.textNumber.text.toString(), Toast.LENGTH_LONG)

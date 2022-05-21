@@ -47,7 +47,7 @@
                 tools:ignore="UnusedAttribute" />
 
             <Button
-                android:id="@+id/deleteBlock"
+                android:id="@+id/deleteBlock5"
                 android:layout_width="27dp"
                 android:layout_height="27dp"
                 android:foreground="@android:drawable/btn_dialog"

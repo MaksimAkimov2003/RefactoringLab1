@@ -15,7 +15,7 @@ class forClose @JvmOverloads constructor(
 
     private val bin7 = ViewForCloseBinding.inflate(LayoutInflater.from(context), this)
 
-    init {
-
-    }
+//    init {
+//
+//    }
 }

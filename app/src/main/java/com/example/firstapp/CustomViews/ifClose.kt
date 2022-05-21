@@ -15,7 +15,7 @@ class ifClose @JvmOverloads constructor(
 
     private val bin7 = ViewIfCloseBinding.inflate(LayoutInflater.from(context), this)
 
-    init {
-
-    }
+//    init {
+//
+//    }
 }

@@ -15,7 +15,7 @@ class forOperator @JvmOverloads constructor(
 
     private val bin = ViewForOperatorBinding.inflate(LayoutInflater.from(context), this)
 
-    init {
-
-    }
+//    init {
+//
+//    }
 }

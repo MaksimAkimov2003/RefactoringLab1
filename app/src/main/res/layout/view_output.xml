@@ -46,7 +46,7 @@
                 tools:ignore="UnusedAttribute" />
 
             <Button
-                android:id="@+id/deleteBlock"
+                android:id="@+id/deleteBlock9"
                 android:layout_width="27dp"
                 android:layout_height="27dp"
                 android:foreground="@android:drawable/btn_dialog"
@@ -74,7 +74,7 @@
                 android:textStyle="italic"
                 app:hintTextColor="@color/bar"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/deleteBlock"
+                app:layout_constraintEnd_toStartOf="@+id/deleteBlock9"
                 app:layout_constraintStart_toEndOf="@+id/inputButton"
                 app:layout_constraintTop_toTopOf="parent">
 

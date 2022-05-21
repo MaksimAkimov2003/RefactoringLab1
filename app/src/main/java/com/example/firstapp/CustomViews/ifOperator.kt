@@ -17,15 +17,15 @@ class ifOperator @JvmOverloads constructor(
 
 
     init {
-        selfBlockDelete()
+//        selfBlockDelete()
 
     }
 
-    private fun selfBlockDelete() {
-        bin4.deleteBlock.setOnClickListener {
-
-
-
-        }
-    }
+//    private fun selfBlockDelete() {
+//        bin4.deleteBlock.setOnClickListener {
+//
+//
+//
+//        }
+//    }
 }

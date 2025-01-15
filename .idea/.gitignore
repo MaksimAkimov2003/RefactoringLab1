@@ -1,3 +1,7 @@
 # Default ignored files
 /shelf/
 /workspace.xml
+/kotlinc.xml
+/migrations.xml
+/other.xml
+/kelp/pluginIsPresent

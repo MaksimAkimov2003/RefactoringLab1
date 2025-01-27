@@ -91,18 +91,7 @@ class DataClass {
                     }
                 }
             } else {
-                if (stack.comparePriority(ch)) {
-                    stack.push(ch)
-                } else {
-                    while (!stack.isEmpty()) {
-                        if (!stack.comparePriority(ch)) {
-                            result.push(stack.pop().toString())
-                        } else {
-                            break
-                        }
-                    }
-                    stack.push(ch)
-                }
+                checkStack(stack, ch, result)
             }
         }
 
@@ -111,6 +100,25 @@ class DataClass {
             result.push(stack.pop().toString())
         }
         return result
+    }
+
+    private fun checkStack(stack: SymbolsStack, ch: Char, result: Stack) {
+        if (stack.comparePriority(ch)) {
+            stack.push(ch)
+        } else {
+            iterateOnStack(stack, ch, result)
+            stack.push(ch)
+        }
+    }
+
+    private fun iterateOnStack(stack: SymbolsStack, ch: Char, result: Stack) {
+        while (!stack.isEmpty()) {
+            if (!stack.comparePriority(ch)) {
+                result.push(stack.pop().toString())
+            } else {
+                break
+            }
+        }
     }
 
     private fun invertStack(stack: Stack): Stack {

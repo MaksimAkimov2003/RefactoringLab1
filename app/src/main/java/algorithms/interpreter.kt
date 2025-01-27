@@ -131,12 +131,7 @@ class DataClass {
         var temp = ""
         for (i in nameVars.indices) {
             if (nameVars[i] == ',') {
-                if (findValue(temp) == -1) {
-                    name.add(temp)
-                    value.add(0.0)
-                } else {
-                    value[findValue(temp)] = 0.0
-                }
+                handleFindValue(temp)
                 temp = ""
             } else if (nameVars[i] == ' ') {
                 continue
@@ -151,6 +146,15 @@ class DataClass {
             } else {
                 temp += nameVars[i]
             }
+        }
+    }
+
+    private fun handleFindValue(temp: String) {
+        if (findValue(temp) == -1) {
+            name.add(temp)
+            value.add(0.0)
+        } else {
+            value[findValue(temp)] = 0.0
         }
     }
 

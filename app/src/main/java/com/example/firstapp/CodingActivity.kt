@@ -520,211 +520,246 @@ class CustomRecyclerAdapter(private val names: List<Obectsi>) :
 
     @SuppressLint("ResourceType", "SetTextI18n")
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val itemObects: Obectsi = names[position]
-        holder.nameBlocks.text = itemObects.name
+        setHolderNameBlocks(position, holder)
 
         when (position) {
             0 -> { //variables
-                val isExpandeble: Boolean = names[position].expandeble
-                holder.expendConVar.visibility = if (isExpandeble) View.VISIBLE else View.GONE
-                holder.expendConOperations.visibility = View.GONE
-                holder.expendConInputOutput.visibility = View.GONE
-                holder.expendConConditions.visibility = View.GONE
-
-
-                val declareIntegerView = declareInteger(holder.itemView.context)
-
-                val paramsDeclareIntegerView: ConstraintLayout.LayoutParams =
-                    ConstraintLayout.LayoutParams(
-                        ConstraintLayout.LayoutParams.WRAP_CONTENT, //width
-                        ConstraintLayout.LayoutParams.WRAP_CONTENT //height
-                    )
-
-                paramsDeclareIntegerView.topToTop = holder.expendConVar.id
-                paramsDeclareIntegerView.leftToLeft = holder.expendConVar.id
-
-                paramsDeclareIntegerView.topMargin = 100
-                paramsDeclareIntegerView.leftMargin = 0
-
-                holder.expendConVar.addView(declareIntegerView, paramsDeclareIntegerView)
-                declareIntegerView.setTag(tagDeclareIntegerView)
-                attachViewDragListener(declareIntegerView)
-
-
-                val arrayOperatorView = arrayOperator(holder.itemView.context)
-
-                val paramsArrayOperatorView: ConstraintLayout.LayoutParams =
-                    ConstraintLayout.LayoutParams(
-                        ConstraintLayout.LayoutParams.WRAP_CONTENT, //width
-                        ConstraintLayout.LayoutParams.WRAP_CONTENT //height
-                    )
-
-                paramsArrayOperatorView.topToTop = holder.expendConVar.id
-                paramsArrayOperatorView.leftToLeft = holder.expendConVar.id
-
-                paramsArrayOperatorView.topMargin = 400
-                paramsArrayOperatorView.leftMargin = 0
-
-                holder.expendConVar.addView(arrayOperatorView, paramsArrayOperatorView)
-                arrayOperatorView.setTag(tagArrayOperatorView)
-                attachViewDragListener(arrayOperatorView)
-
-
+                handleVariables(position, holder)
             }
 
             1 -> { // Opetations
-                val isExpandeble: Boolean = names[position].expandeble
-                holder.expendConOperations.visibility =
-                    if (isExpandeble) View.VISIBLE else View.GONE
-                holder.expendConVar.visibility = View.GONE
-                holder.expendConInputOutput.visibility = View.GONE
-                holder.expendConConditions.visibility = View.GONE
-
-                val assignmentOperatorView = assignmentOperator(holder.itemView.context)
-
-                val paramsDeclareAssignOperatorView: ConstraintLayout.LayoutParams =
-                    ConstraintLayout.LayoutParams(
-                        ConstraintLayout.LayoutParams.WRAP_CONTENT, //width
-                        ConstraintLayout.LayoutParams.WRAP_CONTENT //height
-                    )
-
-                paramsDeclareAssignOperatorView.topToTop = holder.expendConOperations.id
-                paramsDeclareAssignOperatorView.leftToLeft = holder.expendConOperations.id
-
-                paramsDeclareAssignOperatorView.topMargin = 100
-                paramsDeclareAssignOperatorView.leftMargin = 0
-
-                holder.expendConOperations.addView(
-                    assignmentOperatorView,
-                    paramsDeclareAssignOperatorView
-                )
-                assignmentOperatorView.setTag(tagAssignmentOperatorView)
-                attachViewDragListener(assignmentOperatorView)
-
-
-                val forOperatorView = forOperator(holder.itemView.context)
-
-                val paramsForOperatorView: ConstraintLayout.LayoutParams =
-                    ConstraintLayout.LayoutParams(
-                        ConstraintLayout.LayoutParams.WRAP_CONTENT, //width
-                        ConstraintLayout.LayoutParams.WRAP_CONTENT //height
-                    )
-
-                paramsForOperatorView.topToTop = holder.expendConOperations.id
-                paramsForOperatorView.leftToLeft = holder.expendConOperations.id
-
-                paramsForOperatorView.topMargin = 400
-                paramsForOperatorView.leftMargin = 0
-
-                holder.expendConOperations.addView(forOperatorView, paramsForOperatorView)
-                forOperatorView.setTag(tagForOperatorView)
-                attachViewDragListener(forOperatorView)
-
-
-                val forCloseView = forClose(holder.itemView.context)
-
-                val paramsForCloseView: ConstraintLayout.LayoutParams =
-                    ConstraintLayout.LayoutParams(
-                        ConstraintLayout.LayoutParams.WRAP_CONTENT, //width
-                        ConstraintLayout.LayoutParams.WRAP_CONTENT //height
-                    )
-
-                paramsForCloseView.topToTop = holder.expendConOperations.id
-                paramsForCloseView.leftToLeft = holder.expendConOperations.id
-
-                paramsForCloseView.topMargin = 800
-                paramsForCloseView.leftMargin = 0
-
-                holder.expendConOperations.addView(forCloseView, paramsForCloseView)
-                forCloseView.setTag(tagForCloseView)
-                attachViewDragListener(forCloseView)
-
+                handleOperations(position, holder)
             }
 
             2 -> { // Conditions
-                val isExpandeble: Boolean = names[position].expandeble
-                holder.expendConConditions.visibility =
-                    if (isExpandeble) View.VISIBLE else View.GONE
-                holder.expendConVar.visibility = View.GONE
-                holder.expendConInputOutput.visibility = View.GONE
-                holder.expendConOperations.visibility = View.GONE
-
-                val ifOperatorView = ifOperator(holder.itemView.context)
-
-                val paramsIfOperatorView: ConstraintLayout.LayoutParams =
-                    ConstraintLayout.LayoutParams(
-                        ConstraintLayout.LayoutParams.WRAP_CONTENT, //width
-                        ConstraintLayout.LayoutParams.WRAP_CONTENT //height
-                    )
-
-                paramsIfOperatorView.topToTop = holder.expendConConditions.id
-                paramsIfOperatorView.leftToLeft = holder.expendConConditions.id
-
-                paramsIfOperatorView.topMargin = 280
-                paramsIfOperatorView.leftMargin = 0
-
-                holder.expendConConditions.addView(ifOperatorView, paramsIfOperatorView)
-                ifOperatorView.setTag(tagIfOperatorView)
-                attachViewDragListener(ifOperatorView)
-
-
-                val ifCloseView = ifClose(holder.itemView.context)
-
-                val paramsIfCloseView: ConstraintLayout.LayoutParams =
-                    ConstraintLayout.LayoutParams(
-                        ConstraintLayout.LayoutParams.WRAP_CONTENT, //width
-                        ConstraintLayout.LayoutParams.WRAP_CONTENT //height
-                    )
-
-                paramsIfCloseView.topToTop = ifOperatorView.id
-                paramsIfCloseView.leftToLeft = holder.expendConConditions.id
-
-                paramsIfCloseView.topMargin = 1000
-                paramsIfCloseView.leftMargin = 0
-
-                holder.expendConConditions.addView(ifCloseView, paramsIfCloseView)
-                ifCloseView.setTag(tagIfCloseView)
-                attachViewDragListener(ifCloseView)
-
-
+                handleConditions(position, holder)
             }
 
             3 -> { // Input/Output
-                val isExpandeble: Boolean = names[position].expandeble
-                holder.expendConInputOutput.visibility =
-                    if (isExpandeble) View.VISIBLE else View.GONE
-                holder.expendConVar.visibility = View.GONE
-                holder.expendConOperations.visibility = View.GONE
-                holder.expendConConditions.visibility = View.GONE
-
-                val outputView = output(holder.itemView.context)
-
-                val paramsOutputView: ConstraintLayout.LayoutParams =
-                    ConstraintLayout.LayoutParams(
-                        ConstraintLayout.LayoutParams.WRAP_CONTENT, //width
-                        ConstraintLayout.LayoutParams.WRAP_CONTENT //height
-                    )
-
-                paramsOutputView.topToTop = holder.expendConInputOutput.id
-                paramsOutputView.leftToLeft = holder.expendConInputOutput.id
-
-                paramsOutputView.topMargin = 10
-                paramsOutputView.leftMargin = 0
-
-                holder.expendConInputOutput.addView(outputView, paramsOutputView)
-                outputView.setTag(tagOutputView)
-                attachViewDragListener(outputView)
-
-
+                handleInputOutput(position, holder)
             }
         }
 
+        setHolderListener(holder, position)
+
+    }
+
+    private fun setHolderNameBlocks(
+        position: Int,
+        holder: MyViewHolder
+    ) {
+        val itemObects: Obectsi = names[position]
+        holder.nameBlocks.text = itemObects.name
+    }
+
+    private fun setHolderListener(
+        holder: MyViewHolder,
+        position: Int
+    ) {
         holder.linearLayout.setOnClickListener {
             val obectises = names[position]
             obectises.expandeble = !obectises.expandeble
             notifyItemChanged(position)
         }
+    }
 
+    private fun handleInputOutput(
+        position: Int,
+        holder: MyViewHolder
+    ) {
+        val isExpandeble: Boolean = names[position].expandeble
+        holder.expendConInputOutput.visibility =
+            if (isExpandeble) View.VISIBLE else View.GONE
+        holder.expendConVar.visibility = View.GONE
+        holder.expendConOperations.visibility = View.GONE
+        holder.expendConConditions.visibility = View.GONE
+
+        val outputView = output(holder.itemView.context)
+
+        val paramsOutputView: ConstraintLayout.LayoutParams =
+            ConstraintLayout.LayoutParams(
+                ConstraintLayout.LayoutParams.WRAP_CONTENT, //width
+                ConstraintLayout.LayoutParams.WRAP_CONTENT //height
+            )
+
+        paramsOutputView.topToTop = holder.expendConInputOutput.id
+        paramsOutputView.leftToLeft = holder.expendConInputOutput.id
+
+        paramsOutputView.topMargin = 10
+        paramsOutputView.leftMargin = 0
+
+        holder.expendConInputOutput.addView(outputView, paramsOutputView)
+        outputView.setTag(tagOutputView)
+        attachViewDragListener(outputView)
+    }
+
+    private fun handleConditions(
+        position: Int,
+        holder: MyViewHolder
+    ) {
+        val isExpandeble: Boolean = names[position].expandeble
+        holder.expendConConditions.visibility =
+            if (isExpandeble) View.VISIBLE else View.GONE
+        holder.expendConVar.visibility = View.GONE
+        holder.expendConInputOutput.visibility = View.GONE
+        holder.expendConOperations.visibility = View.GONE
+
+        val ifOperatorView = ifOperator(holder.itemView.context)
+
+        val paramsIfOperatorView: ConstraintLayout.LayoutParams =
+            ConstraintLayout.LayoutParams(
+                ConstraintLayout.LayoutParams.WRAP_CONTENT, //width
+                ConstraintLayout.LayoutParams.WRAP_CONTENT //height
+            )
+
+        paramsIfOperatorView.topToTop = holder.expendConConditions.id
+        paramsIfOperatorView.leftToLeft = holder.expendConConditions.id
+
+        paramsIfOperatorView.topMargin = 280
+        paramsIfOperatorView.leftMargin = 0
+
+        holder.expendConConditions.addView(ifOperatorView, paramsIfOperatorView)
+        ifOperatorView.setTag(tagIfOperatorView)
+        attachViewDragListener(ifOperatorView)
+
+
+        val ifCloseView = ifClose(holder.itemView.context)
+
+        val paramsIfCloseView: ConstraintLayout.LayoutParams =
+            ConstraintLayout.LayoutParams(
+                ConstraintLayout.LayoutParams.WRAP_CONTENT, //width
+                ConstraintLayout.LayoutParams.WRAP_CONTENT //height
+            )
+
+        paramsIfCloseView.topToTop = ifOperatorView.id
+        paramsIfCloseView.leftToLeft = holder.expendConConditions.id
+
+        paramsIfCloseView.topMargin = 1000
+        paramsIfCloseView.leftMargin = 0
+
+        holder.expendConConditions.addView(ifCloseView, paramsIfCloseView)
+        ifCloseView.setTag(tagIfCloseView)
+        attachViewDragListener(ifCloseView)
+    }
+
+    private fun handleOperations(
+        position: Int,
+        holder: MyViewHolder
+    ) {
+        val isExpandeble: Boolean = names[position].expandeble
+        holder.expendConOperations.visibility =
+            if (isExpandeble) View.VISIBLE else View.GONE
+        holder.expendConVar.visibility = View.GONE
+        holder.expendConInputOutput.visibility = View.GONE
+        holder.expendConConditions.visibility = View.GONE
+
+        val assignmentOperatorView = assignmentOperator(holder.itemView.context)
+
+        val paramsDeclareAssignOperatorView: ConstraintLayout.LayoutParams =
+            ConstraintLayout.LayoutParams(
+                ConstraintLayout.LayoutParams.WRAP_CONTENT, //width
+                ConstraintLayout.LayoutParams.WRAP_CONTENT //height
+            )
+
+        paramsDeclareAssignOperatorView.topToTop = holder.expendConOperations.id
+        paramsDeclareAssignOperatorView.leftToLeft = holder.expendConOperations.id
+
+        paramsDeclareAssignOperatorView.topMargin = 100
+        paramsDeclareAssignOperatorView.leftMargin = 0
+
+        holder.expendConOperations.addView(
+            assignmentOperatorView,
+            paramsDeclareAssignOperatorView
+        )
+        assignmentOperatorView.setTag(tagAssignmentOperatorView)
+        attachViewDragListener(assignmentOperatorView)
+
+
+        val forOperatorView = forOperator(holder.itemView.context)
+
+        val paramsForOperatorView: ConstraintLayout.LayoutParams =
+            ConstraintLayout.LayoutParams(
+                ConstraintLayout.LayoutParams.WRAP_CONTENT, //width
+                ConstraintLayout.LayoutParams.WRAP_CONTENT //height
+            )
+
+        paramsForOperatorView.topToTop = holder.expendConOperations.id
+        paramsForOperatorView.leftToLeft = holder.expendConOperations.id
+
+        paramsForOperatorView.topMargin = 400
+        paramsForOperatorView.leftMargin = 0
+
+        holder.expendConOperations.addView(forOperatorView, paramsForOperatorView)
+        forOperatorView.setTag(tagForOperatorView)
+        attachViewDragListener(forOperatorView)
+
+
+        val forCloseView = forClose(holder.itemView.context)
+
+        val paramsForCloseView: ConstraintLayout.LayoutParams =
+            ConstraintLayout.LayoutParams(
+                ConstraintLayout.LayoutParams.WRAP_CONTENT, //width
+                ConstraintLayout.LayoutParams.WRAP_CONTENT //height
+            )
+
+        paramsForCloseView.topToTop = holder.expendConOperations.id
+        paramsForCloseView.leftToLeft = holder.expendConOperations.id
+
+        paramsForCloseView.topMargin = 800
+        paramsForCloseView.leftMargin = 0
+
+        holder.expendConOperations.addView(forCloseView, paramsForCloseView)
+        forCloseView.setTag(tagForCloseView)
+        attachViewDragListener(forCloseView)
+    }
+
+    private fun handleVariables(
+        position: Int,
+        holder: MyViewHolder
+    ) {
+        val isExpandeble: Boolean = names[position].expandeble
+        holder.expendConVar.visibility = if (isExpandeble) View.VISIBLE else View.GONE
+        holder.expendConOperations.visibility = View.GONE
+        holder.expendConInputOutput.visibility = View.GONE
+        holder.expendConConditions.visibility = View.GONE
+
+
+        val declareIntegerView = declareInteger(holder.itemView.context)
+
+        val paramsDeclareIntegerView: ConstraintLayout.LayoutParams =
+            ConstraintLayout.LayoutParams(
+                ConstraintLayout.LayoutParams.WRAP_CONTENT, //width
+                ConstraintLayout.LayoutParams.WRAP_CONTENT //height
+            )
+
+        paramsDeclareIntegerView.topToTop = holder.expendConVar.id
+        paramsDeclareIntegerView.leftToLeft = holder.expendConVar.id
+
+        paramsDeclareIntegerView.topMargin = 100
+        paramsDeclareIntegerView.leftMargin = 0
+
+        holder.expendConVar.addView(declareIntegerView, paramsDeclareIntegerView)
+        declareIntegerView.setTag(tagDeclareIntegerView)
+        attachViewDragListener(declareIntegerView)
+
+
+        val arrayOperatorView = arrayOperator(holder.itemView.context)
+
+        val paramsArrayOperatorView: ConstraintLayout.LayoutParams =
+            ConstraintLayout.LayoutParams(
+                ConstraintLayout.LayoutParams.WRAP_CONTENT, //width
+                ConstraintLayout.LayoutParams.WRAP_CONTENT //height
+            )
+
+        paramsArrayOperatorView.topToTop = holder.expendConVar.id
+        paramsArrayOperatorView.leftToLeft = holder.expendConVar.id
+
+        paramsArrayOperatorView.topMargin = 400
+        paramsArrayOperatorView.leftMargin = 0
+
+        holder.expendConVar.addView(arrayOperatorView, paramsArrayOperatorView)
+        arrayOperatorView.setTag(tagArrayOperatorView)
+        attachViewDragListener(arrayOperatorView)
     }
 
     override fun getItemCount() = names.size

@@ -131,9 +131,7 @@ class CodingActivity : AppCompatActivity(){
             errorFlag = true
             errorMessage = "Нет добавленных view"
 
-            val mToast = Toast.makeText(this, errorMessage , Toast.LENGTH_LONG)
-            mToast.setGravity(Gravity.TOP, 0, 0)
-            mToast.show()
+            showToast(errorMessage)
         }
 
         else {
@@ -149,9 +147,7 @@ class CodingActivity : AppCompatActivity(){
                 if ((flag) && (view.textNumber.text.toString() == previousView.textNumber.text.toString())) {
                     errorMessage = repeatingNumbers
 
-                    val mToast = Toast.makeText(this, errorMessage + " " + view.textNumber.text.toString(), Toast.LENGTH_LONG)
-                    mToast.setGravity(Gravity.TOP, 0, 0)
-                    mToast.show()
+                    showToast(errorMessage + " " + view.textNumber.text.toString())
 
                     errorFlag = true
 
@@ -174,9 +170,7 @@ class CodingActivity : AppCompatActivity(){
                         if (!myString.matches(Regex("""(([A-z]([0-9]|[A-z])*)(\s{0,1},{1}\s{0,1}([A-z]([0-9]|[A-z])*))*)"""))) {
                             errorMessage = emptyEditField
 
-                            val mToast = Toast.makeText(this, errorMessage + " " + view.textNumber.text.toString(), Toast.LENGTH_LONG)
-                            mToast.setGravity(Gravity.TOP, 0, 0)
-                            mToast.show()
+                            showToast(errorMessage + " " + view.textNumber.text.toString())
 
                             errorFlag = true
 
@@ -196,9 +190,7 @@ class CodingActivity : AppCompatActivity(){
                         if ((!myString1.matches(Regex("""[A-z]([0-9]|[A-z])*""")))) {
                             errorMessage = emptyEditField
 
-                            val mToast = Toast.makeText(this, errorMessage + " " + view.textNumber.text.toString(), Toast.LENGTH_LONG)
-                            mToast.setGravity(Gravity.TOP, 0, 0)
-                            mToast.show()
+                            showToast(errorMessage + " " + view.textNumber.text.toString())
 
                             errorFlag = true
 
@@ -223,9 +215,7 @@ class CodingActivity : AppCompatActivity(){
                         if (!myString.matches(Regex("""[A-z]([0-9]|[A-z])*"""))) {
                             errorMessage = emptyEditField
 
-                            val mToast = Toast.makeText(this, errorMessage + " " + view.textNumber.text.toString(), Toast.LENGTH_LONG)
-                            mToast.setGravity(Gravity.TOP, 0, 0)
-                            mToast.show()
+                            showToast(errorMessage + " " + view.textNumber.text.toString())
 
                             errorFlag = true
 
@@ -242,9 +232,7 @@ class CodingActivity : AppCompatActivity(){
                         if (!myString.matches(Regex("""[A-z]([0-9]|[A-z])*"""))) {
                             errorMessage = emptyEditField
 
-                            val mToast = Toast.makeText(this, errorMessage + " " + view.textNumber.text.toString(), Toast.LENGTH_LONG)
-                            mToast.setGravity(Gravity.TOP, 0, 0)
-                            mToast.show()
+                            showToast(errorMessage + " " + view.textNumber.text.toString())
 
                             errorFlag = true
 
@@ -262,9 +250,7 @@ class CodingActivity : AppCompatActivity(){
                         if (!myString.matches(Regex("""(([A-z]([0-9]|[A-z])*)(\s{0,1},{1}\s{0,1}([A-z]([0-9]|[A-z])*))*)"""))) {
                             errorMessage = emptyEditField
 
-                            val mToast = Toast.makeText(this, errorMessage + " " + view.textNumber.text.toString(), Toast.LENGTH_LONG)
-                            mToast.setGravity(Gravity.TOP, 0, 0)
-                            mToast.show()
+                            showToast(errorMessage + " " + view.textNumber.text.toString())
 
                             errorFlag = true
 
@@ -324,6 +310,12 @@ class CodingActivity : AppCompatActivity(){
 
 
 
+    }
+
+    private fun showToast(errorMessage: String) {
+        val mToast = Toast.makeText(this, errorMessage, Toast.LENGTH_LONG)
+        mToast.setGravity(Gravity.TOP, 0, 0)
+        mToast.show()
     }
 
     private val addDragListener = View.OnDragListener { view, dragEvent ->

@@ -88,39 +88,19 @@ class CodingActivity : AppCompatActivity(){
         }
 
         binding.mainLayout.setScrimColor(ContextCompat.getColor(getApplicationContext(), android.R.color.transparent))
-
-        initData()
         setRecyclerView()
-
     }
 
-    val obectList = ArrayList<Obectsi>()
+    val obectList = listOf(
+        Obectsi("Variables"),
+        Obectsi("Operations"),
+        Obectsi("Conditions"),
+        Obectsi("Input|Output")
+    )
 
     private fun setRecyclerView() {
         binding.recyclerView.adapter = CustomRecyclerAdapter(obectList)
         binding.recyclerView.setHasFixedSize(true)
-    }
-
-    private fun initData() {
-
-        obectList.add(
-            Obectsi(
-                "Variables"
-            ))
-        obectList.add(
-            Obectsi(
-                "Operations"
-
-            ))
-        obectList.add(
-            Obectsi(
-                "Conditions"
-
-            ))
-        obectList.add(
-            Obectsi(
-                "Input|Output"
-            ))
     }
 
     fun getAndConvertData(allViews: MutableList<View>) {

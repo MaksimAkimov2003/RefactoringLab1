@@ -181,11 +181,7 @@ class CodingActivity : AppCompatActivity(){
                         arrayForView.add(view.valueOfBlock.text.toString())
                     }
                     tagIfOperatorView->{
-                        
-                        arrayForView.add(view.secondCondition.text.toString())
-                        arrayForView.add(view.spinnerForIf.selectedItem.toString())
-                        arrayForView.add(view.firstCondition.text.toString())
-
+                        arrayForView.addAll(listOf(view.secondCondition.text.toString(), view.spinnerForIf.selectedItem.toString(), view.firstCondition.text.toString()))
                     }
                     tagArrayOperatorView->{
 

@@ -351,55 +351,19 @@ class CodingActivity : AppCompatActivity(){
                     draggableItem.textNumber.setText(str)
 
 
-                    when(draggableItem.getTag()){
-
-                        tagDeclareIntegerView->{
-                            draggableItem.deleteBlock1.setOnClickListener {
-                                removeViewInAllViewsList(draggableItem)
-                            }
-                        }
-                        tagArithmeticOperationsView->{
-                            draggableItem.deleteBlock2.setOnClickListener {
-                                removeViewInAllViewsList(draggableItem)
-                            }
-                        }
-                        tagAssignmentOperatorView->{
-                            draggableItem.deleteBlock3.setOnClickListener {
-                                removeViewInAllViewsList(draggableItem)
-                            }
-                        }
-                        tagIfOperatorView->{
-                            draggableItem.deleteBlock4.setOnClickListener {
-                                removeViewInAllViewsList(draggableItem)
-                            }
-                        }
-                        tagIfCloseView->{
-                            draggableItem.deleteBlock5.setOnClickListener {
-                                removeViewInAllViewsList(draggableItem)
-                            }
-                        }
-                        tagArrayOperatorView->{
-                            draggableItem.deleteBlock6.setOnClickListener {
-                                removeViewInAllViewsList(draggableItem)
-                            }
-                        }
-                        tagForOperatorView->{
-                            draggableItem.deleteBlock7.setOnClickListener {
-                                removeViewInAllViewsList(draggableItem)
-                            }
-                        }
-                        tagForCloseView->{
-                            draggableItem.deleteBlock8.setOnClickListener {
-                                removeViewInAllViewsList(draggableItem)
-                            }
-                        }
-                        tagOutputView->{
-                            draggableItem.deleteBlock9.setOnClickListener {
-                                removeViewInAllViewsList(draggableItem)
-                            }
-                        }
-
+                    val button = when(draggableItem.getTag()){
+                        tagDeclareIntegerView-> draggableItem.deleteBlock1
+                        tagArithmeticOperationsView-> draggableItem.deleteBlock2
+                        tagAssignmentOperatorView-> draggableItem.deleteBlock3
+                        tagIfOperatorView-> draggableItem.deleteBlock4
+                        tagIfCloseView-> draggableItem.deleteBlock5
+                        tagArrayOperatorView-> draggableItem.deleteBlock6
+                        tagForOperatorView-> draggableItem.deleteBlock7
+                        tagForCloseView-> draggableItem.deleteBlock8
+                        tagOutputView-> draggableItem.deleteBlock9
+                        else -> null
                     }
+                    button?.setOnClickListener { removeViewInAllViewsList(draggableItem) }
                     number++
                 }
 

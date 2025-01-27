@@ -218,39 +218,20 @@ class DataClass {
                 }
             }
         }
-        when {
-            cond == "=" -> {
-                if (calc(varReplacement(firstBlock)).toDouble() != calc(varReplacement(secBlock)).toDouble()) {
-                    return indexOfEnd
-                }
-            }
-            cond == "!=" -> {
-                if (calc(varReplacement(firstBlock)).toDouble() == calc(varReplacement(secBlock)).toDouble()) {
-                    return indexOfEnd
-                }
-            }
-            cond == ">=" -> {
-                if (calc(varReplacement(firstBlock)).toDouble() < calc(varReplacement(secBlock)).toDouble()) {
-                    return indexOfEnd
-                }
-            }
-            cond == "<=" -> {
-                if (calc(varReplacement(firstBlock)).toDouble() > calc(varReplacement(secBlock)).toDouble()) {
-                    return indexOfEnd
-                }
-            }
-            cond == ">" -> {
-                if (calc(varReplacement(firstBlock)).toDouble() <= calc(varReplacement(secBlock)).toDouble()) {
-                    return indexOfEnd
-                }
-            }
-            cond == "<" -> {
-                if (calc(varReplacement(firstBlock)).toDouble() >= calc(varReplacement(secBlock)).toDouble()) {
-                    return indexOfEnd
-                }
-            }
+        val condition: Boolean? = when (cond) {
+            "=" -> calc(varReplacement(firstBlock)).toDouble() != calc(varReplacement(secBlock)).toDouble()
+            "!=" -> calc(varReplacement(firstBlock)).toDouble() == calc(varReplacement(secBlock)).toDouble()
+            ">=" -> calc(varReplacement(firstBlock)).toDouble() < calc(varReplacement(secBlock)).toDouble()
+            "<=" -> calc(varReplacement(firstBlock)).toDouble() > calc(varReplacement(secBlock)).toDouble()
+            ">" -> calc(varReplacement(firstBlock)).toDouble() <= calc(varReplacement(secBlock)).toDouble()
+            "<" -> calc(varReplacement(firstBlock)).toDouble() >= calc(varReplacement(secBlock)).toDouble()
+            else -> null
         }
-        return -1
+        return if (condition == true) {
+            indexOfEnd
+        } else {
+            -1
+        }
     }
 
     fun loop(q: Queue, index: Int): Int {

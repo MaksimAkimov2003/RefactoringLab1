@@ -6,6 +6,7 @@ import algorithms.sortAllViewList
 import android.annotation.SuppressLint
 import android.content.ClipData
 import android.content.ClipDescription
+import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Point
 import android.os.Build
@@ -267,18 +268,16 @@ class CodingActivity : AppCompatActivity(){
 
                     allVariablesString += variable + " " + "=" + " " + value + "\n"
                 }
-                val builder2 = AlertDialog.Builder(this)
-                builder2.setTitle("All variables:")
-                builder2.setMessage(allVariablesString)
-                val alertDialog2: AlertDialog = builder2.create()
-                alertDialog2.show()
-                alertDialog2.window?.setGravity(Gravity.TOP)
+                this.showAppDialog(
+                    title = "All variables:",
+                    message = allVariablesString,
+                    gravity = Gravity.TOP
+                )
 
-                val builder1 = AlertDialog.Builder(this)
-                builder1.setTitle("Answer:")
-                builder1.setMessage(answerString)
-                val alertDialog1: AlertDialog = builder1.create()
-                alertDialog1.show()
+                this.showAppDialog(
+                    title = "Answer:",
+                    message = answerString
+                )
             }
 
         }
@@ -286,6 +285,15 @@ class CodingActivity : AppCompatActivity(){
 
 
 
+    }
+
+    private fun Context.showAppDialog(title: String, message: String, gravity: Int? = null) {
+        val builder2 = AlertDialog.Builder(this)
+        builder2.setTitle(title)
+        builder2.setMessage(message)
+        val alertDialog2: AlertDialog = builder2.create()
+        alertDialog2.show()
+        gravity?.let { alertDialog2.window?.setGravity(it) }
     }
 
     private fun showToast(errorMessage: String) {

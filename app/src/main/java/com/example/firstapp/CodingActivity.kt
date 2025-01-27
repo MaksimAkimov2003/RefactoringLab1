@@ -25,7 +25,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.firstapp.CustomViews.*
 import com.example.firstapp.databinding.ActivityCodingBinding
 import com.example.firstapp.databinding.RecyclerviewItemBinding
-import kotlinx.android.synthetic.main.activity_coding.*
 import kotlinx.android.synthetic.main.view_arithmetic_operations.view.*
 import kotlinx.android.synthetic.main.view_arithmetic_operations.view.textNumber
 import kotlinx.android.synthetic.main.view_array_operator.view.*
@@ -54,7 +53,7 @@ val tagOutputView = "Output"
 val emptyEditField = "Неверно заполненное поле"
 val repeatingNumbers = "Повторяется номер блока"
 
-class CodingActivity : AppCompatActivity(){
+class CodingActivity : AppCompatActivity() {
     var allViews: MutableList<View> = mutableListOf()
     var number = 1
 
@@ -72,23 +71,26 @@ class CodingActivity : AppCompatActivity(){
         binding.dropArea.setOnDragListener(addDragListener)
 
 
-
-
 //        binding.inputButton.setOnClickListener {
 //            hideKeyboard(it)
 //        }
 
-        binding.button2.setOnClickListener{
+        binding.button2.setOnClickListener {
             getAndConvertData(allViews)
         }
 
         binding.apply {
-            binding.toolbar.iconMenu.setOnClickListener{
+            binding.toolbar.iconMenu.setOnClickListener {
                 mainLayout.openDrawer(GravityCompat.START)
             }
         }
 
-        binding.mainLayout.setScrimColor(ContextCompat.getColor(getApplicationContext(), android.R.color.transparent))
+        binding.mainLayout.setScrimColor(
+            ContextCompat.getColor(
+                getApplicationContext(),
+                android.R.color.transparent
+            )
+        )
         setRecyclerView()
     }
 
@@ -108,183 +110,209 @@ class CodingActivity : AppCompatActivity(){
         var errorFlag = false
         var errorMessage: String
 
-        if (allViews.size == 0) {
+        if (!isDataValid()) {
             errorFlag = true
             errorMessage = "Нет добавленных view"
 
             showToast(errorMessage)
-        }
-
-        else {
+        } else {
             sortAllViewList(allViews, 0, allViews.size - 1)
 
-            var dataSet: MutableList<MutableList<String>> = mutableListOf()
-            var previousView = allViews[0]
-            var flag = false
-
-            for (view in allViews) {
-                var arrayForView: MutableList<String> = mutableListOf()
-
-                if ((flag) && (view.textNumber.text.toString() == previousView.textNumber.text.toString())) {
-                    errorMessage = repeatingNumbers
-
-                    showToast(errorMessage + " " + view.textNumber.text.toString())
-
-                    errorFlag = true
-
-                    break
-
-                }
-
-                previousView = view
-                flag = true
-
-                arrayForView.add(view.getTag().toString())
-                arrayForView.add(view.textNumber.text.toString())
-
-
-                when(view.getTag()){
-                    tagDeclareIntegerView->{
-                        """(([A-z]([0-9]|[A-z])*)(\s{0,1},{1}\s{0,1}([A-z]([0-9]|[A-z])*))*)""".toRegex()
-                        var myString = view.inputValueDeclare.text.toString()
-
-                        if (!myString.matches(Regex("""(([A-z]([0-9]|[A-z])*)(\s{0,1},{1}\s{0,1}([A-z]([0-9]|[A-z])*))*)"""))) {
-                            errorMessage = emptyEditField
-
-                            showToast(errorMessage + " " + view.textNumber.text.toString())
-
-                            errorFlag = true
-
-                            break
-                        }
-
-                        arrayForView.add(view.inputValueDeclare.text.toString())
-                    }
-                    tagArithmeticOperationsView->{
-                        arrayForView.add(view.arifOperations2.text.toString())
-                    }
-                    tagAssignmentOperatorView->{
-                        """[A-z]([0-9]|[A-z])*""".toRegex()
-
-                        var myString1 = view.variableOfBlock.text.toString()
-
-                        if ((!myString1.matches(Regex("""[A-z]([0-9]|[A-z])*""")))) {
-                            errorMessage = emptyEditField
-
-                            showToast(errorMessage + " " + view.textNumber.text.toString())
-
-                            errorFlag = true
-
-                            break
-                        }
-
-                        arrayForView.add(view.variableOfBlock.text.toString())
-                        arrayForView.add(view.valueOfBlock.text.toString())
-                    }
-                    tagIfOperatorView->{
-                        arrayForView.addAll(listOf(view.secondCondition.text.toString(), view.spinnerForIf.selectedItem.toString(), view.firstCondition.text.toString()))
-                    }
-                    tagArrayOperatorView->{
-
-                        """[A-z]([0-9]|[A-z])*""".toRegex()
-                        var myString = view.nameOfArray.text.toString()
-
-                        if (!myString.matches(Regex("""[A-z]([0-9]|[A-z])*"""))) {
-                            errorMessage = emptyEditField
-
-                            showToast(errorMessage + " " + view.textNumber.text.toString())
-
-                            errorFlag = true
-
-                            break
-                        }
-
-                        arrayForView.add(view.nameOfArray.text.toString())
-                        arrayForView.add(view.arraySize.text.toString())
-                    }
-                    tagForOperatorView->{
-                        """[A-z]([0-9]|[A-z])*""".toRegex()
-                        var myString = view.forOperatorVariable.text.toString()
-
-                        if (!myString.matches(Regex("""[A-z]([0-9]|[A-z])*"""))) {
-                            errorMessage = emptyEditField
-
-                            showToast(errorMessage + " " + view.textNumber.text.toString())
-
-                            errorFlag = true
-
-                            break
-                        }
-
-                        arrayForView.add(view.forOperatorVariable.text.toString())
-                        arrayForView.add(view.forOperatorFrom.text.toString())
-                        arrayForView.add(view.forOperatorTo.text.toString())
-                    }
-                    tagOutputView->{
-                        """(([A-z]([0-9]|[A-z])*)(\s{0,1},{1}\s{0,1}([A-z]([0-9]|[A-z])*))*)""".toRegex()
-                        var myString = view.variableOutput.text.toString()
-
-                        if (!myString.matches(Regex("""(([A-z]([0-9]|[A-z])*)(\s{0,1},{1}\s{0,1}([A-z]([0-9]|[A-z])*))*)"""))) {
-                            errorMessage = emptyEditField
-
-                            showToast(errorMessage + " " + view.textNumber.text.toString())
-
-                            errorFlag = true
-
-                            break
-                        }
-
-                        arrayForView.add(view.variableOutput.text.toString())
-                    }
-
-
-                }
-
-                dataSet.add(arrayForView)
-            }
-
+            errorMessage = ""
+            val (dataSet, errorFlag) = iterateOnViews(allViews, errorMessage, errorFlag)
             if (!errorFlag) {
-
-                var answer: MutableList<MutableList<String>> = mutableListOf()
-                var allVariables: MutableList<MutableList<String>> = mutableListOf()
-
-                main(dataSet, answer, allVariables)
-
-
-                var answerString = ""
-                var allVariablesString = ""
-
-                for (i in 0..answer[0].size - 1){
-                    var variable = answer[0][i]
-                    var value = answer[1][i]
-
-                    answerString += variable + " " + "=" + " " + value + "\n"
-
-                }
-
-                for (i in 0..allVariables[0].size - 1) {
-                    var variable = allVariables[0][i]
-                    var value = allVariables[1][i]
-
-                    allVariablesString += variable + " " + "=" + " " + value + "\n"
-                }
-                this.showAppDialog(
-                    title = "All variables:",
-                    message = allVariablesString,
-                    gravity = Gravity.TOP
-                )
-
-                this.showAppDialog(
-                    title = "Answer:",
-                    message = answerString
-                )
+                onSuccess(dataSet)
             }
 
         }
 
 
+    }
+
+    private fun iterateOnViews(
+        allViews: MutableList<View>,
+        errorMessage: String,
+        errorFlag: Boolean
+    ): Pair<MutableList<MutableList<String>>, Boolean> {
+        var errorMessage1 = errorMessage
+        var errorFlag1 = errorFlag
+        var dataSet: MutableList<MutableList<String>> = mutableListOf()
+        var previousView = allViews[0]
+        var flag = false
+
+        for (view in allViews) {
+            var arrayForView: MutableList<String> = mutableListOf()
+
+            if ((flag) && (view.textNumber.text.toString() == previousView.textNumber.text.toString())) {
+                errorMessage1 = repeatingNumbers
+
+                showToast(errorMessage1 + " " + view.textNumber.text.toString())
+
+                errorFlag1 = true
+
+                break
+
+            }
+
+            previousView = view
+            flag = true
+
+            arrayForView.add(view.getTag().toString())
+            arrayForView.add(view.textNumber.text.toString())
 
 
+            when (view.getTag()) {
+                tagDeclareIntegerView -> {
+                    """(([A-z]([0-9]|[A-z])*)(\s{0,1},{1}\s{0,1}([A-z]([0-9]|[A-z])*))*)""".toRegex()
+                    var myString = view.inputValueDeclare.text.toString()
+
+                    if (!myString.matches(Regex("""(([A-z]([0-9]|[A-z])*)(\s{0,1},{1}\s{0,1}([A-z]([0-9]|[A-z])*))*)"""))) {
+                        errorMessage1 = emptyEditField
+
+                        showToast(errorMessage1 + " " + view.textNumber.text.toString())
+
+                        errorFlag1 = true
+
+                        break
+                    }
+
+                    arrayForView.add(view.inputValueDeclare.text.toString())
+                }
+
+                tagArithmeticOperationsView -> {
+                    arrayForView.add(view.arifOperations2.text.toString())
+                }
+
+                tagAssignmentOperatorView -> {
+                    """[A-z]([0-9]|[A-z])*""".toRegex()
+
+                    var myString1 = view.variableOfBlock.text.toString()
+
+                    if ((!myString1.matches(Regex("""[A-z]([0-9]|[A-z])*""")))) {
+                        errorMessage1 = emptyEditField
+
+                        showToast(errorMessage1 + " " + view.textNumber.text.toString())
+
+                        errorFlag1 = true
+
+                        break
+                    }
+
+                    arrayForView.add(view.variableOfBlock.text.toString())
+                    arrayForView.add(view.valueOfBlock.text.toString())
+                }
+
+                tagIfOperatorView -> {
+                    arrayForView.addAll(
+                        listOf(
+                            view.secondCondition.text.toString(),
+                            view.spinnerForIf.selectedItem.toString(),
+                            view.firstCondition.text.toString()
+                        )
+                    )
+                }
+
+                tagArrayOperatorView -> {
+
+                    """[A-z]([0-9]|[A-z])*""".toRegex()
+                    var myString = view.nameOfArray.text.toString()
+
+                    if (!myString.matches(Regex("""[A-z]([0-9]|[A-z])*"""))) {
+                        errorMessage1 = emptyEditField
+
+                        showToast(errorMessage1 + " " + view.textNumber.text.toString())
+
+                        errorFlag1 = true
+
+                        break
+                    }
+
+                    arrayForView.add(view.nameOfArray.text.toString())
+                    arrayForView.add(view.arraySize.text.toString())
+                }
+
+                tagForOperatorView -> {
+                    """[A-z]([0-9]|[A-z])*""".toRegex()
+                    var myString = view.forOperatorVariable.text.toString()
+
+                    if (!myString.matches(Regex("""[A-z]([0-9]|[A-z])*"""))) {
+                        errorMessage1 = emptyEditField
+
+                        showToast(errorMessage1 + " " + view.textNumber.text.toString())
+
+                        errorFlag1 = true
+
+                        break
+                    }
+
+                    arrayForView.add(view.forOperatorVariable.text.toString())
+                    arrayForView.add(view.forOperatorFrom.text.toString())
+                    arrayForView.add(view.forOperatorTo.text.toString())
+                }
+
+                tagOutputView -> {
+                    """(([A-z]([0-9]|[A-z])*)(\s{0,1},{1}\s{0,1}([A-z]([0-9]|[A-z])*))*)""".toRegex()
+                    var myString = view.variableOutput.text.toString()
+
+                    if (!myString.matches(Regex("""(([A-z]([0-9]|[A-z])*)(\s{0,1},{1}\s{0,1}([A-z]([0-9]|[A-z])*))*)"""))) {
+                        errorMessage1 = emptyEditField
+
+                        showToast(errorMessage1 + " " + view.textNumber.text.toString())
+
+                        errorFlag1 = true
+
+                        break
+                    }
+
+                    arrayForView.add(view.variableOutput.text.toString())
+                }
+
+
+            }
+
+            dataSet.add(arrayForView)
+        }
+        return Pair(dataSet, errorFlag1)
+    }
+
+    private fun onSuccess(dataSet: MutableList<MutableList<String>>) {
+        var answer: MutableList<MutableList<String>> = mutableListOf()
+        var allVariables: MutableList<MutableList<String>> = mutableListOf()
+
+        main(dataSet, answer, allVariables)
+
+
+        var answerString = ""
+        var allVariablesString = ""
+
+        for (i in 0..answer[0].size - 1) {
+            var variable = answer[0][i]
+            var value = answer[1][i]
+
+            answerString += variable + " " + "=" + " " + value + "\n"
+
+        }
+
+        for (i in 0..allVariables[0].size - 1) {
+            var variable = allVariables[0][i]
+            var value = allVariables[1][i]
+
+            allVariablesString += variable + " " + "=" + " " + value + "\n"
+        }
+        this.showAppDialog(
+            title = "All variables:",
+            message = allVariablesString,
+            gravity = Gravity.TOP
+        )
+
+        this.showAppDialog(
+            title = "Answer:",
+            message = answerString
+        )
+    }
+
+    private fun isDataValid(): Boolean {
+        return (allViews.size == 0).not()
     }
 
     private fun Context.showAppDialog(title: String, message: String, gravity: Int? = null) {
@@ -310,25 +338,31 @@ class CodingActivity : AppCompatActivity(){
                 onDragStarted(draggableItem)
                 true
             }
+
             DragEvent.ACTION_DRAG_ENTERED -> {
                 onDragEntered()
                 true
             }
+
             DragEvent.ACTION_DRAG_LOCATION -> {
                 true
             }
+
             DragEvent.ACTION_DRAG_EXITED -> {
                 onDragExited(draggableItem, view)
                 true
             }
+
             DragEvent.ACTION_DROP -> {
                 onDrop(dragEvent, draggableItem, view)
                 true
             }
+
             DragEvent.ACTION_DRAG_ENDED -> {
                 onDragEnded(draggableItem, view)
                 true
             }
+
             else -> {
                 false
             }
@@ -451,9 +485,7 @@ fun attachViewDragListener(someView: View) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
             @Suppress("DEPRECATION")
             view.startDrag(dataToDrag, maskShadow, view, 0)
-        }
-
-        else {
+        } else {
             view.startDragAndDrop(dataToDrag, maskShadow, view, 0)
         }
 
@@ -465,9 +497,10 @@ fun attachViewDragListener(someView: View) {
 }
 
 
-class CustomRecyclerAdapter(private val names: List<Obectsi>):  RecyclerView.Adapter<CustomRecyclerAdapter.MyViewHolder>(){
+class CustomRecyclerAdapter(private val names: List<Obectsi>) :
+    RecyclerView.Adapter<CustomRecyclerAdapter.MyViewHolder>() {
 
-    class MyViewHolder(itemView:View):RecyclerView.ViewHolder(itemView){
+    class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         val nameBlocks: TextView = itemView.findViewById(R.id.mainTextView)
         var expendConVar: ConstraintLayout = itemView.findViewById(R.id.expandConstraint1)
@@ -480,7 +513,8 @@ class CustomRecyclerAdapter(private val names: List<Obectsi>):  RecyclerView.Ada
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.recyclerview_item, parent, false)
+        val itemView =
+            LayoutInflater.from(parent.context).inflate(R.layout.recyclerview_item, parent, false)
         return MyViewHolder(itemView)
     }
 
@@ -536,14 +570,12 @@ class CustomRecyclerAdapter(private val names: List<Obectsi>):  RecyclerView.Ada
                 attachViewDragListener(arrayOperatorView)
 
 
-
-
-
-
             }
+
             1 -> { // Opetations
                 val isExpandeble: Boolean = names[position].expandeble
-                holder.expendConOperations.visibility = if (isExpandeble) View.VISIBLE else View.GONE
+                holder.expendConOperations.visibility =
+                    if (isExpandeble) View.VISIBLE else View.GONE
                 holder.expendConVar.visibility = View.GONE
                 holder.expendConInputOutput.visibility = View.GONE
                 holder.expendConConditions.visibility = View.GONE
@@ -562,7 +594,10 @@ class CustomRecyclerAdapter(private val names: List<Obectsi>):  RecyclerView.Ada
                 paramsDeclareAssignOperatorView.topMargin = 100
                 paramsDeclareAssignOperatorView.leftMargin = 0
 
-                holder.expendConOperations.addView(assignmentOperatorView, paramsDeclareAssignOperatorView)
+                holder.expendConOperations.addView(
+                    assignmentOperatorView,
+                    paramsDeclareAssignOperatorView
+                )
                 assignmentOperatorView.setTag(tagAssignmentOperatorView)
                 attachViewDragListener(assignmentOperatorView)
 
@@ -605,9 +640,11 @@ class CustomRecyclerAdapter(private val names: List<Obectsi>):  RecyclerView.Ada
                 attachViewDragListener(forCloseView)
 
             }
-            2 ->{ // Conditions
+
+            2 -> { // Conditions
                 val isExpandeble: Boolean = names[position].expandeble
-                holder.expendConConditions.visibility = if (isExpandeble) View.VISIBLE else View.GONE
+                holder.expendConConditions.visibility =
+                    if (isExpandeble) View.VISIBLE else View.GONE
                 holder.expendConVar.visibility = View.GONE
                 holder.expendConInputOutput.visibility = View.GONE
                 holder.expendConOperations.visibility = View.GONE
@@ -620,8 +657,8 @@ class CustomRecyclerAdapter(private val names: List<Obectsi>):  RecyclerView.Ada
                         ConstraintLayout.LayoutParams.WRAP_CONTENT //height
                     )
 
-                paramsIfOperatorView.topToTop =  holder.expendConConditions.id
-                paramsIfOperatorView.leftToLeft =  holder.expendConConditions.id
+                paramsIfOperatorView.topToTop = holder.expendConConditions.id
+                paramsIfOperatorView.leftToLeft = holder.expendConConditions.id
 
                 paramsIfOperatorView.topMargin = 280
                 paramsIfOperatorView.leftMargin = 0
@@ -639,8 +676,8 @@ class CustomRecyclerAdapter(private val names: List<Obectsi>):  RecyclerView.Ada
                         ConstraintLayout.LayoutParams.WRAP_CONTENT //height
                     )
 
-                paramsIfCloseView.topToTop =  ifOperatorView.id
-                paramsIfCloseView.leftToLeft =  holder.expendConConditions.id
+                paramsIfCloseView.topToTop = ifOperatorView.id
+                paramsIfCloseView.leftToLeft = holder.expendConConditions.id
 
                 paramsIfCloseView.topMargin = 1000
                 paramsIfCloseView.leftMargin = 0
@@ -651,9 +688,11 @@ class CustomRecyclerAdapter(private val names: List<Obectsi>):  RecyclerView.Ada
 
 
             }
-            3 ->{ // Input/Output
+
+            3 -> { // Input/Output
                 val isExpandeble: Boolean = names[position].expandeble
-                holder.expendConInputOutput.visibility = if (isExpandeble) View.VISIBLE else View.GONE
+                holder.expendConInputOutput.visibility =
+                    if (isExpandeble) View.VISIBLE else View.GONE
                 holder.expendConVar.visibility = View.GONE
                 holder.expendConOperations.visibility = View.GONE
                 holder.expendConConditions.visibility = View.GONE
@@ -675,7 +714,6 @@ class CustomRecyclerAdapter(private val names: List<Obectsi>):  RecyclerView.Ada
                 holder.expendConInputOutput.addView(outputView, paramsOutputView)
                 outputView.setTag(tagOutputView)
                 attachViewDragListener(outputView)
-
 
 
             }

@@ -336,14 +336,44 @@ fun main(
     var y: MutableList<String> = mutableListOf()
     var x: MutableList<String> = mutableListOf()
 
+    initializeData(answer, t, z, allVariables, y, x)
+
+    var data = DataClass()
+    mainLoop(q, data, answer)
+    fillAllVariables(data, allVariables)
+}
+
+private fun fillAllVariables(
+    data: DataClass,
+    allVariables: MutableList<MutableList<String>>
+) {
+    for (i in 0..data.name.size - 1) {
+        if (data.name[i] != "") {
+            allVariables[0].add(data.name[i])
+            allVariables[1].add(data.value[data.findValue(data.name[i])].toString())
+        }
+    }
+}
+
+private fun initializeData(
+    answer: MutableList<MutableList<String>>,
+    t: MutableList<String>,
+    z: MutableList<String>,
+    allVariables: MutableList<MutableList<String>>,
+    y: MutableList<String>,
+    x: MutableList<String>
+) {
     answer.add(t)
     answer.add(z)
     allVariables.add(y)
     allVariables.add(x)
+}
 
-    var data = DataClass()
-
-
+private fun mainLoop(
+    q: Queue,
+    data: DataClass,
+    answer: MutableList<MutableList<String>>
+) {
     var i = 0
     while (true) {
         var temp: MutableList<String> = mutableListOf()
@@ -356,15 +386,19 @@ fun main(
                 }
                 continue
             }
+
             temp[0] == declare -> { // обозначение типа блока объявления переменной
                 data.declaration(temp[2])
             }
+
             temp[0] == assignmentOperator -> { // обозначение блока присваивания
                 data.assignment(temp[2], temp[3])
             }
+
             temp[0] == output -> { // обозначение блока вывода
                 data.output(temp[2], answer)
             }
+
             temp[0] == ifCondition -> {
                 var flag = data.condition(temp[2], temp[3], temp[4], i, q)
                 if (flag != -1) {
@@ -373,6 +407,7 @@ fun main(
                     }
                 }
             }
+
             temp[0] == ifEnd -> {
                 i++
                 if (i == q.queue.size) {
@@ -380,6 +415,7 @@ fun main(
                 }
                 continue
             }
+
             temp[0] == forLoop -> {
                 data.declaration(temp[2])
                 val start = data.calc(data.varReplacement(temp[3])).toDouble().toInt()
@@ -408,6 +444,7 @@ fun main(
                 new.add(newBlock)
                 q.paste(new, i + 1)
             }
+
             temp[0] == forEnd -> {
                 i++
                 if (i == q.queue.size) {
@@ -415,6 +452,7 @@ fun main(
                 }
                 continue
             }
+
             temp[0] == createArray -> {
                 data.newArray(temp[2], temp[3])
             }
@@ -422,12 +460,6 @@ fun main(
         i++
         if (i == q.queue.size) {
             break
-        }
-    }
-    for (i in 0..data.name.size - 1) {
-        if (data.name[i] != "") {
-            allVariables[0].add(data.name[i])
-            allVariables[1].add(data.value[data.findValue(data.name[i])].toString())
         }
     }
 }

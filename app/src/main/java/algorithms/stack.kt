@@ -14,7 +14,7 @@ class SymbolsStack {
     }
 
     fun comparePriority(op: Char): Boolean {
-        return (opPriority(op) > opPriority(array[position-1]))
+        return (opPriority(op) > opPriority(array[position - 1]))
     }
 
     private fun opPriority(op: Char?): Int {
@@ -44,12 +44,17 @@ class Stack {
     }
 
     fun pop(): String {
-        return if(!isEmpty()) {
+        return if (!isEmpty()) {
             array[--position].toString()
         } else {
             ""
         }
     }
+
+    fun getArray(): Array<String> = array
+        .filterNotNull()
+        .filter { it.isNotEmpty() and it.isNotBlank() }
+        .toTypedArray()
 
     fun isEmpty() = (position == 0)
 

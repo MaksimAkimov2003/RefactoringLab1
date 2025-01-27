@@ -1,7 +1,7 @@
 package com.example.firstapp
 
 
-import algorithms.main
+import algorithms.Interpreter
 import algorithms.sortAllViewList
 import android.annotation.SuppressLint
 import android.content.ClipData
@@ -10,7 +10,11 @@ import android.graphics.Canvas
 import android.graphics.Point
 import android.os.Build
 import android.os.Bundle
-import android.view.*
+import android.view.DragEvent
+import android.view.Gravity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
@@ -21,20 +25,39 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.core.view.updateLayoutParams
 import androidx.recyclerview.widget.RecyclerView
-import com.example.firstapp.CustomViews.*
+import com.example.firstapp.CustomViews.arrayOperator
+import com.example.firstapp.CustomViews.assignmentOperator
+import com.example.firstapp.CustomViews.declareInteger
+import com.example.firstapp.CustomViews.forClose
+import com.example.firstapp.CustomViews.forOperator
+import com.example.firstapp.CustomViews.ifClose
+import com.example.firstapp.CustomViews.ifOperator
+import com.example.firstapp.CustomViews.output
 import com.example.firstapp.databinding.ActivityCodingBinding
 import com.example.firstapp.databinding.RecyclerviewItemBinding
-import kotlinx.android.synthetic.main.activity_coding.*
-import kotlinx.android.synthetic.main.view_arithmetic_operations.view.*
+import kotlinx.android.synthetic.main.view_arithmetic_operations.view.arifOperations2
+import kotlinx.android.synthetic.main.view_arithmetic_operations.view.deleteBlock2
 import kotlinx.android.synthetic.main.view_arithmetic_operations.view.textNumber
-import kotlinx.android.synthetic.main.view_array_operator.view.*
-import kotlinx.android.synthetic.main.view_assignment_operator.view.*
-import kotlinx.android.synthetic.main.view_declare_integer.view.*
-import kotlinx.android.synthetic.main.view_for_close.view.*
-import kotlinx.android.synthetic.main.view_for_operator.view.*
-import kotlinx.android.synthetic.main.view_if_close.view.*
-import kotlinx.android.synthetic.main.view_if_operator.view.*
-import kotlinx.android.synthetic.main.view_output.view.*
+import kotlinx.android.synthetic.main.view_array_operator.view.arraySize
+import kotlinx.android.synthetic.main.view_array_operator.view.deleteBlock6
+import kotlinx.android.synthetic.main.view_array_operator.view.nameOfArray
+import kotlinx.android.synthetic.main.view_assignment_operator.view.deleteBlock3
+import kotlinx.android.synthetic.main.view_assignment_operator.view.valueOfBlock
+import kotlinx.android.synthetic.main.view_assignment_operator.view.variableOfBlock
+import kotlinx.android.synthetic.main.view_declare_integer.view.deleteBlock1
+import kotlinx.android.synthetic.main.view_declare_integer.view.inputValueDeclare
+import kotlinx.android.synthetic.main.view_for_close.view.deleteBlock8
+import kotlinx.android.synthetic.main.view_for_operator.view.deleteBlock7
+import kotlinx.android.synthetic.main.view_for_operator.view.forOperatorFrom
+import kotlinx.android.synthetic.main.view_for_operator.view.forOperatorTo
+import kotlinx.android.synthetic.main.view_for_operator.view.forOperatorVariable
+import kotlinx.android.synthetic.main.view_if_close.view.deleteBlock5
+import kotlinx.android.synthetic.main.view_if_operator.view.deleteBlock4
+import kotlinx.android.synthetic.main.view_if_operator.view.firstCondition
+import kotlinx.android.synthetic.main.view_if_operator.view.secondCondition
+import kotlinx.android.synthetic.main.view_if_operator.view.spinnerForIf
+import kotlinx.android.synthetic.main.view_output.view.deleteBlock9
+import kotlinx.android.synthetic.main.view_output.view.variableOutput
 
 val buttonVarDragMessage = "buttonVar Added"
 
@@ -285,7 +308,7 @@ class CodingActivity : AppCompatActivity(){
                 var answer: MutableList<MutableList<String>> = mutableListOf()
                 var allVariables: MutableList<MutableList<String>> = mutableListOf()
 
-                main(dataSet, answer, allVariables)
+                Interpreter().main(dataSet, answer, allVariables)
 
 
                 var answerString = ""

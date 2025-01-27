@@ -307,85 +307,106 @@ class CodingActivity : AppCompatActivity(){
 
         when (dragEvent.action) {
             DragEvent.ACTION_DRAG_STARTED -> {
-                draggableItem.updateLayoutParams<ConstraintLayout.LayoutParams> {
-                    topToTop = binding.dropArea.id
-                    leftToLeft = binding.dropArea.id
-
-                    topMargin = 0
-                    leftMargin = 0
-                }
+                onDragStarted(draggableItem)
                 true
             }
             DragEvent.ACTION_DRAG_ENTERED -> {
-                binding.dropArea.alpha = 0.3f
+                onDragEntered()
                 true
             }
             DragEvent.ACTION_DRAG_LOCATION -> {
                 true
             }
             DragEvent.ACTION_DRAG_EXITED -> {
-                binding.dropArea.alpha = 1.0f
-                draggableItem.visibility = View.VISIBLE
-
-                view.invalidate()
+                onDragExited(draggableItem, view)
                 true
             }
             DragEvent.ACTION_DROP -> {
-                binding.dropArea.alpha = 1.0f
-
-                if (dragEvent.clipDescription.hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN)) {
-                    val draggedData = dragEvent.clipData.getItemAt(0).text
-                }
-
-                draggableItem.x = dragEvent.x - (draggableItem.width / 2)
-                draggableItem.y = dragEvent.y - (draggableItem.height / 2)
-
-                val parent = draggableItem.parent as ConstraintLayout
-                val dropPlace = view as ConstraintLayout
-
-                if (parent != binding.dropArea) {
-                    parent.removeAllViews()
-                    allViews.add(draggableItem)
-
-                    val str = number.toString(10)
-                    draggableItem.textNumber.setText(str)
-
-
-                    val button = when(draggableItem.getTag()){
-                        tagDeclareIntegerView-> draggableItem.deleteBlock1
-                        tagArithmeticOperationsView-> draggableItem.deleteBlock2
-                        tagAssignmentOperatorView-> draggableItem.deleteBlock3
-                        tagIfOperatorView-> draggableItem.deleteBlock4
-                        tagIfCloseView-> draggableItem.deleteBlock5
-                        tagArrayOperatorView-> draggableItem.deleteBlock6
-                        tagForOperatorView-> draggableItem.deleteBlock7
-                        tagForCloseView-> draggableItem.deleteBlock8
-                        tagOutputView-> draggableItem.deleteBlock9
-                        else -> null
-                    }
-                    button?.setOnClickListener { removeViewInAllViewsList(draggableItem) }
-                    number++
-                }
-
-                if (parent == binding.dropArea) {
-                    parent.removeView(draggableItem)
-                }
-
-                dropPlace.addView(draggableItem)
-
+                onDrop(dragEvent, draggableItem, view)
                 true
-
             }
             DragEvent.ACTION_DRAG_ENDED -> {
-                draggableItem.visibility = View.VISIBLE
-                view.invalidate()
-
+                onDragEnded(draggableItem, view)
                 true
             }
             else -> {
                 false
             }
 
+        }
+    }
+
+    private fun onDragEnded(draggableItem: View, view: View) {
+        draggableItem.visibility = View.VISIBLE
+        view.invalidate()
+    }
+
+    private fun onDrop(
+        dragEvent: DragEvent,
+        draggableItem: View,
+        view: View?
+    ) {
+        binding.dropArea.alpha = 1.0f
+
+        if (dragEvent.clipDescription.hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN)) {
+            val draggedData = dragEvent.clipData.getItemAt(0).text
+        }
+
+        draggableItem.x = dragEvent.x - (draggableItem.width / 2)
+        draggableItem.y = dragEvent.y - (draggableItem.height / 2)
+
+        val parent = draggableItem.parent as ConstraintLayout
+        val dropPlace = view as ConstraintLayout
+
+        if (parent != binding.dropArea) {
+            parent.removeAllViews()
+            allViews.add(draggableItem)
+
+            val str = number.toString(10)
+            draggableItem.textNumber.setText(str)
+
+
+            val button = when (draggableItem.getTag()) {
+                tagDeclareIntegerView -> draggableItem.deleteBlock1
+                tagArithmeticOperationsView -> draggableItem.deleteBlock2
+                tagAssignmentOperatorView -> draggableItem.deleteBlock3
+                tagIfOperatorView -> draggableItem.deleteBlock4
+                tagIfCloseView -> draggableItem.deleteBlock5
+                tagArrayOperatorView -> draggableItem.deleteBlock6
+                tagForOperatorView -> draggableItem.deleteBlock7
+                tagForCloseView -> draggableItem.deleteBlock8
+                tagOutputView -> draggableItem.deleteBlock9
+                else -> null
+            }
+            button?.setOnClickListener { removeViewInAllViewsList(draggableItem) }
+            number++
+        }
+
+        if (parent == binding.dropArea) {
+            parent.removeView(draggableItem)
+        }
+
+        dropPlace.addView(draggableItem)
+    }
+
+    private fun onDragExited(draggableItem: View, view: View) {
+        binding.dropArea.alpha = 1.0f
+        draggableItem.visibility = View.VISIBLE
+
+        view.invalidate()
+    }
+
+    private fun onDragEntered() {
+        binding.dropArea.alpha = 0.3f
+    }
+
+    private fun onDragStarted(draggableItem: View) {
+        draggableItem.updateLayoutParams<ConstraintLayout.LayoutParams> {
+            topToTop = binding.dropArea.id
+            leftToLeft = binding.dropArea.id
+
+            topMargin = 0
+            leftMargin = 0
         }
     }
 
